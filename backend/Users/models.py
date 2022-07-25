@@ -9,7 +9,7 @@ class Usuarios(models.Model):
         return super().get_queryset().filter(esta_activo=True)
 
   nombre = models.CharField(max_length=250)
-  pellido = models.CharField(max_length=250)
+  apellido = models.CharField(max_length=250)
   cedula = models.IntegerField(unique=True, null=False, blank=False)
   email = models.EmailField(max_length=250)
   direccion = models.CharField(max_length=250)
