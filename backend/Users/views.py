@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from .models import Usuarios
 from .serializers import UsuariosSerializer
 
+
 class ListaUsuariosView(APIView):
   def get(self, request, *args, **kwargs):
       usuarios = Usuarios.posteoobjetos.all()
@@ -18,3 +19,4 @@ class ListaUsuariosView(APIView):
 #     usu = get_object_or_404(Usuarios,)
 #     serializer = UsuariosSerializer(usu)
 #     return Response(serializer.data)
+
