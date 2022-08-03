@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404 ,render
+from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
@@ -8,15 +8,17 @@ from .serializers import UsuariosSerializer
 
 class ListaUsuariosView(APIView):
   def get(self, request, *args, **kwargs):
-      usuarios = Usuarios.PosteoUsuarios.all()
+    if Usuarios.postobjects.all().exists():
+
+      usuarios = Usuarios.postobjects.all()
       serializer = UsuariosSerializer(usuarios,many=True)
 
       return Response(serializer.data)
     
 
-# class UsuariosDetalleView(APIView):
-#   def get(self, request, post_slug,*args,**kwargs):
-#     usu = get_object_or_404(Usuarios,)
-#     serializer = UsuariosSerializer(usu)
-#     return Response(serializer.data)
+class UsuariosDetalleView(APIView):
+   def get(self, request, post_slug,*args,**kwargs):
+      usuarios = get_object_or_404(Usuarios,)
+      serializer = UsuariosSerializer(usu)
+      return Response(serializer.data)
 

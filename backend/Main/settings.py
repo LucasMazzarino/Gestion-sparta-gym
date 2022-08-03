@@ -61,6 +61,9 @@ CKEDITOR_CONFIGS={
         'autoParagraph': False
     }
 }
+
+CKEDITOR_UPLOAD_PATH = "/media/"
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -76,11 +79,11 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_WHITELIST = [
-    'http://localhost:8000',
     'http://localhost:3000',
+    'http://localhost:8000',
 ]
 
-CSRF_TRUSTED_ORIGINS[
+CSRF_TRUSTED_ORIGINS = [
     'http://localhost:3000',
     'http://localhost:8000',
 ]
@@ -97,9 +100,9 @@ if not DEBUG:
     ]
 
 
-CORS_ALLOW_HEADERS = list(default_headers) + [
-    'contenttype',
-]
+# CORS_ALLOW_HEADERS = list(default_headers) + [
+#     'contenttype',
+# ]
 
 
 TEMPLATES = [
@@ -130,12 +133,13 @@ DATABASES = {
 
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
-PASSWORD_HASHERS=[
-    "django.contrib.auth.hashers.Argon2 PasswordHasher",
-    "django.contrib.auth.hashers.PBKDF 2PasswordHasher",
+PASSWORD_HASHERS = [
+    "django.contrib.auth.hashers.Argon2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
     "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
     "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
 ]
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -161,14 +165,15 @@ USE_I18N = True
 
 USE_TZ = True
 
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media') 
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'build/static')
+    os.path.join(BASE_DIR, '../frontend/build/static')
 ]
 
 AUTH_USER_MODEL = 'Users.Usuarios'
@@ -183,13 +188,13 @@ REST_FRAMEWORK = {
     'PAGE_SIZE':16,
 }
 
-AUTHENTICATION_BACKENDS=(
+AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
 FILE_UPLOAD_PERMISSIONS = 0o640
 
-EMAIL_BACKEND-'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
 
 if not DEBUG:
     DEFAULT_FROM_EMAIL="Uridium <mail@uridium.network>"
