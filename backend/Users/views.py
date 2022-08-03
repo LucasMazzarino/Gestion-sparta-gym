@@ -8,7 +8,7 @@ from .serializers import UsuariosSerializer
 
 class ListaUsuariosView(APIView):
   def get(self, request, *args, **kwargs):
-      usuarios = Usuarios.posteoobjetos.all()
+      usuarios = Usuarios.PosteoUsuarios.all()
       serializer = UsuariosSerializer(usuarios,many=True)
 
       return Response(serializer.data)
