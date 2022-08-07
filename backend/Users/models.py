@@ -35,11 +35,6 @@ class UsuarioManager(BaseUserManager):
 
 
 class Usuarios(AbstractBaseUser, PermissionsMixin):
-  
-  class PosteoUsuarios (models.Manager):
-    def get_queryset(self):
-     return super().get_queryset().filter(is_active=True)
-
   nombre = models.CharField(max_length=250)
   apellido = models.CharField(max_length=250)
   cedula = models.IntegerField(unique=True, null=False, blank=False)
@@ -49,7 +44,6 @@ class Usuarios(AbstractBaseUser, PermissionsMixin):
   is_staff = models.BooleanField(default=False)
 
   objects = UsuarioManager()
-  postobjects = PosteoUsuarios()
 
   USERNAME_FIELD = 'cedula'
   REQUIRED_FIELDS = ['nombre', 'apellido', 'email', 'direccion']

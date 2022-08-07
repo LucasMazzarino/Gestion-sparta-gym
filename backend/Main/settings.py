@@ -129,12 +129,11 @@ DATABASES = {
         'ENGINE' : 'django.db.backends.postgresql_psycopg2',
         'NAME' : 'spartagym' ,
         'USER' : 'postgres' ,
-        'PASSWORD' : 'Zandalaris' , 
+        'PASSWORD' : 'mazzanga1212.' , 
         'HOST' : 'localhost' ,
         'PORT' : 5432
     }
 }
-
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
 PASSWORD_HASHERS = [
@@ -176,9 +175,6 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, './frontend/build/static')
-]
 
 AUTH_USER_MODEL = 'Users.Usuarios'
 
