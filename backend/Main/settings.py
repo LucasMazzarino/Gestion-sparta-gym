@@ -12,30 +12,62 @@ SECRET_KEY = env('SECRET_KEY')
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-ALLOWED_HOSTS = []
-
+SITE_NAME = 'SpartaGym'
 
 
-INSTALLED_APPS = [
-    'rest_framework',
-    'rest_framework.authtoken',
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1"    
+]
+
+if not DEBUG:
+    ALLOWED_HOSTS = [
+        "www.spartagym.com",
+        ".spartagym.com",
+        "spartagym.com",
+    ]
+
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+
+DJANGO_APPS =[
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
-
-    'Users',
-    'corsheaders'
 ]
+
+
+PROJECT_APPS =[
+     'Users',
+]
+
+THIRD_PARTY_APPS =[
+    'rest_framework',
+    'rest_framework.authtoken',
+    'corsheaders',
+    'ckeditor',
+    'ckeditor_uploader',
+]
+
+INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
+
+CKEDITOR_CONFIGS={
+    "default":{
+        'toolbar':'full',
+        'autoParagraph': False
+    }
+}
+
+CKEDITOR_UPLOAD_PATH = "/media/"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     #Corsheaders
     "corsheaders.middleware.CorsMiddleware",
 
@@ -46,27 +78,37 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ORIGIN_WHITELIST = (
-    'http://localhost:8000',
-    'http://127.0.0.1:8000',
-
-    'http://localhost:8080',
-    'http://127.0.0.1:8080',
-
+CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
-    'http://127.0.0.1:3000',
-)
-
-CORS_ALLOW_HEADERS = list(default_headers) + [
-    'contenttype',
+    'http://localhost:8000',
 ]
 
-ROOT_URLCONF = 'Main.urls'
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:3000',
+    'http://localhost:8000',
+]
+
+if not DEBUG:
+    CORS_ORIGIN_WHITELIST = [
+        'https://spartagym.com',
+        'https://admin.spartagym.com',
+    ]
+
+    CSRF_TRUSTED_ORIGINS[
+        'https://spartagym.com',
+        'https://admin.spartagym.com',
+    ]
+
+
+# CORS_ALLOW_HEADERS = list(default_headers) + [
+#     'contenttype',
+# ]
+
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'build')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -84,11 +126,22 @@ WSGI_APPLICATION = 'Main.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE' : 'django.db.backends.postgresql_psycopg2',
+        'NAME' : 'spartagym' ,
+        'USER' : 'postgres' ,
+        'PASSWORD' : 'mazzanga1212.' , 
+        'HOST' : 'localhost' ,
+        'PORT' : 5432
     }
 }
+DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
+PASSWORD_HASHERS = [
+    "django.contrib.auth.hashers.Argon2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
+    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
+]
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -105,17 +158,23 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+ROOT_URLCONF = 'Main.urls'
+
 LANGUAGE_CODE = 'es-es'
+
 TIME_ZONE = 'UTC'
+
 USE_I18N = True
+
 USE_TZ = True
 
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media') 
+
 
 AUTH_USER_MODEL = 'Users.Usuarios'
 
@@ -123,6 +182,51 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = { 
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ]
+        'rest_framework.permissions.AllowAny',
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE':16,
 }
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+FILE_UPLOAD_PERMISSIONS = 0o640
+
+EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
+
+if not DEBUG:
+    DEFAULT_FROM_EMAIL="Uridium <mail@uridium.network>"
+    EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = env('EMAIL_HOST')
+    EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+    EMAIL_PORT = env('EMAIL_PORT')
+    EMAIL_USE_TLS = env('EMAIL_USE_TLS')
+
+    
+    # django-ckeditor will not work with S3 through django-storages without this line in settings.py
+    AWS_QUERYSTRING_AUTH = False
+
+    # aws settings
+    AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
+
+
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+    AWS_DEFAULT_ACL = 'public-read'
+
+    # s3 static settings
+
+    STATIC_LOCATION = 'static'
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+    # s3 public media settings
+
+    PUBLIC_MEDIA_LOCATION = 'media'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
+    DEFAULT_FILE_STORAGE = 'core.storage_backends.MediaStore'
