@@ -1,22 +1,30 @@
-from django.shortcuts import get_object_or_404 ,render
-from rest_framework.views import APIView
+from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
-
+from rest_framework import status
+from rest_framework import viewsets
 from .models import Usuarios
 from .serializers import UsuariosSerializer
 
 
-class ListaUsuariosView(APIView):
-  def get(self, request, *args, **kwargs):
-      usuarios = Usuarios.posteoobjetos.all()
-      serializer = UsuariosSerializer(usuarios,many=True)
+class UsuariosViewSet(viewsets.ViewSet):
 
-      return Response(serializer.data)
+  def list(self, request):
+    queryset = Usuarios.objects.all()
+    serializer = UsuariosSerializer(queryset, many=True)
+    return Response(serializer.data)
+
+  def retrieve(self, request, pk=None):
+    queryset = Usuarios.objects.all()
+    usuario = get_object_or_404(queryset, pk=pk)
+    serializer = UsuariosSerializer(usuario)
+    return Response(serializer.data)
     
 
-# class UsuariosDetalleView(APIView):
-#   def get(self, request, post_slug,*args,**kwargs):
-#     usu = get_object_or_404(Usuarios,)
-#     serializer = UsuariosSerializer(usu)
-#     return Response(serializer.data)
+
+
+
+
+
+
+
 
