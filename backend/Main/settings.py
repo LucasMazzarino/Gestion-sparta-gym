@@ -16,8 +16,8 @@ SITE_NAME = 'SpartaGym'
 
 
 ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1"    
+     "localhost",
+     "127.0.0.1"    
 ]
 
 if not DEBUG:
@@ -100,10 +100,6 @@ if not DEBUG:
     ]
 
 
-# CORS_ALLOW_HEADERS = list(default_headers) + [
-#     'contenttype',
-# ]
-
 
 TEMPLATES = [
     {
@@ -160,7 +156,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 ROOT_URLCONF = 'Main.urls'
 
-LANGUAGE_CODE = 'es-es'
+LANGUAGE_CODE = 'es'
 
 TIME_ZONE = 'UTC'
 
@@ -172,6 +168,7 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
@@ -182,7 +179,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = { 
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE':16,

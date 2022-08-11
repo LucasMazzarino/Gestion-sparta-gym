@@ -5,7 +5,7 @@ from Users import models
 
 class UserAdmin(BaseUserAdmin):
     ordering = ['apellido']
-    list_display= ['cedula', 'nombre']
+    list_display= ['cedula', 'nombre','apellido',]
     fieldsets = (
         (None,{'fields':('cedula', 'password')}),
         (_('Personal Info'),{'fields':('nombre','apellido', 'direccion','email')}),

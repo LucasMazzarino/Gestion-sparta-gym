@@ -1,18 +1,15 @@
-from django.urls import path
-from .views import UsuariosViewSet
+# from django.urls import path
+# from .views import UsuariosViewSet
 
-from rest_framework.routers import DefaultRouter
-
-router = DefaultRouter()
-router.register('Usuarios', UsuariosViewSet, basename='UsuariosViewSet')
+# from rest_framework.routers import DefaultRouter
 
 
-app_name='users'
+# app_name='users'
 
-usuario_lista = UsuariosViewSet.as_view({'get': 'list'})
-usuario_detalle = UsuariosViewSet.as_view({'get': 'retrieve'})
+# usuario_lista = UsuariosViewSet.as_view({'get': 'list'})
+# usuario_detalle = UsuariosViewSet.as_view({'get': 'retrieve'})
 
-urlpatterns = [
-    path('usuarios/', usuario_lista),
-    path('usuarios/<int:pk>',usuario_detalle),
-]
+# urlpatterns = [
+#     path('usuarios/', usuario_lista),
+#     path('usuarios/<int:pk>',usuario_detalle),
+# ]
