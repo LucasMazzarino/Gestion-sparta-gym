@@ -43,6 +43,8 @@ DJANGO_APPS =[
 
 PROJECT_APPS =[
      'Users',
+     'Cursos',
+     'Noticias',
 ]
 
 THIRD_PARTY_APPS =[
@@ -125,7 +127,7 @@ DATABASES = {
         'ENGINE' : 'django.db.backends.postgresql_psycopg2',
         'NAME' : 'spartagym' ,
         'USER' : 'postgres' ,
-        'PASSWORD' : 'mazzanga1212.' , 
+        'PASSWORD' : 'Zandalaris' , 
         'HOST' : 'localhost' ,
         'PORT' : 5432
     }
