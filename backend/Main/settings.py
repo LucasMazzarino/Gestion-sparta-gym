@@ -125,7 +125,7 @@ DATABASES = {
         'ENGINE' : 'django.db.backends.postgresql_psycopg2',
         'NAME' : 'spartagym' ,
         'USER' : 'postgres' ,
-        'PASSWORD' : 'mazzanga1212.' , 
+        'PASSWORD' : 'Elune12.' , 
         'HOST' : 'localhost' ,
         'PORT' : 5432
     }
@@ -181,8 +181,8 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ],
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE':16,
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    # 'PAGE_SIZE':16,
 }
 
 AUTHENTICATION_BACKENDS = (
