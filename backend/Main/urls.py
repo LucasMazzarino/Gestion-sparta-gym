@@ -10,14 +10,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('usuarios/',include('Users.api.routers',)),
     path('',Login.as_view(), name = 'login'),
-    path('logout/',Logout.as_view(), name = 'logout'),
-
+    path('logout/', Logout.as_view(), name = 'logout'),
 ]
 
-urlpatterns += [
-    re_path(r'^media/(?P<path>.*)$', serve, {
-        'document_root': settings.MEDIA_ROOT,
-    }),
-]
+# urlpatterns += [
+#     re_path(r'^media/(?P<path>.*)$', serve, {
+#         'document_root': settings.MEDIA_ROOT,
+#     }),
+# ]
 
 
