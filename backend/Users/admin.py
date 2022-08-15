@@ -5,7 +5,7 @@ from Users import models
 
 class UserAdmin(BaseUserAdmin):
     ordering = ['apellido']
-    list_display= ['cedula', 'nombre','apellido',]
+    list_display= ['cedula', 'nombre','apellido']
     fieldsets = (
         (None,{'fields':('cedula', 'password')}),
         (_('Personal Info'),{'fields':('nombre','apellido', 'direccion','email')}),
@@ -20,6 +20,6 @@ class UserAdmin(BaseUserAdmin):
             'fields':('cedula','nombre','apellido','direccion','email','password1', 'password2')
         }),
     )
-
+    
 admin.site.register(models.Usuarios,UserAdmin)
 

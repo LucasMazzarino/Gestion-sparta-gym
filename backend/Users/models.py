@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
 from django.conf import settings
+from Cursos.models import Cursos
 
 
 class UsuarioManager(BaseUserManager):
@@ -42,6 +43,7 @@ class Usuarios(AbstractBaseUser, PermissionsMixin):
   direccion = models.CharField(max_length=250)
   is_active = models.BooleanField(default=True)
   is_staff = models.BooleanField(default=False)
+  curso = models.ForeignKey(Cursos, on_delete=models.CASCADE, null=True)
 
   objects = UsuarioManager()
 
