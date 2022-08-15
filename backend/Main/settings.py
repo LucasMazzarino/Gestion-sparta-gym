@@ -125,15 +125,14 @@ DATABASES = {
         'ENGINE' : 'django.db.backends.postgresql_psycopg2',
         'NAME' : 'spartagym' ,
         'USER' : 'postgres' ,
-        'PASSWORD' : 'Elune12.' , 
-        'HOST' : 'localhost' ,
+        'PASSWORD' : env('CONTRASENIA') ,
+        'HOST' : 'localhost',
         'PORT' : 5432
     }
 }
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
 PASSWORD_HASHERS = [
-    "django.contrib.auth.hashers.Argon2PasswordHasher",
     "django.contrib.auth.hashers.PBKDF2PasswordHasher",
     "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
     "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
