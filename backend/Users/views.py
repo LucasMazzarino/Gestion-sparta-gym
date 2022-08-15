@@ -1,30 +1,31 @@
-from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework import viewsets
+from rest_framework.authtoken.models import Token
+from rest_framework.authtoken.views import ObtainAuthToken
+
+from Users.api.serializers import UsuarioTokenserializer
 from .models import Usuarios
-from .serializers import UsuariosSerializer
+from Users.api.serializers import UsuariosSerializer
 
+class Login(ObtainAuthToken):
 
-class UsuariosViewSet(viewsets.ViewSet):
-
-  def list(self, request):
-    queryset = Usuarios.objects.all()
-    serializer = UsuariosSerializer(queryset, many=True)
-    return Response(serializer.data)
-
-  def retrieve(self, request, pk=None):
-    queryset = Usuarios.objects.all()
-    usuario = get_object_or_404(queryset, pk=pk)
-    serializer = UsuariosSerializer(usuario)
-    return Response(serializer.data)
-    
-
-
-
-
-
-
-
-
-
+	def post(self,request,*args,**kwargs):
+		login_serializer = self.serializer_class(data = request.data, context = {'request':request})
+		if login_serializer.is_valid():
+			user = login_serializer.validated_data['user']
+			if user.is_active:
+				token,created = Token.objects.get_or_create(user = user)
+				user_serialzier = UsuarioTokenserializer(user)
+				if created:
+					return Response({
+						'token':token.key,
+						'user': user,
+						'mensaje':'Inicio de sesion exitoso'
+					}, status = status.HTTP_201_CREATED)
+			else:
+				return Response({'error':'Este usuario no puede inicar sesion'},
+				status = status.HTTP_401_UNAUTHORIZED)
+		else:
+			return Response({'error':'Nombre de usuario o contraseña incorrectos'},
+			status = status.HTTP_400_BAD_REQUEST)
+		return Response({'mensaje':'hola desde response'}, status = status.HTTP_200_OK)
