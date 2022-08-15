@@ -43,6 +43,8 @@ DJANGO_APPS =[
 
 PROJECT_APPS =[
      'Users',
+     'Noticias',
+     'Cursos'
 ]
 
 THIRD_PARTY_APPS =[
