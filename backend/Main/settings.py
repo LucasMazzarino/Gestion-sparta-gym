@@ -43,8 +43,8 @@ DJANGO_APPS =[
 
 PROJECT_APPS =[
      'Users',
-     'Cursos',
      'Noticias',
+     'Cursos'
 ]
 
 THIRD_PARTY_APPS =[
@@ -127,15 +127,14 @@ DATABASES = {
         'ENGINE' : 'django.db.backends.postgresql_psycopg2',
         'NAME' : 'spartagym' ,
         'USER' : 'postgres' ,
-        'PASSWORD' : 'Zandalaris' , 
-        'HOST' : 'localhost' ,
+        'PASSWORD' : env('CONTRASENIA') ,
+        'HOST' : 'localhost',
         'PORT' : 5432
     }
 }
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
 PASSWORD_HASHERS = [
-    "django.contrib.auth.hashers.Argon2PasswordHasher",
     "django.contrib.auth.hashers.PBKDF2PasswordHasher",
     "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
     "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
@@ -183,8 +182,8 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ],
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE':16,
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    # 'PAGE_SIZE':16,
 }
 
 AUTHENTICATION_BACKENDS = (

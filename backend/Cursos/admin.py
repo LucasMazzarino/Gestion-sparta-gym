@@ -9,12 +9,4 @@ class CursoAdmin(admin.ModelAdmin):
     list_display = ('id', 'nombre', 'costo')
     ordering = ['id']
     
-
-
-
-
-
-
-# admin.site.register(CursoAdmin)
-
 admin.site.register(models.Horario)
