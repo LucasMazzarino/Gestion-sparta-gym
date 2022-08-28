@@ -19,7 +19,7 @@ class Horario(models.Model):
 class Cursos(models.Model):
   id = models.AutoField(primary_key=True)
   nombre = models.CharField(max_length=250)
-  costo = models.PositiveSmallIntegerField()
+  costo = models.PositiveSmallIntegerField(default=0)
   descripcion = models.TextField(max_length=250)  
   state = models.BooleanField('Estado',default = True)
   horario = models.ForeignKey(Horario, on_delete=models.CASCADE,) 

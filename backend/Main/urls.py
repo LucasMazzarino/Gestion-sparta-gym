@@ -15,6 +15,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('usuarios/',include('Users.api.routers',)),
     path('cursos/',include('Cursos.api.routers',)),
+    path('noticias/',include('Noticias.api.routers',)),
     path('login/',Login.as_view(), name = 'login'),
     path('logout/', Logout.as_view(), name = 'logout'),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
