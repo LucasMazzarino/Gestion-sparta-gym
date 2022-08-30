@@ -22,7 +22,7 @@ class Cursos(models.Model):
   costo = models.PositiveSmallIntegerField(default=0)
   descripcion = models.TextField(max_length=250)  
   state = models.BooleanField('Estado',default = True)
-  horario = models.ForeignKey(Horario, on_delete=models.CASCADE,) 
+  horario = models.ManyToManyField(Horario) 
   
   @property
   def ganancia(self):

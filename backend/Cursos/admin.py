@@ -16,7 +16,7 @@ class UsuarioInline(admin.TabularInline):
 class CursoAdmin(admin.ModelAdmin):
     list_display = ('id', 'nombre', 'costo')
     ordering = ['nombre']
-    radio_fields = {"horario": admin.VERTICAL}
+    fliter_horizontal = ('horario',)
     inlines = [
         UsuarioInline,
     ]
