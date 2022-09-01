@@ -16,8 +16,8 @@ SITE_NAME = 'SpartaGym'
 
 
 ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1"    
+     "localhost",
+     "127.0.0.1"    
 ]
 
 if not DEBUG:
@@ -43,11 +43,14 @@ DJANGO_APPS =[
 
 PROJECT_APPS =[
      'Users',
+     'Noticias',
+     'Cursos'
 ]
 
 THIRD_PARTY_APPS =[
     'rest_framework',
-    'rest_framework.authtoken',
+    'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
     'ckeditor',
     'ckeditor_uploader',
@@ -100,10 +103,6 @@ if not DEBUG:
     ]
 
 
-# CORS_ALLOW_HEADERS = list(default_headers) + [
-#     'contenttype',
-# ]
-
 
 TEMPLATES = [
     {
@@ -129,15 +128,14 @@ DATABASES = {
         'ENGINE' : 'django.db.backends.postgresql_psycopg2',
         'NAME' : 'spartagym' ,
         'USER' : 'postgres' ,
-        'PASSWORD' : 'mazzanga1212.' , 
-        'HOST' : 'localhost' ,
+        'PASSWORD' : env('CONTRASENIA') ,
+        'HOST' : 'localhost',
         'PORT' : 5432
     }
 }
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
 PASSWORD_HASHERS = [
-    "django.contrib.auth.hashers.Argon2PasswordHasher",
     "django.contrib.auth.hashers.PBKDF2PasswordHasher",
     "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
     "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
@@ -160,7 +158,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 ROOT_URLCONF = 'Main.urls'
 
-LANGUAGE_CODE = 'es-es'
+LANGUAGE_CODE = 'es'
 
 TIME_ZONE = 'UTC'
 
@@ -172,6 +170,7 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
@@ -181,11 +180,14 @@ AUTH_USER_MODEL = 'Users.Usuarios'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = { 
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE':16,
+    'DEFAULT_PERMISSIONS_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated'
+    ],
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    # 'PAGE_SIZE':16,
 }
 
 AUTHENTICATION_BACKENDS = (

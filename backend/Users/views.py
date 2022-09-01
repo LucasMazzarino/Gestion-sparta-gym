@@ -1,30 +1,48 @@
-from django.shortcuts import get_object_or_404
-from rest_framework.response import Response
+from django.contrib.auth import authenticate
+
 from rest_framework import status
-from rest_framework import viewsets
-from .models import Usuarios
-from .serializers import UsuariosSerializer
+from rest_framework.generics import GenericAPIView
+from rest_framework.response import Response
+
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.views import TokenObtainPairView
+
+from Users.api.serializers import (
+    CustomTokenObtainPairSerializer, UsuariosSerializer
+)
+
+from Users.models import Usuarios
 
 
-class UsuariosViewSet(viewsets.ViewSet):
+class Login(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer
 
-  def list(self, request):
-    queryset = Usuarios.objects.all()
-    serializer = UsuariosSerializer(queryset, many=True)
-    return Response(serializer.data)
+    def post(self, request, *args, **kwargs):
+        cedula = request.data.get('cedula', '')
+        password = request.data.get('password', '')
+        user = authenticate(
+            cedula=cedula,
+            password=password
+        )
 
-  def retrieve(self, request, pk=None):
-    queryset = Usuarios.objects.all()
-    usuario = get_object_or_404(queryset, pk=pk)
-    serializer = UsuariosSerializer(usuario)
-    return Response(serializer.data)
-    
+        if user:
+            login_serializer = self.serializer_class(data=request.data)
+            if login_serializer.is_valid():
+                user_serializer = UsuariosSerializer(user)
+                return Response({
+                    'token': login_serializer.validated_data.get('access'),
+                    'refresh-token': login_serializer.validated_data.get('refresh'),
+                    'user': user_serializer.data,
+                    'message': 'Inicio de Sesion Existoso'
+                }, status=status.HTTP_200_OK)
+            return Response({'error': 'Contraseña o nombre de usuario incorrectos'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'error': 'Contraseña o nombre de usuario incorrectos'}, status=status.HTTP_400_BAD_REQUEST)
 
-
-
-
-
-
-
-
+class Logout(GenericAPIView):
+	def post(self, request,*args,**kwargs):
+		user = Usuarios.objects.filter(id=request.data.get('user', 0))
+		if user.exists():
+			RefreshToken.for_user(user.first())
+			return Response({'mensaje': 'Sesion cerrada correctamente'}, status=status.HTTP_200_OK)
+		return Response({'error': 'No existe este usaurio'}, status=status.HTTP_400_BAD_REQUEST)
 
