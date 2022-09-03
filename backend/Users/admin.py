@@ -8,7 +8,7 @@ class UserAdmin(BaseUserAdmin):
     list_display= ['cedula', 'nombre','apellido',]
     fieldsets = (
         (None,{'fields':('cedula',)}),
-        (_('Informacion personal'),{'fields':('nombre','apellido', 'direccion','email','curso')}),
+        (_('Informacion personal'),{'fields':('nombre','apellido', 'direccion','email',)}),
         (
             _('Permissions'),
             {'fields':('is_active', 'is_staff', 'is_superuser')}
@@ -17,7 +17,7 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None,{
             'classes':('wide',),
-            'fields':('cedula','nombre','apellido','direccion','email','curso','password1', 'password2')
+            'fields':('cedula','nombre','apellido','direccion','email','password1', 'password2')
         }),
     )
 

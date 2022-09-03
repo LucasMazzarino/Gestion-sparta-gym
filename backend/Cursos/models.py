@@ -46,9 +46,9 @@ class AsistenciaCursoUsuario(models.Model):
   usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
   curso_horario = models.ForeignKey(CursoHorario, on_delete=models.CASCADE)
   asistencia = models.BooleanField(default=False)
-  
-  def get_usuarios(self, obj):
-        return "\n".join([u.usuario for u in obj.usuario.all()])
+
+  def get_usuarios(self):
+      # return "\n".join([u.usuario for u in obj.usuario.all()])
 
 
 

@@ -3,9 +3,6 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 
 from django.conf import settings
 
-from Cursos.models import Cursos
-
-
 class UsuarioManager(BaseUserManager):
 
   def create_user(self, nombre, apellido, cedula, email, direccion, password=None, **extra_filds):
@@ -36,13 +33,13 @@ class UsuarioManager(BaseUserManager):
     return usuario
 
 
-class Usuarios(AbstractBaseUser, PermissionsMixin):
+class Usuarios(AbstractBaseUser, PermissionsMixin):   
   nombre = models.CharField(max_length=250)
   apellido = models.CharField(max_length=250)
   cedula = models.IntegerField(unique=True, null=False, blank=False)
   email = models.EmailField(max_length=250)
   direccion = models.CharField(max_length=250)
-  curso = models.ForeignKey(Cursos,on_delete=models.CASCADE,null=True)
+  #curso = models.ForeignKey(Cursos,on_delete=models.CASCADE,null=True)
   is_active = models.BooleanField(default=True)
   is_staff = models.BooleanField(default=False)
   pago_cuota = models.BooleanField(default=False)
