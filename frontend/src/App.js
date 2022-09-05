@@ -1,8 +1,9 @@
 import './App.css';
+import Header from './componentes/Header';
 import Footer from './componentes/Footer';
-import Header from './componentes/Header.js';
 import SeccionUno from './componentes/SeccionUno';
 import SeccionDos from './componentes/SeccionDos';
+import SeccionTres from './componentes/SeccionTres';
 
 function App() {
   return (
@@ -10,7 +11,8 @@ function App() {
       <Header/>
       <SeccionUno/>
       <SeccionDos/>
-      <Footer/>
+      <SeccionTres/>
+      <Footer/>    
     </div>
   );
 }

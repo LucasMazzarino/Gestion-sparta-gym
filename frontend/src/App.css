@@ -1,8 +1,9 @@
 h1{
   text-align: center;
-  color: white;
+  color: black;
   padding: 20px;
-
+  letter-spacing: 5px;
+  font-family: 'Russo One', sans-serif;
 }
 
 .Footer{
@@ -35,8 +36,8 @@ li{
 
 .container-fluid ul li a{
   color: white; 
-  font-size: 25px;
-  font-family: 'Permanent Marker', cursive;
+  font-size: 20px;
+  font-family: 'Russo One', sans-serif;
 }
 
 li a:hover{
@@ -52,38 +53,71 @@ li a:hover{
 }
 
 .SeccionDos{
-  position: relative;   
+  background-color: black;
+  position: relative;  
 }
-   
+ 
 .SeccionDos img { 
   width: 100%;
+  height: 100%;
 }
 
 .SeccionDos img:hover{ 
   filter: brightness(30%);  
 }
 
-.TextoCentradoUno{
-  font-size: 30px;
+.CajaUno{
+  background: url('https://nutricion360.es/wp-content/uploads/2020/06/mujeres-plan-quemar-grasa-ejercicios-768x512.jpg');
+}
+
+.TextoCentradoUno{  
   color: white;
   position: absolute;
   top: 50%;
   left: 25%;
   transform: translate(-50%, -50%);
+  font-size: 10px;
 }
 
-.TextoCentradoDos{
-  font-size: 30px;
+.TextoCentradoDos{ 
   color: white;
   position: absolute;
   top: 50%;
-  right: 10%;
+  right: 5%;
   transform: translate(-50%, -50%);
+  font-size: 10px;
 }
 
-.SeccionDos{
-  background-color: black;
+#Ellas{
+  font-size: 50px;  
 }
+
+#Ellos{
+  font-size: 50px;  
+}
+
+#parrafoEntrenadores{
+  padding-left: 100px;
+  padding-right: 100px;
+  text-align: center;
+}
+
+.EntrenadorUno{
+  padding: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+}
+
+.EntrenadorDos{  
+  padding: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+
+
 
 .btn-flotante {
 	font-size: 15px; 
