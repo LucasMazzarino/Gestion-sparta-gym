@@ -124,14 +124,7 @@ WSGI_APPLICATION = 'Main.wsgi.application'
 
 
 DATABASES = {
-    'default': {
-        'ENGINE' : 'django.db.backends.postgresql_psycopg2',
-        'NAME' : 'spartagym' ,
-        'USER' : 'postgres' ,
-        'PASSWORD' : env('CONTRASENIA') ,
-        'HOST' : 'localhost',
-        'PORT' : 5432
-    }
+    "default":env.db("DATABASE_URL",default="postgres:///spartagym" ),
 }
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
@@ -199,7 +192,7 @@ FILE_UPLOAD_PERMISSIONS = 0o640
 EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
 
 if not DEBUG:
-    DEFAULT_FROM_EMAIL="Uridium <mail@uridium.network>"
+    DEFAULT_FROM_EMAIL= env('EMAIL_DEF')
     EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
     EMAIL_HOST = env('EMAIL_HOST')
     EMAIL_HOST_USER = env('EMAIL_HOST_USER')

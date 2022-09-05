@@ -6,21 +6,26 @@ from Users.models import Usuarios
 from Cursos.models import AsistenciaCursoUsuario
 
 
-class UsuarioInline(admin.TabularInline):
+class AsistenciaCursoUsuarioInline(admin.TabularInline):
     model = AsistenciaCursoUsuario
-    max_num = 1
-    extra = 1
-    list_display = ('get_usuarios',)
-    #fields = ('nombre','apellido','pago_cuota')
-    # readonly_fields = ('nombre','apellido')
+    extra = 0
+    
+    #exclude = ('usuario',)
+    #list_display = ('get_usuarios_curso',)
+    fields = ('usuario','asistencia',)
+    readonly_fields = ('usuario',)
+
+    def get_pago_cuota(self, obj):
+        return obj.usuario.pago_cuota
+    
 
 class CursoHorarioInline(admin.TabularInline):
     model = CursoHorario
     extra = 1
     fields = ('horario','cupo','dia',)
-    inlines = [
-         UsuarioInline,
-    ]
+    # inlines = [
+    #     AsistenciaCursoUsuarioInline
+    # ]
 
 @admin.register(Cursos)
 class CursoAdmin(admin.ModelAdmin):
@@ -28,13 +33,19 @@ class CursoAdmin(admin.ModelAdmin):
     filter_horizontal = ('usuarios',)
     ordering = ['nombre']
     inlines = (CursoHorarioInline,)
-    #fliter_horizontal = ('horarios')
     readonly_fields = ('ganancia',)
 
 @admin.register(CursoHorario)
 class CursoHorarioAdmin(admin.ModelAdmin):
-     list_display = ('curso','horario', 'cupo')
-     inlines = [UsuarioInline,]
+    model = CursoHorario
+    list_display = ('curso','horario', 'cupo', )
+    inlines = [AsistenciaCursoUsuarioInline,]
+
+
+# class CursoInline(admin.TabularInline):
+#     model = Cursos
+#     extra =1
+#     exclude = ('nombre','costo','descripcion','state','horario')
 
     
 

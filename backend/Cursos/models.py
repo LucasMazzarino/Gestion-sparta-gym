@@ -33,6 +33,19 @@ class Cursos(models.Model):
   def __str__(self):
     txt = "{0} (Costo: $ {1} por mes)"
     return txt.format(self.nombre, self.costo)
+  
+  def save(self, *args, **kwargs):
+     super(Cursos,self).save(*args,**kwargs)
+     print(self.usuarios.all())
+     curso_horarios = CursoHorario.objects.filter(curso__id=self.id)
+     for curso_horario in curso_horarios:
+       # for usuario in curso_horario.usuario.all():
+       #   curso_horario.usuario.remove(usuario)
+       #   curso_horario.save()
+       curso_horario.usuario.set(Usuarios.objects.none()) 
+       curso_horario.usuario.add(*self.usuarios.all())
+       curso_horario.save()
+    
 
 
 class CursoHorario(models.Model):
@@ -47,8 +60,8 @@ class AsistenciaCursoUsuario(models.Model):
   curso_horario = models.ForeignKey(CursoHorario, on_delete=models.CASCADE)
   asistencia = models.BooleanField(default=False)
 
-  def get_usuarios(self):
-      # return "\n".join([u.usuario for u in obj.usuario.all()])
+
+
 
 
 
