@@ -5,7 +5,7 @@ from Cursos.models import Cursos,Horario
 class HorarioSerializer(serializers.ModelSerializer):
   class Meta:
    model = Horario
-   fields = ('horaInicio','horaFin','cuposLibres',)
+   fields = ('horaInicio','horaFin',)
 
     
 
