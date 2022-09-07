@@ -1,20 +1,18 @@
 import React from 'react';
+import MujerEntrenando from '../imagenes/MujerEntrenando.jpg'
+import HombreEntrenando from '../imagenes/HombreEntrenando.jpg'
 
 function SeccionDos(){
   return(
     <div className='SeccionDos'>    
-            <div class="row">
-                <div class="col-md-6">                    
-                    <img src='https://nutricion360.es/wp-content/uploads/2020/06/mujeres-plan-quemar-grasa-ejercicios-768x512.jpg'/>
-                    <div className='TextoCentradoUno'>               
-                        para <strong id='ellas'>ELLAS</strong> / Contamos con un equipo de entrenadores que construyen un plan ajustado a tus objetivos.      
-                    </div>                  
+            <div className="row">
+                <div className="col-md-6" id='FondoUno'>              
+                      <img src={MujerEntrenando}></img>
+                      <p id='TextoUno'>Ejercicios para ELLAS</p>       
                 </div>
-                 <div class="col-md-6">                     
-                     <img src='https://www.tododisca.com/wp-content/uploads/2022/01/ejercicio-fisico-casa-hombre-covid.jpg'/>
-                     <div className='TextoCentradoDos'>
-                        para <strong id='ellos'>ELLOS</strong> / Contamos con un equipo de entrenadores que construyen un plan ajustado a tus objetivos.  
-                     </div>
+                 <div className="col-md-6" id='FondoDos'>                     
+                      <img src={HombreEntrenando}></img>
+                      <p id='TextoDos'>Ejercicios para ELLOS</p>                             
                 </div>                            
             </div>       
     </div>

@@ -1,17 +1,17 @@
-import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
+import EjercicioUno from '../imagenes/EjercicioUno.jpg';
+import EjercicioDos from '../imagenes/EjercicioDos.jpg';
+import EjercicioTres from '../imagenes/EjercicioTres.jpg';
 
-function SeccionUno(){
-  return(
-    <div className='SeccionUno'>                  
-      <Carousel>
+function SeccionUno() {
+  return (
+    <Carousel>
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src='https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/personal-weight-training-in-the-gym-royalty-free-image-1568020980.jpg?crop=0.65809xw:1xh;center,top&resize=980:*'
-          width='300'
-          height='800'
+          src={EjercicioUno}
           alt="First slide"
+          height='600'
         />
         <Carousel.Caption>
           <h3>First slide label</h3>
@@ -21,10 +21,9 @@ function SeccionUno(){
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="https://elucabista.com/wp-content/uploads/2017/01/portada3.jpg"
-          width='300'
-          height='800'
+          src={EjercicioDos}
           alt="Second slide"
+          height='600'
         />
 
         <Carousel.Caption>
@@ -35,10 +34,9 @@ function SeccionUno(){
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="https://t2.uc.ltmcdn.com/es/posts/8/5/0/las_mejores_clases_para_mantenerme_en_forma_en_el_gimnasio_31058_orig.jpg"
-          width='300'
-          height='800'
+          src={EjercicioTres}
           alt="Third slide"
+          height='600'
         />
 
         <Carousel.Caption>
@@ -49,7 +47,6 @@ function SeccionUno(){
         </Carousel.Caption>
       </Carousel.Item>
     </Carousel>
-    </div>
   );
 }
 

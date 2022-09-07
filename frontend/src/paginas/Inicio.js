@@ -1,20 +1,23 @@
 import React from 'react';
-import Header from '../componentes/Header';
-import SeccionDos from '../componentes/SeccionDos';
-import SeccionTres from '../componentes/SeccionTres';
+import Navbar from '../componentes/Navbar';
 import SeccionUno from '../componentes/SeccionUno';
+import SeccionDos from '../componentes/SeccionDos';
 import Footer from '../componentes/Footer';
+import SeccionTres from '../componentes/SeccionTres';
 
-function Inicio(){
+
+const inicio = () => {
   return(
-    <div className='Inicio'>
-        <Header/>
-        <SeccionUno/>
-        <SeccionDos/>
-        <SeccionTres/>
-        <Footer/>             
+    <div className='Inicio'>       
+        <Navbar/>
+        <SeccionUno/>       
+        <Footer/>
+               
     </div>
   );
+  
 }
 
-export default Inicio;
+
+
+export default inicio;
