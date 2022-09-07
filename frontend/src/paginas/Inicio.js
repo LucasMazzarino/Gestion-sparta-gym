@@ -10,7 +10,9 @@ const inicio = () => {
   return(
     <div className='Inicio'>       
         <Navbar/>
-        <SeccionUno/>       
+        <SeccionUno/>  
+        <SeccionDos/>
+        <SeccionTres/>
         <Footer/>
                
     </div>
