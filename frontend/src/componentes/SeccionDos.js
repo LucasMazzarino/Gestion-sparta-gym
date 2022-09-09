@@ -1,23 +1,21 @@
 import React from 'react';
-import MujerEntrenando from '../imagenes/MujerEntrenando.jpg'
-import HombreEntrenando from '../imagenes/HombreEntrenando.jpg'
-import Image from 'react-bootstrap/Image'
+
 
 function SeccionDos(){
   return(
-    <section id='SeccionDos'>
+    <section className='SeccionDos'>
         <div className='container'>
               <div className='row'>
                 <div className='col-12 col-md-6 d-flex aling-items-center justify-content-center'>
-                      <div className='ParteUno'>
-                        <h1>Para Ellas</h1>
-                        <Image src={MujerEntrenando} rounded width='400' height='300'/>                                           
+                      <div className='ParteUno'>  
+                        <h2>Ejercicios</h2>           
+                        <h1>para ELLAS</h1>                                         
                       </div>                        
                 </div>
                 <div className='col-12 col-md-6 d-flex aling-items-center justify-content-center'>
-                      <div className='ParteDos'>
-                        <h1>Para Ellos</h1> 
-                        <Image src={HombreEntrenando} rounded width='400' height='300'/>                                          
+                      <div className='ParteDos'>                
+                        <h2>Ejercicios</h2>           
+                        <h1>para ELLOS</h1>                                         
                       </div>             
                 </div>                
               </div>
