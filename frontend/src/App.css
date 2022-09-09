@@ -41,25 +41,43 @@ li a:hover{
   color: white;
 }
 
+.SeccionTres img:hover{
+  filter: brightness(30%);
+}
+
+.SeccionTres p{
+  font-size: 25px;
+  font-family: 'Crete Round', serif;;
+}
 
 
-/* .ParteUno{
-  width: 700px;
-  height: 500px;
-  background-image: url('https://htmlcolorcodes.com/assets/images/html-color-codes-color-tutorials-hero.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-} */
+.EntrenadorUno{  
+  position: relative;
+}
 
-/* .ParteDos{
-  width: 700px;
-  height: 500px;
-  background-image: url('https://htmlcolorcodes.com/assets/images/html-color-codes-color-tutorials-hero.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;  
-} */
+.EntrenadorDos{  
+  position: relative;
+}
+
+.TextoUno{  
+  position: absolute;
+  bottom: 10%; 
+  color: white;
+  font-size: 25px;
+  font-family: 'Passion One', cursive;
+}
+
+.TextoDos{
+  position: absolute;
+  bottom: 10%;   
+  color: white;
+  font-size: 25px;
+  font-family: 'Passion One', cursive;
+}
+
+
+
+
 
 
 
@@ -79,6 +97,10 @@ Footer{
   color: floralwhite;
   padding: 20px;
   margin-top: 20px;
+}
+
+Footer .row img{
+  margin: 10px;
 }
 
 Footer i{
