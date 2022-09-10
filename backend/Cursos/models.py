@@ -27,18 +27,18 @@ class Cursos(models.Model):
   state = models.BooleanField('Estado',default = True)
   horarios = models.ManyToManyField(Horario, through='CursoHorario')
   pagos_cuotas = models.ManyToManyField(Usuarios, through='PagoCuota', related_name='pagos')
+  asistencias = models.ManyToManyField(Usuarios, through='Asistencia', related_name='asistencias')
   
   @property
   def ganancia(self):
     ganancia = 0
-    print(self.pagos_cuotas.through.objects.all())
-    for pago in self.pagos_cuotas.through.objects.all():
+    for pago in self.pagos_cuotas.through.objects.filter(curso_id=self.id):
       ganancia += pago.monto
     return ganancia
 
   def __str__(self):
-    txt = "{0} (Costo: $ {1} por mes)"
-    return txt.format(self.nombre, self.costo)
+    
+    return self.nombre
   
   # def save(self, *args, **kwargs):
   #     super(Cursos,self).save(*args,**kwargs)
@@ -56,6 +56,10 @@ class PagoCuota(models.Model):
   usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
   curso = models.ForeignKey(Cursos, on_delete=models.CASCADE)
   dia_de_pago = models.DateField()
+  
+  def __str__(self):
+    txt = "{0} (Pago: $ {1} del Curso {2})"
+    return txt.format(self.usuario, self.monto, self.curso)
 
   @property
   def monto(self):
@@ -64,21 +68,19 @@ class PagoCuota(models.Model):
       monto+= 500
       return monto
     return monto
+    
 
-dias = (
-  ("Lu","Lunes"),
-  ("Ma","Martes"),
-  ("Mi","Miercoles"),
-  ("Ju","Jueves"),
-  ("Vi","Viernes"),
-  ("Sa","Sabado"),
-
-)
-
-# class Misdias(models.Model):
-#   choice = models.CharField(max_length=200, choices=dias,)
 
 class CursoHorario(models.Model):
+  
+  dias = (
+  ("Lunes","Lunes"),
+  ("Martes","Martes"),
+  ("Miercoles","Miercoles"),
+  ("Juves","Jueves"),
+  ("Viernes","Viernes"),
+  ("Sabado","Sabado"),
+)
   horario = models.ForeignKey(Horario, on_delete=models.CASCADE)
   curso =models.ForeignKey(Cursos, on_delete=models.CASCADE)
   usuario = models.ManyToManyField(Usuarios, through='AsistenciaCursoUsuario')
@@ -89,6 +91,12 @@ class AsistenciaCursoUsuario(models.Model):
   usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
   curso_horario = models.ForeignKey(CursoHorario, on_delete=models.CASCADE)
   asistencia = models.BooleanField(default=False)
+
+class Asistencia(models.Model):
+  usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
+  curso = models.ForeignKey(Cursos, on_delete=models.CASCADE)
+  asistio = models.BooleanField(default=False)
+  fecha = models.DateField()
 
 
 

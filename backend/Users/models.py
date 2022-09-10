@@ -52,6 +52,6 @@ class Usuarios(AbstractBaseUser, PermissionsMixin):
   
   
   def __str__(self):
-    return self.nombre
+    return self.nombre +" "+self.apellido
   
   

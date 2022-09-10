@@ -11,7 +11,7 @@ class UserAdmin(BaseUserAdmin):
         (_('Informacion personal'),{'fields':('nombre','apellido', 'direccion','email',)}),
         (
             _('Permissions'),
-            {'fields':('is_active', 'is_staff', 'is_superuser')}
+            {'fields':('is_active', 'is_staff')}
         ),
     )
     add_fieldsets = (
