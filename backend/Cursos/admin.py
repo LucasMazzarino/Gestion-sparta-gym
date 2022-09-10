@@ -1,54 +1,88 @@
 from django.contrib import admin
+from django.contrib.auth.models import Group
 
 
-from .models import Horario, Cursos, CursoHorario
+from .models import Horario, Cursos, CursoHorario, PagoCuota, Asistencia
 from Users.models import Usuarios
-from Cursos.models import AsistenciaCursoUsuario
+
+class PagoCuotaInline(admin.TabularInline):
+    model = PagoCuota
+    fields = ('usuario','dia_de_pago')
+    extra = 1
+    list_filter = ('dia_de_pago',)
+
+    # def formfield_for_foreignkey(self, db_field, request, **kwargs):
+    #     if db_field.name == 'usuario':
+    #         kwargs['queryset'] = Usuarios.objects.filter(Cursos.nombre == self.curso)
+    #     return super(PagoCuotaInline, self).formfield_for_foreignkey(db_field, request, **kwargs)
+
+    def formfield_for_foreignkey(self, db_field, request=None, **kwargs): 
+        field = super(PagoCuotaInline, self).formfield_for_foreignkey(db_field, request, **kwargs) 
+        if db_field.name == 'usuario': 
+            if request._obj_ is not None: 
+                field.queryset = field.queryset.filter(building__exact = request._obj_)
+            else: 
+                field.queryset = field.queryset.none() 
+        return field
 
 
-class AsistenciaCursoUsuarioInline(admin.TabularInline):
-    model = AsistenciaCursoUsuario
-    extra = 0
     
-    #exclude = ('usuario',)
-    #list_display = ('get_usuarios_curso',)
-    fields = ('usuario','asistencia',)
-    readonly_fields = ('usuario',)
-
-    def get_pago_cuota(self, obj):
-        return obj.usuario.pago_cuota
+class AsistenciaInline(admin.TabularInline):
+    model = Asistencia
+    extra = 0
+    fields = ('curso','usuario','asistio','fecha',)
+    #readonly_fields = ('usuario',)
     
 
 class CursoHorarioInline(admin.TabularInline):
     model = CursoHorario
     extra = 1
     fields = ('horario','cupo','dia',)
-    # inlines = [
-    #     AsistenciaCursoUsuarioInline
-    # ]
 
+    
 @admin.register(Cursos)
 class CursoAdmin(admin.ModelAdmin):
-    list_display = ('nombre', 'costo')
+    list_display = ('nombre', 'costo',)
     filter_horizontal = ('usuarios',)
     ordering = ['nombre']
-    inlines = (CursoHorarioInline,)
+    inlines = (CursoHorarioInline,PagoCuotaInline,AsistenciaInline)
     readonly_fields = ('ganancia',)
+
+    
 
 @admin.register(CursoHorario)
 class CursoHorarioAdmin(admin.ModelAdmin):
     model = CursoHorario
-    list_display = ('curso','horario', 'cupo', )
-    inlines = [AsistenciaCursoUsuarioInline,]
+    list_display = ('curso','dia','horario', 'cupo', )
+    list_filter = ('dia','curso','horario')
+    ordering = ('curso','dia')
+    # inlines = [AsistenciaCursoUsuarioInline,]
+    search_fields = ('dia',)
 
 
-# class CursoInline(admin.TabularInline):
-#     model = Cursos
-#     extra =1
-#     exclude = ('nombre','costo','descripcion','state','horario')
+@admin.register(PagoCuota)
+class PagoCuotaAdmin(admin.ModelAdmin):
+    model = PagoCuota
+    fields = ('curso','usuario','dia_de_pago')
+    list_filter = ('dia_de_pago','usuario','curso')
 
-    
+@admin.register(Asistencia)
+class AsistenciaAdmin(admin.ModelAdmin):
+    model = Asistencia
+    fields = ('curso','usuario','asistio','fecha')
+    list_filter = ('curso','usuario','asistio','fecha')
 
+
+
+admin.site.site_header = 'Administracion Sparta Gym'
+admin.site.index_title = 'Panel de control Sparta'
+
+
+admin.site.unregister(Group)
 admin.site.register(Horario)
+
+
+
+
 
 
