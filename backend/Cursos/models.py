@@ -1,3 +1,4 @@
+
 from django.db import models
 from Users.models import Usuarios
 from django.db.models.signals import post_save, m2m_changed
@@ -56,6 +57,8 @@ class PagoCuota(models.Model):
   usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
   curso = models.ForeignKey(Cursos, on_delete=models.CASCADE)
   dia_de_pago = models.DateField()
+
+  
   
   def __str__(self):
     txt = "{0} (Pago: $ {1} del Curso {2})"

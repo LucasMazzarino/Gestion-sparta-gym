@@ -1,7 +1,11 @@
-# from django.contrib.auth.models import User
-# from django.db.models.signals import post_save,m2m_changed
-# from django.dispatch import receiver
-# from .models import Cursos, CursoHorario
+from ast import In
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save,m2m_changed, pre_save
+from django.dispatch import receiver
+
+from backend.Cursos.admin import PagoCuotaInline
+from backend.Users.models import Usuarios
+from .models import Cursos, PagoCuota
 
 
 # def save_users(sender, instance, *kwargs):
@@ -22,3 +26,9 @@
 #     curso_horario.save()
   
 # post_save.connect(asignar_usuarios_cursohorario,sender = Cursos)
+# @receiver(pre_save, sender=PagoCuota)
+# def save_pagos(sender, instance, **kwargs):
+#     u_cursos = Usuarios.objects.filter(c
+
+
+    

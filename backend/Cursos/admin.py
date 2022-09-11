@@ -7,31 +7,34 @@ from Users.models import Usuarios
 
 class PagoCuotaInline(admin.TabularInline):
     model = PagoCuota
-    fields = ('usuario','dia_de_pago')
+    fields = ('usuario','dia_de_pago',)
     extra = 1
     list_filter = ('dia_de_pago',)
 
-    # def formfield_for_foreignkey(self, db_field, request, **kwargs):
-    #     if db_field.name == 'usuario':
-    #         kwargs['queryset'] = Usuarios.objects.filter(Cursos.nombre == self.curso)
-    #     return super(PagoCuotaInline, self).formfield_for_foreignkey(db_field, request, **kwargs)
-
-    def formfield_for_foreignkey(self, db_field, request=None, **kwargs): 
-        field = super(PagoCuotaInline, self).formfield_for_foreignkey(db_field, request, **kwargs) 
-        if db_field.name == 'usuario': 
-            if request._obj_ is not None: 
-                field.queryset = field.queryset.filter(building__exact = request._obj_)
-            else: 
-                field.queryset = field.queryset.none() 
-        return field
-
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+            if db_field.name == 'usuario':
+                cur_id = request.resolver_match.kwargs.get('object_id', None)
+                if cur_id:
+                    kwargs['queryset'] = Usuarios.objects.filter(cursos=cur_id)
+                else:
+                    kwargs['queryset'] = Usuarios.objects.none()
+            return super(PagoCuotaInline, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
     
 class AsistenciaInline(admin.TabularInline):
     model = Asistencia
-    extra = 0
+    extra = 1
     fields = ('curso','usuario','asistio','fecha',)
-    #readonly_fields = ('usuario',)
+    
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+            if db_field.name == 'usuario':
+                cur_id = request.resolver_match.kwargs.get('object_id', None)
+                if cur_id:
+                    kwargs['queryset'] = Usuarios.objects.filter(cursos=cur_id)
+                else:
+                    kwargs['queryset'] = Usuarios.objects.none()
+            return super(AsistenciaInline, self).formfield_for_foreignkey(db_field, request, **kwargs)
+
     
 
 class CursoHorarioInline(admin.TabularInline):
@@ -65,6 +68,14 @@ class PagoCuotaAdmin(admin.ModelAdmin):
     model = PagoCuota
     fields = ('curso','usuario','dia_de_pago')
     list_filter = ('dia_de_pago','usuario','curso')
+    # readonly_fields = ('curso','usuario','dia_de_pago')
+
+    # def formfield_for_foreignkey(self, db_field, request, **kwargs):
+    #         if db_field.name == 'usuario':
+    #             cur_id = request.resolver_match.kwargs['object_id']
+    #             print(cur_id)
+    #             kwargs['queryset'] = Usuarios.objects.filter(cursos=cur_id)
+    #         return super(PagoCuotaAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
 @admin.register(Asistencia)
 class AsistenciaAdmin(admin.ModelAdmin):
