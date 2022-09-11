@@ -3,6 +3,8 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 
+
+
 function Navegacion() {
   return (
     <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
