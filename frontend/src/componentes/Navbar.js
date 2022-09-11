@@ -2,6 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
+import {Link} from 'react-router-dom';
 
 
 
@@ -13,11 +14,11 @@ function Navegacion() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mx-auto">
-            <Nav.Link href="#Inicio">INICIO</Nav.Link>
-            <Nav.Link href="#Cursos">CURSOS</Nav.Link>
-            <Nav.Link href="#Noticias">NOTICIAS</Nav.Link>
-            <Nav.Link href="#Contacto">CONTACTO</Nav.Link>
-            <Nav.Link href="#Galeria">GALERIA</Nav.Link>     
+            <Link className="nav-link" to='/'>INICIO</Link>
+            <Link className="nav-link" to='/Cursos'>CURSOS</Link>
+            <Link className="nav-link" to='/Noticias'>NOTICIAS</Link>
+            <Link className="nav-link" to='/Contacto'>CONTACTO</Link>
+            <Link className="nav-link" to='/Galeria'>GALERIA</Link>    
           </Nav>
         <Button variant="outline-success">Iniciar Sesion</Button>
         </Navbar.Collapse>

@@ -1,5 +1,5 @@
 import './App.css';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import Navbar from './componentes/Navbar';
 import Footer from './componentes/Footer';
 import Inicio from './paginas/Inicio';
@@ -10,12 +10,15 @@ import Galeria from './paginas/Galeria';
 
 function App() {
   return ( 
-    <Router>
+    <BrowserRouter>
         <Navbar/>
-        <Route></Route>
-        <Route></Route>
+        <Routes>
+           <Route index element={<Inicio/>}/>
+           <Route path='/Contacto' element={<Contacto/>}/>
+           <Route path='/Galeria' element={<Galeria/>}/>
+        </Routes>
         <Footer/>
-    </Router>      
+    </BrowserRouter>      
         
         
   );
