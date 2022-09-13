@@ -1,38 +1,154 @@
-.App {
+h1{
   text-align: center;
+  color: black;
+  padding: 20px;
+  letter-spacing: 5px;
+  font-family: 'Russo One', sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h2{
+  text-align: center;
+  color: black;
+  padding: 20px;
+  letter-spacing: 5px;
+  font-family: 'Russo One', sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.SeccionDos{ 
+  background-color: black;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.SeccionDos h1{
   color: white;
+  -webkit-text-stroke: 2px black;
+ 
 }
 
-.App-link {
-  color: #61dafb;
+.SeccionDos h2{
+  margin-top: 80px;
+  color: white;
+  -webkit-text-stroke: 2px black;
+  
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.ParteUno{
+  margin:10px auto;
+  padding:13px;
+  width:1000px;
+  height:500px; 
+  background-repeat:no-repeat;
+  background:url('./imagenes/MujerEntrenando.jpg');
+  background-size: cover;
 }
+
+.ParteDos{
+  margin:10px auto;
+  padding:13px;
+  width:1000px;
+  height:500px; 
+  background-repeat:no-repeat;
+  background:url('./imagenes/HombreEntrenando.jpg');
+  background-size: cover;
+}
+
+
+.SeccionTres img:hover{
+  filter: brightness(30%);
+}
+
+.SeccionTres p{
+  font-size: 17px;
+  font-family: 'Crete Round', serif;;
+}
+
+
+.EntrenadorUno{  
+  position: relative;
+}
+
+.EntrenadorDos{  
+  position: relative;
+}
+
+.TextoUno{  
+  position: absolute;
+  bottom: 10%; 
+  color: white;
+  font-size: 25px !important;
+  font-family: 'Passion One', cursive !important;
+}
+
+.TextoDos{
+  position: absolute;
+  bottom: 10%;   
+  color: white;
+  font-size: 25px !important;
+  font-family: 'Passion One', cursive !important; 
+}
+
+Footer{
+  background-color: black !important;
+  color: floralwhite;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+Footer .row img{
+  margin: 10px;
+}
+
+Footer i{
+  height: 50px;
+  width: 10px;
+  padding: 30px;
+}
+
+Footer #Derechos{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 14px;
+}
+
+.btn-flotante {
+	font-size: 15px; 
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	color: #ffffff; 
+	border-radius: 15px;
+  border-color: forestgreen; 
+	background-color: forestgreen; 
+	padding-right: 20px; 
+	position: fixed;
+	bottom: 40px;
+	right: 40px;
+	transition: all 300ms ease 0ms;
+	box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+	z-index: 99;
+}
+
+.btn-flotante:hover {
+	background-color: mediumseagreen;
+	box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.3);
+	transform: translateY(-7px);
+}
+
+.ParrafoContacto{
+  font-size: 20px; 
+}
+
+.Galeria img{
+  width: 100%;
+  height: 300px;
+}
+
+.Galeria .col-md-3{
+  margin: 0 !important;
+  padding: 20px;
+}
+
+.Galeria img:hover{
+  border: 5px solid white;
+}
+
+
+
+
+
