@@ -1,0 +1,36 @@
+  /* login*/
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAIL = 'LOGIN_FAIL';
+export const LOGOUT = 'LOGOUT';
+
+/*loadin*/ 
+export const SET_AUTH_LOADING = 'SET_AUTH_LOADING';
+export const REMOVE_AUTH_LOADING = 'REMOVE_AUTH_LOADING';
+
+
+/*user loaded*/
+export const USER_LOADED_SUCCESS = 'USER_LOADED_SUCCESS';
+export const USER_LOADED_FAIL = 'USER_LOADED_FAIL';
+
+
+/* autenticado */ 
+export const AUTHENTICATED_SUCCESS = 'AUTHENTICATED_SUCCESS';
+export const AUTHENTICATED_FAIL = 'AUTHENTICATED_FAIL';
+
+/*reset password*/ 
+export const RESET_PASSWORD_SUCCESS = 'RESET_PASSWORD_SUCCESS';
+export const RESET_PASSWORD_FAIL = 'RESET_PASSWORD_FAIL';
+export const CONFIRM_RESET_PASSWORD__SUCCESS = 'CONFIRM_RESET_PASSWORD__SUCCESS';
+export const CONFIRM_RESET_PASSWORD__FAIL = 'CONFIRM_RESET_PASSWORD__FAIL';
+
+/* refresh */ 
+export const REFRESH_SUCCESS = 'REFRESH_SUCCESS';
+export const REFRESH_FAIL = 'REFRESH_FAIL';
+
+/* alertas */ 
+export const SET_ALERT = 'SET_ALERT';
+export const REMOVE_ALERT = 'REMOVE_ALERT';
+
+/* Cursos*/
+export const GET_CURSOS_SUCCESS = 'GET_CURSOS_SUCCESS';
+export const GET_CURSOS_FAIL = 'GET_CURSOS_FAIL';

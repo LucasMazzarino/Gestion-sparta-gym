@@ -37,7 +37,7 @@ h2{
   width:1000px;
   height:500px; 
   background-repeat:no-repeat;
-  background:url('./imagenes/MujerEntrenando.jpg');
+  background:url('../imagenes/MujerEntrenando.jpg');
   background-size: cover;
 }
 
@@ -47,7 +47,7 @@ h2{
   width:1000px;
   height:500px; 
   background-repeat:no-repeat;
-  background:url('./imagenes/HombreEntrenando.jpg');
+  background:url('../imagenes/HombreEntrenando.jpg');
   background-size: cover;
 }
 

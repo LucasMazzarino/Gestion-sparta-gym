@@ -1,10 +1,12 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Layout from '../../hocs/Layout';
 
 
 function Contacto(){
   return(
+    <Layout>
     <section className='Contacto'>       
          <div className='container'>
                 <div className='row'>
@@ -64,6 +66,7 @@ function Contacto(){
               <br></br>  
               <br></br>             
     </section>
+    </Layout>
   );
 }
 

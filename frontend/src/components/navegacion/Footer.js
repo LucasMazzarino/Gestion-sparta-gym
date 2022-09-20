@@ -1,10 +1,10 @@
 import React from 'react';
-import Facebook from '../imagenes/Facebook.png';
-import Instagram from '../imagenes/Instagram.png';
-import Twitter from '../imagenes/Twitter.png';
-import Whatsapp from '../imagenes/Whatsapp.png';
+import Facebook from '../../imagenes/Facebook.png';
+import Instagram from '../../imagenes/Instagram.png';
+import Twitter from '../../imagenes/Twitter.png';
+import Whatsapp from '../../imagenes/Whatsapp.png'
 
-function Footer() {
+export function Footer() {
   return (
     <div>
         <footer>
@@ -29,12 +29,6 @@ function Footer() {
 
         </footer>
     </div>
-
-
-
-
-
   )
 }
 
-export default Footer
