@@ -1,6 +1,6 @@
 import{
-  GET_CURSOS_EXITO,
-  GET_CURSOS_FALLO,
+  GET_CURSOS_SUCCESS,
+  GET_CURSOS_FAIL,
 }from '../actions/types';
 
 const initialState = {
@@ -11,13 +11,16 @@ export default function Cursos(state = initialState, action){
   const {type, payload} = action;
 
   switch (type) {
-    case GET_CURSOS_EXITO:
+    case GET_CURSOS_SUCCESS:
       return{
         ...state,
         cursos: payload
       }
-    case GET_CURSOS_FALLO:
-
+    case GET_CURSOS_FAIL:
+      return{
+        ...state,
+        cursos:null
+      }
     default:
       return state
   }

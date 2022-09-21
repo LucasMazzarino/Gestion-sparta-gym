@@ -13,7 +13,7 @@ class HorarioSerializer(serializers.ModelSerializer):
 class CursoSerializer(serializers.ModelSerializer):
   class Meta:
    model = Cursos
-   fields = ('id', 'nombre', 'costo','descripcion',)
+   fields = ('id', 'nombre', 'costo','descripcion','imagen')
 
 
 class CursoHorarioserializer(serializers.ModelSerializer):

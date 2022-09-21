@@ -1,20 +1,21 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+
+import Alert from '../alert'
 import { Link } from 'react-router-dom';
 import { Navigate } from 'react-router'
 
-import Alert from '../alert'
-
+import { logout } from '../../redux/actions/auth'
 
 import { connect } from 'react-redux'
-import { logout } from '../../redux/actions/auth'
 import { Fragment, useState } from 'react'
 
 
 function Navegacion({
   isAuthenticated,
   logout,
+  staff,
 }) {
 
   const [redirect, setRedirect] = useState(false);
@@ -29,15 +30,7 @@ function Navegacion({
     return <Navigate to='/' />;
   }
 
-  const authenticatedLinks = (
-    <Fragment>
-    <button> Estas autenticado</button> 
-    <button
-    onClick={logoutHandler}
-    > Cerrar seccion</button>
-    </Fragment>
-  )
-
+  
   const noAuthenticatedLinks = (
     <Fragment>
       <div className="flex item-center" variant="outline-success">
@@ -49,7 +42,29 @@ function Navegacion({
   )
 
 
-
+  const isStafflinks = (
+    <Fragment>
+        <button> eres administrador!!</button> 
+    </Fragment>
+  )
+  
+  const isNoStafflinks = (
+    <Fragment>
+        <button> no eres administrador</button> 
+    </Fragment>
+  )
+  
+  const authenticatedLinks = (
+    <Fragment>
+    <button> Estas autenticado</button> 
+    <button
+    onClick={logoutHandler}
+    > Cerrar seccion</button>
+    {
+      staff ? isStafflinks : isNoStafflinks
+    }
+    </Fragment>
+  )
 
   return (
     <>
@@ -79,6 +94,7 @@ function Navegacion({
 const mapStateToProps = state => ({
   isAuthenticated: state.Auth.isAuthenticated,
   user: state.Auth.user,
+  staff: state.Auth.staff
 })
 
 export default connect(mapStateToProps,{

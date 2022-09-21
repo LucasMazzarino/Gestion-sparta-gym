@@ -51,11 +51,11 @@ const Login = ({
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Ingrese su Cedula</Form.Label>
           <Form.Control name='cedula'
-            value={cedula}
-            onChange={e=>onChange(e)}
-            type="number"
-            required 
-            />
+              value={cedula}
+              onChange={e=>onChange(e)}
+              type="number"
+              required 
+              />
           <Form.Text className="text-muted">
           </Form.Text>
         </Form.Group>
@@ -63,10 +63,10 @@ const Login = ({
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Contraseña</Form.Label>
           <Form.Control name="password"
-            value={password}
-            onChange={e=>onChange(e)}
-            type="password" 
-            required />
+              value={password}
+              onChange={e=>onChange(e)}
+              type="password" 
+              required />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
           <Form.Check type="checkbox" label="Check me out" />
@@ -85,7 +85,7 @@ const Login = ({
           </Button>:
           <Button type="submit" variant="primary">Login</Button>}
           </div>
-        <div class="col">
+        <div>
           <Link to="/reset_password">Olvidaste la contraseña?</Link>
         </div>
       </Form>

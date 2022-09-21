@@ -21,7 +21,8 @@ import {
     refresh: localStorage.getItem('refresh'),
     isAuthenticated: null,
     user: null,
-    loading: false
+    loading: false,
+    staff: false
   }
 
 
@@ -42,7 +43,8 @@ import {
         case USER_LOADED_SUCCESS:
             return {
                 ...state,
-                user: payload
+                user: payload,
+                staff: payload.is_staff
             }
         case USER_LOADED_FAIL:
             return {
@@ -96,6 +98,7 @@ import {
             refresh: null,
             isAuthenticated: false,
             user: null,
+            staff:false
           }
 
         default:
