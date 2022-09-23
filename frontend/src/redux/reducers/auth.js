@@ -100,7 +100,6 @@ import {
             user: null,
             staff:false
           }
-
         default:
           return state
     }

@@ -26,7 +26,7 @@ function Contacto(){
                       <br></br>
                       <br></br>
                       <br></br>
-                      <p className='ParrafoContacto'>Email: spartagym@gmail.com<br></br>
+                      <p className='ParrafoContacto'>Email: spartagyym@gmail.com<br></br>
                         Whatsapp: +5999 9999 99<br></br>
                         Dirección: Uruguay 1444, Salto, Uruguay</p>          
                   </div>

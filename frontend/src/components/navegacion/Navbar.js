@@ -31,16 +31,6 @@ function Navegacion({
   }
 
   
-  const noAuthenticatedLinks = (
-    <Fragment>
-      <div className="flex item-center" variant="outline-success">
-          <Link to="/login" className="btn btn-primary text-center">
-            Iniciar Sesion
-          </Link>
-        </div>
-    </Fragment>
-  )
-
 
   const isStafflinks = (
     <Fragment>
@@ -60,9 +50,21 @@ function Navegacion({
     <button
     onClick={logoutHandler}
     > Cerrar seccion</button>
-    {
-      staff ? isStafflinks : isNoStafflinks
-    }
+      <Fragment>
+        {
+          staff ? isStafflinks: isNoStafflinks
+        }
+      </Fragment>
+    </Fragment>
+  )
+
+   const noAuthenticatedLinks = (
+    <Fragment>
+      <div className="flex item-center" variant="outline-success">
+          <Link to="/login" className="btn btn-primary text-center">
+            Iniciar Sesion
+          </Link>
+        </div>
     </Fragment>
   )
 

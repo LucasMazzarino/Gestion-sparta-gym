@@ -25,7 +25,7 @@ class Cursos(models.Model):
   nombre = models.CharField(max_length=250)
   costo = models.PositiveSmallIntegerField(default=0)
   descripcion = models.TextField(max_length=250)  
-  imagen = models.ImageField('Imagen de portada',upload_to='cursos/imagenes/', null=True, default='sparta_img.jpg')
+  imagen = models.ImageField('Imagen de portada',upload_to='cursos/imagenes/', null=True, default='cursos/imagenes/sparta_img.jpg')
   state = models.BooleanField('Estado',default = True)
   horarios = models.ManyToManyField(Horario, through='CursoHorario')
   pagos_cuotas = models.ManyToManyField(Usuarios, through='PagoCuota', related_name='pagos')

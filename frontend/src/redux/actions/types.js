@@ -34,3 +34,5 @@ export const REMOVE_ALERT = 'REMOVE_ALERT';
 /* Cursos*/
 export const GET_CURSOS_SUCCESS = 'GET_CURSOS_SUCCESS';
 export const GET_CURSOS_FAIL = 'GET_CURSOS_FAIL';
+export const GET_CURSO_FAIL = 'GET_CURSO_FAIL';
+export const GET_CURSO_SUCCESS = 'GET_CURSO_SUCCESS';

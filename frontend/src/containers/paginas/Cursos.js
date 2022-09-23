@@ -2,59 +2,71 @@ import React from 'react';
 import Layout from '../../hocs/Layout';
 
 import Container from 'react-bootstrap/Container'
-import Button from 'react-bootstrap/Button';
+
 import Card from 'react-bootstrap/Card';
+import CardGroup from 'react-bootstrap/CardGroup';
+import Row from 'react-bootstrap/Row';
+
+
 
 import { get_cursos } from '../../redux/actions/cursos';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
-import CardImg from 'react-bootstrap/esm/CardImg';
+import { Link } from 'react-router-dom';
+
 
 const Cursos = ({
     get_cursos,
-    cursos
+    cursos,
 }) => {
 
-    useEffect(() => {
-        get_cursos()
-        window.scrollTo(0,0)
-    }, [])
+	useEffect(() => {
+			get_cursos()
+			window.scrollTo(0,0)
+	}, [])
 
-    return(
-        <Layout>
-        <section className='Cursos'>
-            <h1>Cursos</h1>
-            <Container fluid='sm'>
-                {
-                    cursos &&
-                    cursos !== null &&
-                    cursos !== undefined &&
-                    cursos.map(curso => {
-                        if (curso.length !== 0){
-                            return(
-                                <Card style={{ width: '18rem' }} key={curso.id}>
-                                <CardImg src={curso.imagen.url}/>
-                                <Card.Body>
-                                  <Card.Title>{curso.nombre}</Card.Title>
-                                  <Card.Text>
-                                    {curso.descripcion}
-                                  </Card.Text>
-                                  <Button variant="primary">Go somewhere</Button>
-                                </Card.Body>
-                              </Card>
-                            )
-                        }
-                        return <div></div>
-                    })
-                }          
-            </Container>
-        </section>
-        </Layout>
-    )
+	const mostrarCursos = () =>{
+		return(
+			cursos &&
+			cursos !== null &&
+			cursos !== undefined &&
+			cursos.length !==0 &&
+			cursos.map((curso) => {        
+				return(
+					<CardGroup key={curso.id}>
+					<Card className="bg-dark text-white">
+						<Card.Img variant="top" src={curso.imagen} />
+						<Card.Body>
+							<Card.Title>{curso.nombre}</Card.Title>
+							<Card.Text>
+							{curso.descripcion}
+							</Card.Text>
+						</Card.Body>
+						<Card.Footer>
+						<Link to={`${curso.id}`} variant="primary">Ver el Curso</Link>						</Card.Footer>
+					</Card>
+					</CardGroup>
+				)               
+			})  
+		)
+	}
+
+	return(
+			<Layout>
+			<section className='Cursos'>
+					<h1>Cursos</h1>
+					<Container>
+					<Row md={3}>
+					{mostrarCursos()}
+      		</Row>          
+					</Container>
+			</section>
+			</Layout>
+	)
 }
 
 const mapStateToProps = state => ({
-    cursos: state.Cursos.cursos
+    cursos: state.Cursos.cursos,
 })
 
 export default connect(mapStateToProps,{
