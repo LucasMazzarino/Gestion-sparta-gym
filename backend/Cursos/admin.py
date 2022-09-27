@@ -3,19 +3,20 @@ from django.contrib.auth.models import Group
 
 
 from .models import Horario, Cursos, CursoHorario, PagoCuota, Asistencia
-from Users.models import Usuarios
+from Users.models import Usuarios,ReservaUsuarios
+
+# class MinValidatedInlineMixIn:
+#     validate_min = True
+#     def get_formset(self, *args, **kwargs):
+
+#         return super().get_formset(validate_min=self.validate_min, *args, **kwargs)
 
 class PagoCuotaInline(admin.TabularInline):
     model = PagoCuota
     fields = ('usuario','dia_de_pago',)
     extra = 1
     list_filter = ('dia_de_pago',)
-
-    def get_form(self, request, obj=None, **kwargs):    # Just added this override
-        form = super(PagoCuotaInline, self).get_form(request, obj, **kwargs)
-        form.base_fields['usuario'].widget.can_add_related = False
-        form.base_fields['usuario'].widget.can_change_related = False
-        return form
+    
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == 'usuario':
@@ -56,6 +57,8 @@ class AsistenciaInline(admin.TabularInline):
         widget.can_add_related = False
         widget.can_change_related = False
         return formset
+    
+    
 
     
 
@@ -72,6 +75,13 @@ class CursoHorarioInline(admin.TabularInline):
         widget.can_change_related = False
         return formset
 
+
+class ReservasUsuariosInline(admin.TabularInline):
+     model = ReservaUsuarios
+     extra = 1
+     fields =('usuario',)
+
+
     
 @admin.register(Cursos)
 class CursoAdmin(admin.ModelAdmin):
@@ -87,9 +97,13 @@ class CursoAdmin(admin.ModelAdmin):
 class CursoHorarioAdmin(admin.ModelAdmin):
     model = CursoHorario
     list_display = ('curso','dia','horario', 'cupo', )
+    inlines = [
+        ReservasUsuariosInline
+    ]
     list_filter = ('dia','curso','horario')
     ordering = ('curso','dia')
     search_fields = ('dia',)
+    
     
     def get_form(self, request, obj=None, **kwargs):    # Just added this override
         form = super(CursoHorarioAdmin, self).get_form(request, obj, **kwargs)

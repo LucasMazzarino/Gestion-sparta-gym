@@ -14,7 +14,6 @@ import { get_curso } from "../../redux/actions/cursos";
 const CursoDetail = ({
   get_curso,
   curso,
-  horarios
 }) => {
   const params = useParams()
   const cursoId = params.cursoId
@@ -25,6 +24,7 @@ const CursoDetail = ({
 
   const mostrarHorario = () => {
     if(curso.horarios && curso.horarios !== null && curso.horarios !== undefined && curso.horarios.length !==0){
+      console.log(curso.horarios)
       return(
         curso.horarios.map((horario) => {
           return (         

@@ -41,6 +41,7 @@ class Cursos(models.Model):
   def __str__(self):
     
     return self.nombre
+
   
 class PagoCuota(models.Model):
   usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
@@ -65,7 +66,6 @@ class PagoCuota(models.Model):
     curso = self.curso.usuarios.all()
     if usuario not in curso:
       raise ValidationError("Este usuario no se encuentra en este curso.")
-    
             
 
 class CursoHorario(models.Model):
@@ -82,6 +82,7 @@ class CursoHorario(models.Model):
   curso =models.ForeignKey(Cursos, on_delete=models.CASCADE)
   cupo = models.PositiveSmallIntegerField(default=40)
   dia = models.CharField(max_length=200, choices=dias)
+  
 
 
 class Asistencia(models.Model):

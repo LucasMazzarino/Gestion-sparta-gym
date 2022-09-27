@@ -6,8 +6,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import action
 from rest_framework import viewsets
 
-from Users.models import Usuarios
-from Users.api.serializers import UsuariosSerializer
+from Users.models import Usuarios, ReservaUsuarios
+from Users.api.serializers import UsuariosSerializer, UsuariosPartialSerializer,ReservaUsuariosSerializer
 
 class UsuariosViewSet(viewsets.ViewSet):
   
@@ -22,3 +22,8 @@ class UsuariosViewSet(viewsets.ViewSet):
 		usuario = get_object_or_404(queryset, pk=pk)
 		serializer = UsuariosSerializer(usuario)
 		return Response(serializer.data,status = status.HTTP_200_OK)
+
+class ReservaUsuariosViewset(viewsets.ModelViewSet):
+  	serializer_class = ReservaUsuariosSerializer
+  	queryset = ReservaUsuarios.objects.all()
+

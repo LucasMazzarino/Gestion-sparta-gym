@@ -30,7 +30,6 @@ function Navegacion({
     return <Navigate to='/' />;
   }
 
-  
 
   const isStafflinks = (
     <Fragment>
@@ -41,12 +40,18 @@ function Navegacion({
   const isNoStafflinks = (
     <Fragment>
         <button> no eres administrador</button> 
+        <span>
+          Bienvenido
+        </span>
     </Fragment>
+    
   )
   
   const authenticatedLinks = (
     <Fragment>
-    <button> Estas autenticado</button> 
+      <Link to="/reservas" className="btn btn-primary text-center">
+        Reserva tu horario
+      </Link>
     <button
     onClick={logoutHandler}
     > Cerrar seccion</button>

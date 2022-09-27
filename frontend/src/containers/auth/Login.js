@@ -9,6 +9,7 @@ import Col from 'react-bootstrap/Col';
 
 import Form from 'react-bootstrap/Form';
 
+import { Navigate } from 'react-router'
 import { connect } from 'react-redux';
 import { login } from '../../redux/actions/auth';
 import { useState, useEffect } from 'react'

@@ -6,6 +6,7 @@ import Noticias from './containers/paginas/Noticias';
 import Contacto from './containers/paginas/Contacto';
 import Galeria from './containers/paginas/Galeria';
 import CursoDetail from './containers/paginas/CursosDetail';
+import ReservaHorario from './containers/paginas/ReservaHorario';
 
 import Login from './containers/auth/Login';
 import ResetPassword from './containers/auth/ResetPassword';
@@ -29,7 +30,10 @@ function App() {
            <Route exact path='/password/reset/confirm/:uid/:token' element={<ConfirmResetPassword/>} />
 
            {/*detalle Curso */}
-           <Route exact path='/cursos/:cursoId' element={<CursoDetail/>} />
+           <Route exact path='/cursos/:cursoId' element={<CursoDetail/>} /> 
+
+           {/*reserva de horario */}
+           <Route exact path='/reservas' element={<ReservaHorario/>}></Route>
         </Routes>
       </Router>      
   );

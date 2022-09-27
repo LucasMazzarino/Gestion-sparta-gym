@@ -70,5 +70,5 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps,{
-    get_cursos,
+  get_cursos,
 }) (Cursos)

@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 
 from django.conf import settings
 
+
 class UsuarioManager(BaseUserManager):
 
   def create_user(self, nombre, apellido, cedula, email, direccion, password=None, **extra_filds):
@@ -43,7 +44,8 @@ class Usuarios(AbstractBaseUser, PermissionsMixin):
   is_active = models.BooleanField(default=True)
   is_staff = models.BooleanField(default=False)
   pago_cuota = models.BooleanField(default=False)
-
+  reservas = models.ManyToManyField(to='Cursos.CursoHorario', through='ReservaUsuarios', blank=True, related_name='reserva')
+  
   objects = UsuarioManager()
 
   USERNAME_FIELD = 'cedula'
@@ -54,4 +56,8 @@ class Usuarios(AbstractBaseUser, PermissionsMixin):
   def __str__(self):
     return self.nombre +" "+self.apellido
   
-  
+
+class ReservaUsuarios(models.Model):
+  usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
+  curso_horario = models.ForeignKey(to='Cursos.CursoHorario', on_delete=models.CASCADE)
+
