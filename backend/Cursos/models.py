@@ -25,6 +25,7 @@ class Cursos(models.Model):
   nombre = models.CharField(max_length=250)
   costo = models.PositiveSmallIntegerField(default=0)
   descripcion = models.TextField(max_length=250)  
+  imagen = models.ImageField('Imagen de portada',upload_to='cursos/imagenes/', null=True, default='cursos/imagenes/sparta_img.jpg')
   state = models.BooleanField('Estado',default = True)
   horarios = models.ManyToManyField(Horario, through='CursoHorario')
   pagos_cuotas = models.ManyToManyField(Usuarios, through='PagoCuota', related_name='pagos')
@@ -40,6 +41,7 @@ class Cursos(models.Model):
   def __str__(self):
     
     return self.nombre
+
   
 class PagoCuota(models.Model):
   usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
@@ -64,7 +66,6 @@ class PagoCuota(models.Model):
     curso = self.curso.usuarios.all()
     if usuario not in curso:
       raise ValidationError("Este usuario no se encuentra en este curso.")
-    
             
 
 class CursoHorario(models.Model):
@@ -81,6 +82,7 @@ class CursoHorario(models.Model):
   curso =models.ForeignKey(Cursos, on_delete=models.CASCADE)
   cupo = models.PositiveSmallIntegerField(default=40)
   dia = models.CharField(max_length=200, choices=dias)
+  
 
 
 class Asistencia(models.Model):

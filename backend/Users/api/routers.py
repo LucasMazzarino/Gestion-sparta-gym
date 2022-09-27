@@ -1,11 +1,12 @@
 from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken import views
 
-from Users.api.api import UsuariosViewSet
+from Users.api.api import UsuariosViewSet, ReservaUsuariosViewset
 
 router = DefaultRouter()
 
-router.register('',UsuariosViewSet, basename="users")
+router.register('verusuarios',UsuariosViewSet, basename="users")
+router.register('reservas',ReservaUsuariosViewset, basename="reserva")
 
 
 urlpatterns = router.urls

@@ -154,11 +154,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ROOT_URLCONF = 'Main.urls'
 
 LANGUAGE_CODE = 'es'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
 
@@ -199,6 +196,7 @@ SIMPLE_JWT = {
 DJOSER = {
     'LOGIN_FIELD': 'cedula',
     'USER_CREATE_PASSWORD_RETYPE': True,
+    'PASSWORD_RESET_CONFIRM_RETYPE': True,
     'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
     'USERNAME_RESET_CONFIRM_URL': 'cedula/reset/confirm/{uid}/{token}',
     'ACTIVATION_URL': 'activate/{uid}/{token}',

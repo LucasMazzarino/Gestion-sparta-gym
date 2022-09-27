@@ -4,9 +4,6 @@ from django.utils import timezone
 from Users.models import Usuarios
 
 
-# def user_directory_path(instance, filename):
-#   return 'noticia/{0}/{1}'.format(instance.title, filename)
-
 class Noticia(models.Model):
 
   class Meta:
