@@ -20,9 +20,10 @@ import {
     access: localStorage.getItem('access'),
     refresh: localStorage.getItem('refresh'),
     isAuthenticated: null,
-    user: null,
     loading: false,
-    staff: false
+    staff: false,
+    user: null,
+    cursos_usuario: null
   }
 
 
@@ -44,7 +45,8 @@ import {
             return {
                 ...state,
                 user: payload,
-                staff: payload.is_staff
+                staff: payload.is_staff,
+                cursos_usuario:payload.cursos
             }
         case USER_LOADED_FAIL:
             return {
