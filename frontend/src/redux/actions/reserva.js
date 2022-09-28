@@ -5,7 +5,7 @@ import {
 import { setAlert } from './alert';
 import axios from 'axios'
 
-export const reservar_horario = () => async dispatch => {
+export const reservar_horario = (uid , cid) => async dispatch => {
 
     const config = {
 			Headers: {
@@ -14,7 +14,8 @@ export const reservar_horario = () => async dispatch => {
     };
     
     const body = JSON.stringify({
-        
+        uid,
+				cid
     });
 
 	try {

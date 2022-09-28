@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 from django.conf import settings
 
 
@@ -61,4 +64,8 @@ class ReservaUsuarios(models.Model):
   usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
   curso_horario = models.ForeignKey(to='Cursos.CursoHorario', on_delete=models.CASCADE)
 
-  
+
+@receiver(post_save, sender=ReservaUsuarios, dispatch_uid="create_restar_cupo")
+def restar_cupo(sender, instance, **kwargs):
+  instance.curso_horario.cupo -= 1
+  instance.curso_horario.save()

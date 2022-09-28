@@ -7,7 +7,7 @@ from rest_framework.decorators import action
 from rest_framework import viewsets
 
 from Users.models import Usuarios, ReservaUsuarios
-from Users.api.serializers import UsuariosSerializer, UsuariosPartialSerializer,ReservaUsuariosSerializer
+from Users.api.serializers import UsuariosSerializer, UsuariosPartialSerializer,ReservaUsuariosSerializer,CrearReservaUsuarioSerializer
 
 class UsuariosViewSet(viewsets.ViewSet):
   
@@ -25,17 +25,21 @@ class UsuariosViewSet(viewsets.ViewSet):
 
 class ReservaUsuariosViewset(viewsets.ModelViewSet):
 	queryset = ReservaUsuarios.objects.all()
-	serializer_class = ReservaUsuariosSerializer
+
+	def get_serializer_class(self):
+		if self.action == 'list':
+				return ReservaUsuariosSerializer
+		return CrearReservaUsuarioSerializer
 
 	@action(detail=True, methods=['post'])
 	def reservar_cupo(self, request, pk=None):
 		user = self.request.user
 		serializer = ReservaUsuariosSerializer(data=request.data)
 		if serializer.is_valid():
-			ReservaUsuarios.curso_horario.cupo -1
+			ReservaUsuarios.curso_horario.cupo - 1
 			return Response({'status': 'reserva agregada'})
 		else:
 			return Response(serializer.errors,
-											status=status.HTTP_400_BAD_REQUEST)
+				status=status.HTTP_400_BAD_REQUEST)
 	
 
