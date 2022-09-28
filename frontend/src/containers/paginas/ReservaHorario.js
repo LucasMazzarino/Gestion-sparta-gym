@@ -6,16 +6,14 @@ import { connect } from "react-redux";
 
 
 import { useEffect } from 'react';
-import { load_user } from '../../redux/actions/auth';
 
 const ReservaHorarios = ({
-  cursos_horarios,
   cursos_h,
-  load_user
+  
 }) => {
 
   useEffect(() =>{
-    load_user();
+    
     window.scrollTo(0,0);
   },[])
 
@@ -74,5 +72,5 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps, {
-  load_user
+ 
 }) (ReservaHorarios)

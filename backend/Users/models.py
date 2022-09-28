@@ -61,3 +61,4 @@ class ReservaUsuarios(models.Model):
   usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
   curso_horario = models.ForeignKey(to='Cursos.CursoHorario', on_delete=models.CASCADE)
 
+  

@@ -81,6 +81,16 @@ class ReservasUsuariosInline(admin.TabularInline):
      extra = 1
      fields =('usuario',)
 
+     def formfield_for_foreignkey(self, db_field, request, **kwargs):
+            if db_field.name == 'usuario':
+                usuario_id = request.resolver_match.kwargs.get('object_id', None)
+                if usuario_id:
+                    kwargs['queryset'] = Usuarios.objects.all()
+                else:
+                    kwargs['queryset'] = Usuarios.objects.none()
+            return super(ReservasUsuariosInline, self).formfield_for_foreignkey(db_field, request, **kwargs)
+    
+
 
     
 @admin.register(Cursos)

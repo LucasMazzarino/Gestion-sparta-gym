@@ -24,6 +24,18 @@ class UsuariosViewSet(viewsets.ViewSet):
 		return Response(serializer.data,status = status.HTTP_200_OK)
 
 class ReservaUsuariosViewset(viewsets.ModelViewSet):
-  	serializer_class = ReservaUsuariosSerializer
-  	queryset = ReservaUsuarios.objects.all()
+	queryset = ReservaUsuarios.objects.all()
+	serializer_class = ReservaUsuariosSerializer
+
+	@action(detail=True, methods=['post'])
+	def reservar_cupo(self, request, pk=None):
+		user = self.request.user
+		serializer = ReservaUsuariosSerializer(data=request.data)
+		if serializer.is_valid():
+			ReservaUsuarios.curso_horario.cupo -1
+			return Response({'status': 'reserva agregada'})
+		else:
+			return Response(serializer.errors,
+											status=status.HTTP_400_BAD_REQUEST)
+	
 
