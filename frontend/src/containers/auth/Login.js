@@ -41,6 +41,7 @@ const Login = ({
     e.preventDefault();
     login(cedula, password);
   }
+  console.log(formData)
 
   
   return (
