@@ -1,10 +1,13 @@
 import React from "react";
-import Cry from '../imagenes/Cry.jpg';
+import Cry from '../../imagenes/Cry.jpg';
 import Image from 'react-bootstrap/Image';
+import Layout from "../../hocs/Layout";
+
 
 
 function Galeria(){
     return(
+        <Layout>
         <section className="Galeria">
             <h1>Galeria</h1>
             <div className="container">
@@ -40,6 +43,7 @@ function Galeria(){
                 </div>
             </div>     
         </section>
+        </Layout>
     );
 
 

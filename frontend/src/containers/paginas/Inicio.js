@@ -1,16 +1,20 @@
 import React from 'react';
-import SeccionUno from '../componentes/SeccionUno';
-import SeccionDos from '../componentes/SeccionDos';
-import SeccionTres from '../componentes/SeccionTres';
+import SeccionUno from '../SeccionUno';
+import SeccionDos from '../SeccionDos';
+import SeccionTres from '../SeccionTres';
+import Layout from '../../hocs/Layout';
+
 
 
 function Inicio(){
   return(
+    <Layout>
     <div className='Inicio'>       
         <SeccionUno/>  
         <SeccionDos/>
         <SeccionTres/>
     </div>
+    </Layout>
   );
   
 }

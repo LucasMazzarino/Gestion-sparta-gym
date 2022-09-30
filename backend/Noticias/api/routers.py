@@ -3,6 +3,6 @@ from Noticias.api.api import NoticiaViewSet
 
 router = DefaultRouter()
 
-router.register('noticias',NoticiaViewSet, basename='noticia')
+router.register('',NoticiaViewSet, basename='noticia')
 
 urlpatterns = router.urls
