@@ -46,46 +46,74 @@ const ConfirmResetPassword = ({
 
   return (
     <Layout>
-      <Form onSubmit={e=>onSubmit(e)}>
-      <Form.Group className="mb-3" >
-        <Form.Label>Ingrese su nueva contraseña</Form.Label>
-        <Form.Control
-                    name="new_password"
-                    value={new_password}
-                    onChange={e=>onChange(e)}
-                    type="password"
-                    placeholder="Contraseña"
-                    required />
-        <Form.Text className="text-muted">
-        </Form.Text>
-      </Form.Group>
-      <Form.Group className="mb-3" >
-        <Form.Label>Repita su contraseña</Form.Label>
-        <Form.Control
-                    name="re_new_password"
-                    value={re_new_password}
-                    onChange={e=>onChange(e)}
-                    type="password"
-                    placeholder="Contraseña"
-                    required />
-        <Form.Text className="text-muted">
-        </Form.Text>
-      </Form.Group>
-      <div>
-        {loading ? 
-          <Button  variant="primary" disabled>
-          <Spinner
-          as="span"
-          animation="grow"
-          size="sm"
-          role="status"
-          aria-hidden="true"
-        />
-        Enviando...
-        </Button>:
-        <Button type="submit" variant="primary">Confirmar</Button>}
-      </div>
-      </Form>
+          <section className='seccionConfirmarReseteo'>
+                <div className='container'>
+                      <div className='row'>
+                          <div className='col-12 col-md-3'>
+
+                          </div>
+                          <div className='col-12 col-md-6 d-flex aling-items-center justify-content-center'>
+                          <Form onSubmit={e=>onSubmit(e)}>
+                                  <Form.Group className="mb-3" >
+                                    <Form.Label>Ingrese su nueva contraseña</Form.Label>
+                                    <Form.Control
+                                                name="new_password"
+                                                value={new_password}
+                                                onChange={e=>onChange(e)}
+                                                type="password"
+                                                placeholder="Contraseña"
+                                                required />
+                                    <Form.Text className="text-muted">
+                                    </Form.Text>
+                                  </Form.Group>
+                                  <Form.Group className="mb-3" >
+                                    <Form.Label>Repita su contraseña</Form.Label>
+                                    <Form.Control
+                                                name="re_new_password"
+                                                value={re_new_password}
+                                                onChange={e=>onChange(e)}
+                                                type="password"
+                                                placeholder="Contraseña"
+                                                required />
+                                    <Form.Text className="text-muted">
+                                    </Form.Text>
+                                  </Form.Group>
+                                  <div>
+                                    {loading ? 
+                                      <Button  variant="primary" disabled>
+                                      <Spinner
+                                      as="span"
+                                      animation="grow"
+                                      size="sm"
+                                      role="status"
+                                      aria-hidden="true"
+                                    />
+                                    Enviando...
+                                    </Button>:
+                                    <Button type="submit" variant="primary">Confirmar</Button>}
+                                  </div>
+                              </Form>
+                          </div>
+                          <div className='col-12 col-md-3'>
+
+                          </div>
+                      </div>
+                </div>
+          </section>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br> 
+          <br></br>
+          <br></br>  
+          <br></br>
+          <br></br>
+          <br></br>  
+          <br></br>  
+          <br></br>  
+          <br></br>  
+          <br></br>  
+          <br></br>           
     </Layout>
   )
 }

@@ -74,7 +74,7 @@ class CursoHorario(models.Model):
   ("Lunes","Lunes"),
   ("Martes","Martes"),
   ("Miercoles","Miercoles"),
-  ("Juves","Jueves"),
+  ("Jueves","Jueves"),
   ("Viernes","Viernes"),
   ("Sabado","Sabado"),
  )
