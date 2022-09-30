@@ -141,12 +141,141 @@ Footer #Derechos{
 
 .Galeria .col-md-3{
   margin: 0 !important;
-  padding: 20px;
+  padding-top: 20px;
+}
+
+.Galeria .col-md-4{
+  margin: 0 !important;
+  padding-top: 20px;
+}
+
+.Galeria .col-md-5{
+  margin: 0 !important;
+  padding-top: 20px;
+}
+
+.Galeria .col-md-6{
+  margin: 0 !important;
+  padding-top: 20px;
+}
+
+.Galeria .col-md-9{
+  margin: 0 !important;
+  padding-top: 20px;
 }
 
 .Galeria img:hover{
   border: 5px solid white;
 }
+
+.seccionLogin{
+  margin: 100px;
+}
+
+.seccionResetPassword{
+  margin: 100px;
+}
+
+.seccionConfirmarReseteo{
+  margin: 100px;
+}
+
+.pBienvenidoAdministrador{
+  color: white;
+}
+
+.pNoeresadmins{
+  color: white;
+}
+
+
+.ImagenCarta{
+  height: 400px;
+  width: 400px;  
+  transition: all 1.5s ease;
+}
+
+.Carta{
+  overflow: hidden;
+}
+
+.ImagenCarta:hover{
+  transform: scale(1.5);
+}
+
+.CardTitle{
+  text-align: center;
+  font-family: 'Bungee Spice', cursive; 
+}
+
+.CardText{
+  text-align: center;
+  font-family: 'Ropa Sans', sans-serif;
+  font-size: 20px;
+}
+
+.CartasCursos{
+  padding-top: 20px;
+}
+
+.SeccionCuatro{ 
+  padding: 20px;
+  background-color: black;  
+}
+
+#parrafoSparta{
+  color: orange !important;
+}
+
+#parrafoSeccionCuatro{
+  font-size: 60px;
+  font-family: 'Rubik Dirt', cursive;
+  color: white;
+  text-align: center;
+}
+
+.SeccionCuatro img{
+  border: solid 5px white; 
+}
+
+.SeccionCuatro h1{
+  color: red !important;
+  font-family: 'Sigmar One', cursive;
+  font-size: 50px; 
+  text-align: center;
+}
+
+.ImagenUno:hover {filter: sepia(60%);}
+
+.ImagenDos{
+  transition: all 1.5s ease;
+}
+
+.ImagenDos:hover{
+  transform: scale(1.2);  
+}
+
+.ImagenTres{
+  transition: all 1.5s ease;
+}
+
+.ImagenTres:hover{
+  transform: scale(1.2);  
+}
+  
+.ImagenCuatro{
+  transition: all 1.5s ease;
+}
+
+.ImagenCuatro:hover{
+   transform: scale(1.2);  
+}
+
+  
+
+
+
+
 
 
 

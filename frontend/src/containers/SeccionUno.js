@@ -1,7 +1,6 @@
 import Carousel from 'react-bootstrap/Carousel';
-import EjercicioUno from '../imagenes/EjercicioUno.jpg';
-import EjercicioDos from '../imagenes/EjercicioDos.jpg';
-import EjercicioTres from '../imagenes/EjercicioTres.jpg';
+import EjercicioUno from '../imagenes/EjercicioUno.jfif';
+
 
 function SeccionUno() {
   return (
@@ -21,7 +20,7 @@ function SeccionUno() {
           <Carousel.Item>
             <img
               className="d-block w-100"
-              src={EjercicioDos}
+              src={EjercicioUno}
               alt="Second slide"
               height='600'
             />
@@ -34,7 +33,7 @@ function SeccionUno() {
           <Carousel.Item>
             <img
               className="d-block w-100"
-              src={EjercicioTres}
+              src={EjercicioUno}
               alt="Third slide"
               height='600'
             />

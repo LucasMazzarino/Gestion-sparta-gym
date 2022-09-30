@@ -13,7 +13,7 @@ export function Footer() {
                 <div className='col-12 col-md-4 d-flex aling-items-center justify-content-center'>               
                     <p className='font-weight-bold mb-2'>¡Síguenos en nuestras redes sociales!<br/>                      
                         <img src={Facebook} height='40' width='40'/>
-                        <img src={Instagram} height='40' width='40'/>
+                        <a href='https://www.instagram.com/sparta_sit/' target="_blank"><img src={Instagram} height='40' width='40'/></a>
                         <img src={Twitter} height='40' width='40'/>               
                     </p>           
                 </div>
@@ -22,7 +22,7 @@ export function Footer() {
                     Politica de privacidad - Designed by MazzSilv</p>
                 </div>
                 <div className='col-12 col-md-4 d-flex aling-items-center justify-content-center'>
-                  <button className="btn-flotante"><img src={Whatsapp} width='30' height='30'/>Comunicate con nosotros</button> 
+                  <a href='https://web.whatsapp.com/' target="_blank"><button className="btn-flotante"><img src={Whatsapp} width='30' height='30'/>Comunicate con nosotros</button> </a>
                 </div>
               </div>
             </div>

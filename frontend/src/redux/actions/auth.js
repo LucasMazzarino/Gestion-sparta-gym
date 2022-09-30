@@ -76,13 +76,13 @@ export const login = (cedula, password) => async dispatch => {
       if (res.status === 200) {
           dispatch({
               type: LOGIN_SUCCESS,
-              payload: res.data
+              payload: res.data             
           });
 		  dispatch(load_user());
           dispatch({
               type: REMOVE_AUTH_LOADING
           });
-          dispatch(setAlert('Inicio de sesión con éxito', 'success'));
+          dispatch(setAlert('Inicio de sesión con éxito', 'success'));             
       } else {
           dispatch({
               type: LOGIN_FAIL

@@ -27,8 +27,8 @@ function Contacto(){
                       <br></br>
                       <br></br>
                       <p className='ParrafoContacto'>Email: spartagyym@gmail.com<br></br>
-                        Whatsapp: +5999 9999 99<br></br>
-                        Dirección: Uruguay 1444, Salto, Uruguay</p>          
+                        Whatsapp: +598 098 34 02 64<br></br>
+                        Dirección: Agraciada 1664, Salto, Uruguay</p>          
                   </div>
                   <div className='col-12 col-md-5'>
                       <p className='ParrafoContacto'>Deja tu información y te contactaremos muy pronto</p> 
