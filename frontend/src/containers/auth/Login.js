@@ -85,7 +85,8 @@ const Login = ({
           />
           Loading...
           </Button>:
-          <Button type="submit" variant="primary">Login</Button>}
+          <Button type="submit" variant="primary">Login</Button>
+          }
           </div>
         <div>
           <Link to="/reset_password">Olvidaste la contraseña?</Link>

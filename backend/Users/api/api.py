@@ -22,6 +22,7 @@ class UsuariosViewSet(viewsets.ViewSet):
 		usuario = get_object_or_404(queryset, pk=pk)
 		serializer = UsuariosSerializer(usuario)
 		return Response(serializer.data,status = status.HTTP_200_OK)
+		
 
 class ReservaUsuariosViewset(viewsets.ModelViewSet):
 	queryset = ReservaUsuarios.objects.all()
@@ -34,6 +35,7 @@ class ReservaUsuariosViewset(viewsets.ModelViewSet):
 	@action(detail=True, methods=['post'])
 	def reservar_cupo(self, request, pk=None):
 		user = self.request.user
+		print(user)
 		serializer = ReservaUsuariosSerializer(data=request.data)
 		if serializer.is_valid():
 			ReservaUsuarios.curso_horario.cupo - 1
@@ -41,6 +43,7 @@ class ReservaUsuariosViewset(viewsets.ModelViewSet):
 		else:
 			return Response(serializer.errors,
 				status=status.HTTP_400_BAD_REQUEST)
+
 
 class ListaReservasUsuariosViewSet(viewsets.ReadOnlyModelViewSet):
 	queryset = Usuarios.objects.all()

@@ -46,7 +46,6 @@ class Usuarios(AbstractBaseUser, PermissionsMixin):
   #curso = models.ForeignKey(Cursos,on_delete=models.CASCADE,null=True)
   is_active = models.BooleanField(default=True)
   is_staff = models.BooleanField(default=False)
-  pago_cuota = models.BooleanField(default=False)
   reservas = models.ManyToManyField(to='Cursos.CursoHorario', through='ReservaUsuarios', blank=True, related_name='reserva')
   
   objects = UsuarioManager()

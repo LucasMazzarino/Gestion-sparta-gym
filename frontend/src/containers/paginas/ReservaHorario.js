@@ -24,6 +24,7 @@ const ReservaHorarios = ({
 
   const reservar = () => {
     get_reservas_horarios(usu_id)
+    console.log('renderizando')
   }
 
   const onClick = (id) => {  
@@ -33,6 +34,7 @@ const ReservaHorarios = ({
 
   if (listar){
     reservar()
+    setListar(false)
   }
   
   const listarMiscursos = () => {
@@ -54,7 +56,8 @@ const ReservaHorarios = ({
   }
 
   const listarHorarios = (cursos_horarios) => {
-    if(cursos_horarios.horarios && cursos_horarios.horarios !== null && cursos_horarios.horarios !== undefined && cursos_horarios.horarios.length !==0){
+    if(cursos_horarios.horarios && cursos_horarios.horarios !== null && cursos_horarios.horarios !== undefined && cursos_horarios.horarios.length !==0)
+    {
       return(
         cursos_horarios.horarios.map((horarios) => {
           return (         
@@ -69,6 +72,24 @@ const ReservaHorarios = ({
       )
     }  
   }
+
+  const listarMisReservas = () => {
+    if(reservas &&
+      reservas !== null && 
+      reservas !== undefined && 
+      reservas.length !==0)
+      {
+        return (reservas.map((reserva) => {      
+          return(
+          <div key={reserva.id}>
+            <div>{reserva.nombre}</div>
+              <div> {listarHorarios(reserva)}</div> 
+          </div>
+          )
+        }))
+      } 
+  }
+
   return(
     <Layout>
     <section className='Reservas'>
@@ -79,7 +100,8 @@ const ReservaHorarios = ({
           </div>
     </section>
     <section>
-      <div>{reservas}</div>
+      <h3>tus horarios son</h3>
+      <div>{listarMisReservas()}</div>
     </section>
     </Layout>
 )

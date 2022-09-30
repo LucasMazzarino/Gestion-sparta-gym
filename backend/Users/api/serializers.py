@@ -2,7 +2,7 @@ from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from Users.models import Usuarios, ReservaUsuarios
 from Cursos.models import Cursos
-from Cursos.api.serializers import CursoSerializer,CursoHorarioserializer
+from Cursos.api.serializers import CursoSerializer,CursoHorarioserializer,PartialCursoHorarioserializer
 
 class UsuariosSerializer(serializers.ModelSerializer):
   cursos = CursoSerializer(many=True,)
@@ -16,14 +16,18 @@ class UsuariosPartialSerializer(serializers.ModelSerializer):
     model=Usuarios
     fields = ('id',)
 
-class ListaReservasUsuariosSerializer(serializers.ModelSerializer):
-  class Meta:
-    model=Usuarios
-    fields = ('id','reservas')
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
   pass
 
+# serializador para listar las reservas de un usuario
+class ListaReservasUsuariosSerializer(serializers.ModelSerializer):
+  reservas = PartialCursoHorarioserializer(many=True,)
+  class Meta:
+    model=Usuarios
+    fields = ('reservas',)
+
+# serializador por defecto para crear al reserva
 class ReservaUsuariosSerializer(serializers.ModelSerializer):
   usuario = UsuariosPartialSerializer()
   curso_horario = CursoHorarioserializer()
@@ -31,6 +35,8 @@ class ReservaUsuariosSerializer(serializers.ModelSerializer):
     model=ReservaUsuarios
     fields = ('usuario','curso_horario')
 
+
+# serializadr para crear la reserva con post
 class CrearReservaUsuarioSerializer(serializers.ModelSerializer):
   class Meta:
     model=ReservaUsuarios

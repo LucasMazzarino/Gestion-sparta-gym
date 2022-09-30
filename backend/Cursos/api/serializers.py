@@ -14,6 +14,12 @@ class CursoHorarioserializer(serializers.ModelSerializer):
   class Meta: 
     model = CursoHorario
     fields = ('id','dia','cupo','horario')
+
+class PartialCursoHorarioserializer(serializers.ModelSerializer):
+  horario = HorarioSerializer()
+  class Meta: 
+    model = CursoHorario
+    fields = ('id','dia','horario')
     
 
 class CursoSerializer(serializers.ModelSerializer):
