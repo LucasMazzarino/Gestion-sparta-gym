@@ -23,6 +23,8 @@ const Login = ({
     window.scrollTo(0,0)
   }, [])
 
+  
+
   const [formData, setFormData] = useState({
     cedula: '',
     password: '',
@@ -39,7 +41,6 @@ const Login = ({
     e.preventDefault();
     login(cedula, password);
   }
-
   
   return (
     <Layout>
@@ -96,8 +97,7 @@ const Login = ({
 
               </div>
               <div className='col-12 col-md-3'>
-
-              </div>
+              </div>     
           </div>
         </div>
      </section>

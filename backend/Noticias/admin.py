@@ -7,7 +7,7 @@ from Users.models import Usuarios
 @admin.register(Noticia)
 class NoticiaAdmin(admin.ModelAdmin):
   model = Noticia
-  list_display = ('titulo','slug','autor','status','publicado')
+  list_display = ('titulo','autor','status','publicado')
   list_filter = ('publicado','autor','status')
   ordering =['publicado']
   
@@ -17,7 +17,6 @@ class NoticiaAdmin(admin.ModelAdmin):
     form.base_fields['autor'].widget.can_change_related = False
 
     return form
-
 
   def formfield_for_foreignkey(self, db_field, request, **kwargs):
     if db_field.name == "autor":
