@@ -23,7 +23,8 @@ import {
     loading: false,
     staff: false,
     user: null,
-    cursos_usuario: null
+    cursos_usuario: null,
+    id:localStorage.getItem('id'),
   }
 
 
@@ -42,11 +43,13 @@ import {
                 loading: false
             }
         case USER_LOADED_SUCCESS:
+          localStorage.setItem('id',payload.id)
             return {
                 ...state,
                 user: payload,
                 staff: payload.is_staff,
-                cursos_usuario:payload.cursos
+                cursos_usuario:payload.cursos,
+                id:payload.id
             }
         case USER_LOADED_FAIL:
             return {
@@ -74,7 +77,8 @@ import {
             ...state,
             isAuthenticated:true,
             access:localStorage.getItem('access'),
-            refresh:localStorage.getItem('refresh')
+            refresh:localStorage.getItem('refresh'),
+            id:localStorage.getItem('id'),
           }
         case RESET_PASSWORD_SUCCESS:
         case RESET_PASSWORD_FAIL:
@@ -94,13 +98,16 @@ import {
         case LOGOUT:
             localStorage.removeItem('access')
             localStorage.removeItem('refresh')
+            localStorage.removeItem('id')
           return {
             ...state,
             access: null,
             refresh: null,
             isAuthenticated: false,
             user: null,
-            staff:false
+            staff:false,
+            cursos_usuario: null,
+            id:null
           }
         default:
           return state

@@ -7,7 +7,8 @@ import{
 
 
 const initialState = {
-  reservas : null,
+ 
+  reservas:null
 }
 
 export default function Reservas(state = initialState, action){
@@ -17,7 +18,8 @@ export default function Reservas(state = initialState, action){
     case GET_RESERVA_HORARIO_SUCCESS:
       return {
         ...state,
-        reservas: payload
+        
+        reservas: payload.reservas
       }
     case GET_RESERVA_HORARIO_FAIL:
       return {

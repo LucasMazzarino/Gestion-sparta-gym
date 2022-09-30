@@ -23,25 +23,26 @@ const Noticias = ({
 
 	const mostrarNoticias = () =>{
 		return(
-			noticias &&
-			noticias !== null &&
-			noticias !== undefined &&
-			noticias.length !==0 &&
-			noticias.map((noticia) => {   
-				return(
-					<CardGroup key={noticia.id}>
-						<Card className="bg-dark text-white" key={noticia.key}>
-							<Card.Img variant="top" src={noticia.imagen} />
-							<Card.Body>
-								<Card.Title>{noticia.titulo}</Card.Title>
-								<Card.Text>
-								{noticia.descripcion}
-								</Card.Text>
-							</Card.Body>
-						</Card>
-					</CardGroup>
-				)               
-			})  
+			<div>{
+				noticias &&
+				noticias !== null &&
+				noticias !== undefined &&
+				noticias.length !==0 &&
+				noticias.map((noticia) => {   
+					return(
+						<CardGroup key={noticia.id}>
+								<Card.Img variant="top" src={noticia.imagen} />
+								<Card.Body>
+									<Card.Title>{noticia.titulo}</Card.Title>
+									<Card.Text>
+									{noticia.descripcion}
+									</Card.Text>
+								</Card.Body>
+						</CardGroup>
+					)               
+				}) 
+			}
+		</div> 
 		)
 	}
 	

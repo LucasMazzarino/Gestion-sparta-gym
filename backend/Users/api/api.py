@@ -7,7 +7,7 @@ from rest_framework.decorators import action
 from rest_framework import viewsets
 
 from Users.models import Usuarios, ReservaUsuarios
-from Users.api.serializers import UsuariosSerializer, UsuariosPartialSerializer,ReservaUsuariosSerializer,CrearReservaUsuarioSerializer
+from Users.api.serializers import UsuariosSerializer, UsuariosPartialSerializer,ReservaUsuariosSerializer,CrearReservaUsuarioSerializer,ListaReservasUsuariosSerializer
 
 class UsuariosViewSet(viewsets.ViewSet):
   
@@ -41,5 +41,8 @@ class ReservaUsuariosViewset(viewsets.ModelViewSet):
 		else:
 			return Response(serializer.errors,
 				status=status.HTTP_400_BAD_REQUEST)
-	
+
+class ListaReservasUsuariosViewSet(viewsets.ReadOnlyModelViewSet):
+	queryset = Usuarios.objects.all()
+	serializer_class = ListaReservasUsuariosSerializer
 

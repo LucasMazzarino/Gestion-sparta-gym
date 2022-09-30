@@ -1,26 +1,38 @@
-import React, { useState } from 'react';
 import Layout from '../../hocs/Layout';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
 
 import { connect } from "react-redux";
-import { reservar_horario } from '../../redux/actions/reserva'
+import { reservar_horario, get_reservas_horarios} from '../../redux/actions/reserva'
 
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const ReservaHorarios = ({
   cursos_usuarios,
-  usu,
-  reservar_horario
+  usu_id,
+  reservas,
+  reservar_horario,
+  get_reservas_horarios,
 }) => {
 
-  useEffect(() =>{ 
-    window.scrollTo(0,0);
+  const [listar, setListar] = useState(false) 
+
+  useEffect(() => { 
+    get_reservas_horarios(usu_id)
   },[])
 
+  const reservar = () => {
+    get_reservas_horarios(usu_id)
+  }
+
   const onClick = (id) => {  
-    reservar_horario(usu.id, id)
+    reservar_horario(usu_id, id)
+    setListar(true)
+  }
+
+  if (listar){
+    reservar()
   }
   
   const listarMiscursos = () => {
@@ -64,8 +76,10 @@ const ReservaHorarios = ({
         <div> hola tus cursos son :
             <div> {listarMiscursos()}</div> 
           <div> reserva tu horario</div>
-          <div> </div>
           </div>
+    </section>
+    <section>
+      <div>{reservas}</div>
     </section>
     </Layout>
 )
@@ -74,9 +88,11 @@ const ReservaHorarios = ({
 
 const mapStateToProps = state => ({
   cursos_usuarios: state.Auth.cursos_usuario,
-  usu: state.Auth.user
+  usu_id: state.Auth.id,
+  reservas: state.Reservas.reservas
 })
 
 export default connect(mapStateToProps, {
-  reservar_horario
+  reservar_horario,
+  get_reservas_horarios
 }) (ReservaHorarios)

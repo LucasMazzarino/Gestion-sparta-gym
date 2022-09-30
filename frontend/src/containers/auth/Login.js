@@ -25,6 +25,8 @@ const Login = ({
     window.scrollTo(0,0)
   }, [])
 
+  
+
   const [formData, setFormData] = useState({
     cedula: '',
     password: '',
@@ -41,8 +43,6 @@ const Login = ({
     e.preventDefault();
     login(cedula, password);
   }
-  console.log(formData)
-
   
   return (
     <Layout>

@@ -44,35 +44,33 @@ export const reservar_horario = (usuario, curso_horario) => async dispatch => {
 
 }
 
-// const get_reservas_horarios = () => async (dispatch) => {
+export const get_reservas_horarios = (usuario_id) => async (dispatch) => {
 
-// 	const config = {
-// 		Headers: {
-// 			'Content-Type': 'application/json'
-// 		}
-// 	};
+ 	const config = {
+ 		Headers: {
+ 			'Content-Type': 'application/json'
+ 		}
+ 	};
 
-// 	try {
-// 		const res = await axios.get(`${process.env.REACT_APP_API_URL}/usuarios/reservas/${usuario_id}`, config);
+ 	try {
+ 		const res = await axios.get(`${process.env.REACT_APP_API_URL}/usuarios/listar_reservas/${usuario_id}`, config);
 
-// 		if (res.status === 200) {
-// 			dispatch({
-// 				type: GET_RESERVA_HORARIO_SUCCESS,
-// 			});
-// 			dispatch(setAlert('Reserva agregada con exito', 'success'));
-// 		} else {
-// 			dispatch({
-// 				type: GET_RESERVA_HORARIO_FAIL
-// 			});
-// 			dispatch(setAlert('No se pudieron cargar tus horarios, error en elservidor', 'danger'));
-// 		}
-// 	}
-// 	catch (err) {
-// 		dispatch({
-// 			type: GET_RESERVA_HORARIO_FAIL
-// 		});
-// 		dispatch(setAlert('No se pudieron cargar tus horarios, error en el servidor', 'danger'));
-// 	}
+ 		if (res.status === 200) {
+ 			dispatch({
+ 				type: GET_RESERVA_HORARIO_SUCCESS,
+				payload: res.data
+ 			});
+ 		} else {
+ 			dispatch({
+ 				type: GET_RESERVA_HORARIO_FAIL
+ 			});
+ 		}
+ 	}
+ 	catch (err) {
+ 		dispatch({
+ 			type: GET_RESERVA_HORARIO_FAIL
+ 		});
+ 	}
 
-// };
+ };
 
