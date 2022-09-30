@@ -43,7 +43,7 @@ const Login = ({
   
   return (
     <Layout>
-        <section className='seccionLogin'>
+       
           <div className='container'>
             <div className='row'>
               <div className='col-12 col-md-3'>
@@ -100,7 +100,7 @@ const Login = ({
               </div>
           </div>
         </div>
-     </section>
+
      <br></br>
       <br></br>
       <br></br>
