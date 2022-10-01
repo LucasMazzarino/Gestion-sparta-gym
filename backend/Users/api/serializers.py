@@ -1,8 +1,8 @@
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from Users.models import Usuarios, ReservaUsuarios
-from Cursos.models import Cursos
-from Cursos.api.serializers import CursoSerializer,CursoHorarioserializer,PartialCursoHorarioserializer
+from Cursos.models import Cursos,CursoHorario
+from Cursos.api.serializers import CursoSerializer,CursoHorarioserializer,PartialCursoHorarioserializer, PartialCursoSerializer
 
 class UsuariosSerializer(serializers.ModelSerializer):
   cursos = CursoSerializer(many=True,)
@@ -45,6 +45,14 @@ class CrearReservaUsuarioSerializer(serializers.ModelSerializer):
   def validate_usuario(self, value):
     cu_ho = self.context['request'].data['curso_horario']
     curso = Cursos.objects.get(cursohorario=cu_ho)
-    if value not in curso.usuarios.all():
+    reservas = CursoHorario.objects.get(id=cu_ho)
+    # por_dia = value.reservas.filter(dia=cu)
+    print(cu_ho)
+    print('\n')
+    print(value.reservas.filter(dia='Lunes'))
+    if value in reservas.reserva.all():
+      raise serializers.ValidationError("Este usuario ya tiene una reserva en este horario")
+    # elif value in  
+    elif value not in curso.usuarios.all():
         raise serializers.ValidationError("Este usario no se encuentra en el curso")
     return value
