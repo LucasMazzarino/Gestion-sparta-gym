@@ -1,6 +1,8 @@
 import Layout from '../../hocs/Layout';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
+import Accordion from 'react-bootstrap/Accordion';
+import Container from 'react-bootstrap/Container';
 
 import { connect } from "react-redux";
 import { reservar_horario, get_reservas_horarios} from '../../redux/actions/reserva'
@@ -65,7 +67,7 @@ const ReservaHorarios = ({
                 <ListGroup.Item >Dia: {horarios.dia}</ListGroup.Item>
                 <ListGroup.Item >Comienza a las: {horarios.horario.horaInicio}</ListGroup.Item>
                 <ListGroup.Item>Finaliza a las: {horarios.horario.horaFin}</ListGroup.Item> 
-                <Button type="submit" variant="danger" onClick={()=>onClick(horarios.id)}>Reserva un cupo!</Button>
+                <Button type="submit" variant="info" onClick={()=>onClick(horarios.id)}>Reserva un cupo!</Button>
               </ListGroup>
           )  
         })
@@ -83,9 +85,15 @@ const ReservaHorarios = ({
           console.log(reserva)     
           return(
           <div key={reserva.id}>
-            <div>{reserva.curso.nombre} el {reserva.dia} de:</div>
-            <div>{reserva.horario.horaInicio} a {reserva.horario.horaFin}</div>
-              <Button>Eliminar mi reserva</Button> 
+            <Accordion defaultActiveKey="1">
+                <Accordion.Item eventKey="0">
+                  <Accordion.Header>{reserva.curso.nombre}</Accordion.Header>
+                  <Accordion.Body>
+                      {reserva.dia} de {reserva.horario.horaInicio} a {reserva.horario.horaFin}
+                      <Button variant="danger">Eliminar reserva</Button>
+                  </Accordion.Body>                
+                </Accordion.Item>             
+          </Accordion>
           </div>
           )
         }))
@@ -94,8 +102,7 @@ const ReservaHorarios = ({
 
   return(
     <Layout>
-    <section className='seccionReservas'>
-      <div className='container'>
+    <Container className='seccionReservas'>     
           <h1>Reserva de horarios</h1>
           <div className='row'>
                 <div className='col-12 col-md-2'>
@@ -111,23 +118,16 @@ const ReservaHorarios = ({
 
                 </div>
                 <div className='col-12 col-md-3 d-flex aling-items-center justify-content-center'> 
+                      <div className='reservaUsuario'>
                         <h3>Tus reservas:</h3>
-                        <div>{listarMisReservas()}</div>  
+                        <div>{listarMisReservas()}</div> 
+                      </div>                      
                 </div>
                 <div className='col-12 col-md-2'>
 
                 </div>
-          </div>
-      </div>             
-    </section> 
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br> 
-      <br></br>
-      <br></br>  
-      <br></br>
-      <br></br>           
+          </div>              
+    </Container>           
     </Layout>
 )
 

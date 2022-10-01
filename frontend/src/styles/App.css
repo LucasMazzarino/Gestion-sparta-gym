@@ -195,15 +195,18 @@ Footer #Derechos{
 }
 
 .seccionLogin{
-  margin: 100px;
+  margin-top: 100px;
+  margin-bottom: 350px;
 }
 
 .seccionResetPassword{
-  margin: 100px;
+  margin-top: 100px;
+  margin-bottom: 500px;
 }
 
 .seccionConfirmarReseteo{
-  margin: 100px;
+  margin-top: 100px;
+  margin-bottom: 450px;
 }
 
 .pBienvenidoAdministrador{
@@ -237,6 +240,12 @@ Footer #Derechos{
 .CardText{
   text-align: center;
   font-family: 'Ropa Sans', sans-serif;
+  font-size: 20px;
+}
+
+.spanCosto{
+  color: lawngreen;
+  text-align: center;
   font-size: 20px;
 }
 
@@ -315,6 +324,26 @@ Footer #Derechos{
   width: 700px;
   height: 300px;
 }
+
+.Noticias{
+  padding: 20px;
+}
+
+#Noticia{
+  margin: 20px;
+}
+
+.fechaPosteo{
+  font-size: 15px;
+  color: gray;
+}
+
+.seccionReservas{
+  margin-bottom: 230px;
+}
+
+
+
 
 
 

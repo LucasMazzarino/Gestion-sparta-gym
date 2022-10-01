@@ -6,6 +6,7 @@ import { useParams,Navigate } from 'react-router'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Spinner from 'react-bootstrap/Spinner';
+import Container from 'react-bootstrap/Container'
 
 const ConfirmResetPassword = ({
   confirm_reset_password,
@@ -46,8 +47,7 @@ const ConfirmResetPassword = ({
 
   return (
     <Layout>
-          <section className='seccionConfirmarReseteo'>
-                <div className='container'>
+          <Container className='seccionConfirmarReseteo'>              
                       <div className='row'>
                           <div className='col-12 col-md-3'>
 
@@ -97,23 +97,8 @@ const ConfirmResetPassword = ({
                           <div className='col-12 col-md-3'>
 
                           </div>
-                      </div>
-                </div>
-          </section>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br> 
-          <br></br>
-          <br></br>  
-          <br></br>
-          <br></br>
-          <br></br>  
-          <br></br>  
-          <br></br>  
-          <br></br>  
-          <br></br>  
-          <br></br>           
+                      </div>              
+          </Container>               
     </Layout>
   )
 }
