@@ -38,8 +38,7 @@ const ResetPassword = ({
   if (requestSent && !loading)
         return <Navigate to='/' />;
 
-  return (
-    <Layout>
+  return (    
       <Container className='seccionResetPassword'>          
               <div className='row'>
               <div className='col-12 col-md-3'>
@@ -80,8 +79,7 @@ const ResetPassword = ({
 
                 </div>
               </div>   
-      </Container>       
-    </Layout>
+      </Container> 
   )
 }
 const mapStateToProps = state => ({

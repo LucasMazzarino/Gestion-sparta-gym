@@ -2,7 +2,7 @@ import React from 'react';
 import EntrenadorUno from '../imagenes/EntrenadorUno.png'
 import EntrenadorDos from '../imagenes/EntrenadorDos.jpg'
 import Image from 'react-bootstrap/Image'
-import Container from 'react-bootstrap/Container'
+
 
 
 function SeccionTres(){

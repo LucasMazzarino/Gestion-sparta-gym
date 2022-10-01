@@ -12,6 +12,13 @@ import { connect } from 'react-redux';
 import { Fragment, useState } from 'react';
 import Logo from '../../imagenes/Sparta Logo.jfif';
 
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+
+import Login from '../../containers/auth/Login';
+
+
+
 
 function Navegacion({
   isAuthenticated,
@@ -20,7 +27,10 @@ function Navegacion({
 }) {
 
   const [redirect, setRedirect] = useState(false);
+  const [show, setShow] = useState(false);
 
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const logoutHandler = () => {
     logout()
     setRedirect(true);
@@ -30,6 +40,8 @@ function Navegacion({
     window.location.reload(false)
     return <Navigate to='/' />;
   }
+
+ 
 
 
   const isStafflinks = (
@@ -61,12 +73,20 @@ function Navegacion({
    const noAuthenticatedLinks = (
     <Fragment>
       <div className="flex item-center" variant="outline-success">
-          <Link to="/login" className="btn btn-primary text-center">
-            Iniciar sesión
-          </Link>
+          <Button variant="primary" onClick={handleShow}>
+           Iniciar sesión
+          </Button>
+          
+          <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                <Modal.Title>Inicie sesión</Modal.Title>
+                </Modal.Header>
+                <Modal.Body><Login/></Modal.Body>               
+          </Modal>
         </div>
     </Fragment>
   )
+
 
   return (
     <>
