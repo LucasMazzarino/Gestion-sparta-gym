@@ -22,20 +22,22 @@ function Contacto(){
                   </div>
                   <div className='col-12 col-md-5'>
                       <p className='ParrafoContactoUno'>Deja tu información y te contactaremos muy pronto</p>                      
-                      <Form>
+                      <Form action="https://formsubmit.co/tiagosilva_93@hotmail.es" method="POST" >
                           <Form.Group className="mb-3" controlId="Nombre">                            
                             <Form.Label>Nombre</Form.Label>
-                            <Form.Control type="input"/>
+                            <Form.Control type="input" name='Nombre' required/>
                           </Form.Group>
                           <Form.Group className="mb-3" controlId="Email">                            
                             <Form.Label>E-Mail</Form.Label>
-                            <Form.Control type="email" placeholder="email@gmail.com" />
+                            <Form.Control type="email" placeholder="email@gmail.com" name='E-Mail' required />
                           </Form.Group>
                           <Form.Group className="mb-3" controlId="Mensaje1">
                             <Form.Label>Mensaje</Form.Label>
-                            <Form.Control as="textarea" rows={3} />
+                            <Form.Control as="textarea" rows={3} name='Consulta' required/>
                           </Form.Group>
-                          <Button variant="dark">Enviar</Button>
+                          <Button type='submit' variant="dark">Enviar</Button>
+                          <Form.Control type="hidden" name='_next' value='http://localhost:3000/Contacto'/>
+                          <Form.Control type="hidden" name='_captcha' value='false'/>
                        </Form>                                         
                   </div>
                   <div className='col-12 col-md-1'>
