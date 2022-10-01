@@ -23,7 +23,7 @@ const Cursos = ({
 	useEffect(() => {
 			get_cursos()
 			window.scrollTo(0,0)
-	}, [])
+	},[])
 
 	const mostrarCursos = () =>{
 		return(

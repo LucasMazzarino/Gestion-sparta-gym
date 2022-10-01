@@ -35,7 +35,6 @@ class ReservaUsuariosViewset(viewsets.ModelViewSet):
 	@action(detail=True, methods=['post'])
 	def reservar_cupo(self, request, pk=None):
 		user = self.request.user
-		print(user)
 		serializer = ReservaUsuariosSerializer(data=request.data)
 		if serializer.is_valid():
 			ReservaUsuarios.curso_horario.cupo - 1
