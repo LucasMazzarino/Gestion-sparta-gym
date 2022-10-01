@@ -79,11 +79,13 @@ const ReservaHorarios = ({
       reservas !== undefined && 
       reservas.length !==0)
       {
-        return (reservas.map((reserva) => {      
+        return (reservas.map((reserva) => { 
+          console.log(reserva)     
           return(
           <div key={reserva.id}>
-            <div>{reserva.nombre}</div>
-              <div> {listarHorarios(reserva)}</div> 
+            <div>{reserva.curso.nombre} el {reserva.dia} de:</div>
+            <div>{reserva.horario.horaInicio} a {reserva.horario.horaFin}</div>
+              <Button>Eliminar mi reserva</Button> 
           </div>
           )
         }))

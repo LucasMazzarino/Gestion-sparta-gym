@@ -14,12 +14,6 @@ class CursoHorarioserializer(serializers.ModelSerializer):
   class Meta: 
     model = CursoHorario
     fields = ('id','dia','cupo','horario')
-
-class PartialCursoHorarioserializer(serializers.ModelSerializer):
-  horario = HorarioSerializer()
-  class Meta: 
-    model = CursoHorario
-    fields = ('id','dia','horario')
     
 
 class CursoSerializer(serializers.ModelSerializer):
@@ -27,5 +21,17 @@ class CursoSerializer(serializers.ModelSerializer):
   class Meta:
    model = Cursos
    fields = ('id', 'nombre', 'costo','descripcion','imagen','horarios')
+
+class PartialCursoSerializer(serializers.ModelSerializer):
+  class Meta:
+   model = Cursos
+   fields = ('nombre',)
+
+class PartialCursoHorarioserializer(serializers.ModelSerializer):
+  horario = HorarioSerializer()
+  curso = PartialCursoSerializer()
+  class Meta: 
+    model = CursoHorario
+    fields = ('id','curso','dia','horario',)
 
 
