@@ -6,6 +6,11 @@ h1{
   font-family: 'Russo One', sans-serif;
 }
 
+h3{
+  font-family: 'Russo One', sans-serif;
+}
+
+
 h2{
   text-align: center;
   color: black;
@@ -269,6 +274,10 @@ Footer #Derechos{
 
 .ImagenCuatro:hover{
    transform: scale(1.2);  
+}
+
+.NombreCursoReserva{
+  font-family: 'Bungee Spice', cursive; 
 }
 
   
