@@ -6,6 +6,7 @@ import { Navigate } from 'react-router'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Spinner from 'react-bootstrap/Spinner';
+import Container from 'react-bootstrap/Container'
 
 const ResetPassword = ({
   reset_password,
@@ -39,8 +40,7 @@ const ResetPassword = ({
 
   return (
     <Layout>
-      <section className='seccionResetPassword'>
-          <div className='container'>
+      <Container className='seccionResetPassword'>          
               <div className='row'>
               <div className='col-12 col-md-3'>
 
@@ -79,25 +79,8 @@ const ResetPassword = ({
                 <div className='col-12 col-md-3'>
 
                 </div>
-              </div>
-          </div>
-      </section>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br> 
-      <br></br>
-      <br></br>  
-      <br></br>
-      <br></br>
-      <br></br>      
-      <br></br>   
-      <br></br>
-      <br></br>
-      <br></br>      
-      <br></br> 
-      <br></br>
-      <br></br>      
+              </div>   
+      </Container>       
     </Layout>
   )
 }

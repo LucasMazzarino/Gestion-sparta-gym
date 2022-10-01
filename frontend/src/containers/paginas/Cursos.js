@@ -59,7 +59,7 @@ const Cursos = ({
 	return(
 			<Layout>
 			<section className='Cursos'>
-					<h1>Cursos</h1>
+					<h1>Nuestros Cursos</h1>
 					<Container>
 						<Row md={3}>
 							{mostrarCursos()}

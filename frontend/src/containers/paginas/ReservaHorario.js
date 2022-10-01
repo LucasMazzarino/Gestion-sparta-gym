@@ -1,6 +1,8 @@
 import Layout from '../../hocs/Layout';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
+import Accordion from 'react-bootstrap/Accordion';
+import Container from 'react-bootstrap/Container';
 
 import { connect } from "react-redux";
 import { reservar_horario, get_reservas_horarios} from '../../redux/actions/reserva'
@@ -46,8 +48,8 @@ const ReservaHorarios = ({
         return (cursos_usuarios.map((cursos_horarios) => {      
           return(
           <div key={cursos_horarios.id}>
-            <div>{cursos_horarios.nombre}</div>
-              <div> {listarHorarios(cursos_horarios)}</div> 
+            <div className='NombreCursoReserva'>{cursos_horarios.nombre}</div>
+              <div>{listarHorarios(cursos_horarios)}</div> 
           </div>
           )
         }))
@@ -61,11 +63,11 @@ const ReservaHorarios = ({
       return(
         cursos_horarios.horarios.map((horarios) => {
           return (         
-              <ListGroup key={horarios.id} horizontal={'md'} className="my-2">
-                <ListGroup.Item >{horarios.dia}</ListGroup.Item>
-                <ListGroup.Item >{horarios.horario.horaInicio}</ListGroup.Item>
-                <ListGroup.Item>{horarios.horario.horaFin}</ListGroup.Item> 
-                <Button type="submit" variant="primary" onClick={()=>onClick(horarios.id)}>reservar horario</Button>
+              <ListGroup key={horarios.id} className="my-2">
+                <ListGroup.Item >Dia: {horarios.dia}</ListGroup.Item>
+                <ListGroup.Item >Comienza a las: {horarios.horario.horaInicio}</ListGroup.Item>
+                <ListGroup.Item>Finaliza a las: {horarios.horario.horaFin}</ListGroup.Item> 
+                <Button type="submit" variant="info" onClick={()=>onClick(horarios.id)}>Reserva un cupo!</Button>
               </ListGroup>
           )  
         })
@@ -83,9 +85,15 @@ const ReservaHorarios = ({
           console.log(reserva)     
           return(
           <div key={reserva.id}>
-            <div>{reserva.curso.nombre} el {reserva.dia} de:</div>
-            <div>{reserva.horario.horaInicio} a {reserva.horario.horaFin}</div>
-              <Button>Eliminar mi reserva</Button> 
+            <Accordion defaultActiveKey="1">
+                <Accordion.Item eventKey="0">
+                  <Accordion.Header>{reserva.curso.nombre}</Accordion.Header>
+                  <Accordion.Body>
+                      {reserva.dia} de {reserva.horario.horaInicio} a {reserva.horario.horaFin}
+                      <Button variant="danger">Eliminar reserva</Button>
+                  </Accordion.Body>                
+                </Accordion.Item>             
+          </Accordion>
           </div>
           )
         }))
@@ -94,17 +102,32 @@ const ReservaHorarios = ({
 
   return(
     <Layout>
-    <section className='Reservas'>
-        <h1>Reserva de horarios</h1>
-        <div> hola tus cursos son :
-            <div> {listarMiscursos()}</div> 
-          <div> reserva tu horario</div>
-          </div>
-    </section>
-    <section>
-      <h3>tus horarios son</h3>
-      <div>{listarMisReservas()}</div>
-    </section>
+    <Container className='seccionReservas'>     
+          <h1>Reserva de horarios</h1>
+          <div className='row'>
+                <div className='col-12 col-md-2'>
+
+                </div>
+                <div className='col-12 col-md-3 d-flex aling-items-center justify-content-center'>                    
+                     <div className='cursosUsuario'>
+                        <h3>Tus cursos:</h3>
+                        <div> {listarMiscursos()}</div>                    
+                    </div>
+                </div>
+                <div className='col-12 col-md-2'>
+
+                </div>
+                <div className='col-12 col-md-3 d-flex aling-items-center justify-content-center'> 
+                      <div className='reservaUsuario'>
+                        <h3>Tus reservas:</h3>
+                        <div>{listarMisReservas()}</div> 
+                      </div>                      
+                </div>
+                <div className='col-12 col-md-2'>
+
+                </div>
+          </div>              
+    </Container>           
     </Layout>
 )
 

@@ -28,7 +28,7 @@ const CursoDetail = ({
       return(
         curso.horarios.map((horario) => {
           return (         
-            <ListGroup key={horario.id} horizontal={'md'} className="my-2">
+            <ListGroup key={horario.id}  className="my-2">
               <ListGroup.Item>Día: {horario.dia} - Comienza a las {horario.horario.horaInicio} y finaliza a las {horario.horario.horaFin}</ListGroup.Item>                                     
             </ListGroup>
           )         
@@ -50,7 +50,8 @@ const CursoDetail = ({
             <Card.Title className='CardTitle'>{curso.nombre}</Card.Title>
             <Card.Text className='CardText'>{curso.descripcion}</Card.Text>
           </Card.Body>
-          <Card.Footer> {mostrarHorario()}</Card.Footer>         
+          <Card.Footer> {mostrarHorario()}</Card.Footer>  
+          <Card.Text className='spanCosto'>Costo del curso: $ {curso.costo} mensual</Card.Text>           
         </Card>        	  
       )
       return( 

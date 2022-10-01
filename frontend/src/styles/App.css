@@ -6,6 +6,11 @@ h1{
   font-family: 'Russo One', sans-serif;
 }
 
+h3{
+  font-family: 'Russo One', sans-serif;
+}
+
+
 h2{
   text-align: center;
   color: black;
@@ -51,6 +56,10 @@ h2{
   background-size: cover;
 }
 
+.SeccionTres{
+  padding: 20px;
+}
+
 
 .SeccionTres img:hover{
   filter: brightness(30%);
@@ -89,8 +98,7 @@ h2{
 Footer{
   background-color: black !important;
   color: floralwhite;
-  padding: 20px;
-  margin-top: 20px;
+  padding: 20px; 
 }
 
 Footer .row img{
@@ -130,8 +138,26 @@ Footer #Derechos{
 	transform: translateY(-7px);
 }
 
-.ParrafoContacto{
-  font-size: 20px; 
+.ParrafoContactoUno{
+  font-size: 20px;   
+  margin-bottom: 50px;
+}
+
+.ParrafoContactoDos{
+  font-size: 20px;   
+}
+
+.Contacto{ 
+  padding: 20px;
+  margin-bottom: 150px;
+}
+
+.Contacto h1{
+  margin-bottom: 50px;
+}
+
+.Galeria{
+  padding: 20px;  
 }
 
 .Galeria img{
@@ -169,15 +195,18 @@ Footer #Derechos{
 }
 
 .seccionLogin{
-  margin: 100px;
+  margin-top: 100px;
+  margin-bottom: 350px;
 }
 
 .seccionResetPassword{
-  margin: 100px;
+  margin-top: 100px;
+  margin-bottom: 500px;
 }
 
 .seccionConfirmarReseteo{
-  margin: 100px;
+  margin-top: 100px;
+  margin-bottom: 450px;
 }
 
 .pBienvenidoAdministrador{
@@ -212,6 +241,22 @@ Footer #Derechos{
   text-align: center;
   font-family: 'Ropa Sans', sans-serif;
   font-size: 20px;
+}
+
+.spanCosto{
+  color: lawngreen;
+  text-align: center;
+  font-size: 20px;
+}
+
+.Cursos{
+  background-image: radial-gradient(circle at 17.64% 61.78%, #d2c963 0, #d9c15a 7.14%, #e0b852 14.29%, #e5ae4b 21.43%, #eaa345 28.57%, #ee9641 35.71%, #f0893d 42.86%, #f2793c 50%, #f3683d 57.14%, #f35741 64.29%, #f34548 71.43%, #f33050 78.57%, #f1135a 85.71%, #ed0065 92.86%, #e90072 100%);
+  padding: 20px;
+}
+
+.Detalle{
+  background-image: radial-gradient(circle at 17.64% 61.78%, #d2c963 0, #d9c15a 7.14%, #e0b852 14.29%, #e5ae4b 21.43%, #eaa345 28.57%, #ee9641 35.71%, #f0893d 42.86%, #f2793c 50%, #f3683d 57.14%, #f35741 64.29%, #f34548 71.43%, #f33050 78.57%, #f1135a 85.71%, #ed0065 92.86%, #e90072 100%);
+  padding: 20px;
 }
 
 .CartasCursos{
@@ -271,7 +316,37 @@ Footer #Derechos{
    transform: scale(1.2);  
 }
 
-  
+.NombreCursoReserva{
+  font-family: 'Bungee Spice', cursive; 
+}
+
+.imagenNoticia{
+  width: 700px;
+  height: 300px;
+}
+
+.Noticias{
+  padding: 20px;
+}
+
+#Noticia{
+  margin: 20px;
+}
+
+.fechaPosteo{
+  font-size: 15px;
+  color: gray;
+}
+
+.seccionReservas{
+  margin-bottom: 230px;
+}
+
+
+
+
+
+
 
 
 

@@ -2,6 +2,7 @@ import React from 'react';
 import Layout from '../../hocs/Layout';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
+import Container from 'react-bootstrap/Container'
 
 
 
@@ -43,8 +44,7 @@ const Login = ({
   
   return (
     <Layout>
-        <section className='seccionLogin'>
-          <div className='container'>
+        <Container className='seccionLogin'>        
             <div className='row'>
               <div className='col-12 col-md-3'>
 
@@ -98,18 +98,8 @@ const Login = ({
               <div className='col-12 col-md-3'>
               </div>     
           </div>
-        </div>
-     </section>
-     <br></br>
-      <br></br>
-      <br></br>
-      <br></br> 
-      <br></br>
-      <br></br>  
-      <br></br>
-      <br></br>
-      <br></br>  
-      <br></br>    
+       
+     </Container>  
   </Layout>
 )
 }
