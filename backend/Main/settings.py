@@ -126,7 +126,14 @@ WSGI_APPLICATION = 'Main.wsgi.application'
 
 
 DATABASES = {
-    "default":env.db("DATABASE_URL",default="postgres:///spartagym" ),
+        'default': {
+        'ENGINE' : 'django.db.backends.postgresql_psycopg2',
+        'NAME' : 'spartagym' ,
+        'USER' : 'postgres' ,
+        'PASSWORD' : env("CONTRASENIA") , 
+        'HOST' : 'localhost' ,
+        'PORT' : 5432
+    }
 }
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 

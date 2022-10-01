@@ -33,19 +33,24 @@ const Cursos = ({
 			cursos.length !==0 &&
 			cursos.map((curso) => {        
 				return(
-					<CardGroup key={curso.id}>
-					<Card className="bg-dark text-white">
-						<Card.Img variant="top" src={curso.imagen} />
-						<Card.Body>
-							<Card.Title>{curso.nombre}</Card.Title>
-							<Card.Text>
-							{curso.descripcion}
-							</Card.Text>
-						</Card.Body>
-						<Card.Footer>
-						<Link to={`${curso.id}`} variant="primary">Ver el Curso</Link>						</Card.Footer>
-					</Card>
-					</CardGroup>
+					<section className='CartasCursos'>
+						<CardGroup key={curso.id}>
+							<Card className="bg-dark text-white">
+								<div className='Carta'>
+									<Card.Img variant="top" src={curso.imagen} className='ImagenCarta'/>
+								</div>						
+								<Card.Body>
+									<Card.Title className='CardTitle'>{curso.nombre}</Card.Title>
+									<Card.Text className='CardText'>
+									{curso.descripcion}
+									</Card.Text>
+								</Card.Body>
+								<Card.Footer>
+									<Link to={`${curso.id}`} variant="primary">Detalles del curso</Link>
+								</Card.Footer>
+							</Card>
+						</CardGroup>
+					</section>					
 				)               
 			})  
 		)
@@ -56,9 +61,9 @@ const Cursos = ({
 			<section className='Cursos'>
 					<h1>Cursos</h1>
 					<Container>
-					<Row md={3}>
-					{mostrarCursos()}
-      		</Row>          
+						<Row md={3}>
+							{mostrarCursos()}
+						</Row>          
 					</Container>
 			</section>
 			</Layout>

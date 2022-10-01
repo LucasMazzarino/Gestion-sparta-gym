@@ -3,6 +3,7 @@ import SeccionUno from '../SeccionUno';
 import SeccionDos from '../SeccionDos';
 import SeccionTres from '../SeccionTres';
 import Layout from '../../hocs/Layout';
+import SeccionCuatro from '../SeccionCuatro';
 
 
 
@@ -11,7 +12,8 @@ function Inicio(){
     <Layout>
     <div className='Inicio'>       
         <SeccionUno/>  
-        <SeccionDos/>
+        <SeccionDos/>      
+        <SeccionCuatro/>
         <SeccionTres/>
     </div>
     </Layout>

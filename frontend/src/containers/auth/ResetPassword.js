@@ -39,35 +39,65 @@ const ResetPassword = ({
 
   return (
     <Layout>
-      <Form onSubmit={e=>onSubmit(e)}>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
-            name="email"
-            value={email}
-            onChange={e=>onChange(e)}
-            type="email"
-            placeholder="Email"
-            required />
-          <Form.Text className="text-muted">
-            Ingrese su Email aqui
-          </Form.Text>
-        </Form.Group>
-      <div>
-        {loading ? 
-          <Button  variant="primary" disabled>
-          <Spinner
-          as="span"
-          animation="grow"
-          size="sm"
-          role="status"
-          aria-hidden="true"
-        />
-        Enviando...
-        </Button>:
-        <Button type="submit" variant="primary">Enviar Email</Button>}
-      </div>
-      </Form>
+      <section className='seccionResetPassword'>
+          <div className='container'>
+              <div className='row'>
+              <div className='col-12 col-md-3'>
+
+              </div>
+                <div className='col-12 col-md-6 d-flex aling-items-center justify-content-center'>
+                   <Form onSubmit={e=>onSubmit(e)}>
+                      <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Dirección de E-Mail</Form.Label>
+                            <Form.Control
+                              name="email"
+                              value={email}
+                              onChange={e=>onChange(e)}
+                              type="email"
+                              placeholder="Email"
+                              required />
+                            <Form.Text className="text-muted">
+                              Ingrese su E-Mail para resetear la contraseña
+                            </Form.Text>
+                      </Form.Group>
+                    <div>
+                          {loading ? 
+                            <Button  variant="primary" disabled>
+                            <Spinner
+                            as="span"
+                            animation="grow"
+                            size="sm"
+                            role="status"
+                            aria-hidden="true"
+                          />
+                          Enviando...
+                          </Button>:
+                          <Button type="submit" variant="primary">Enviar E-Mail</Button>}
+                    </div>
+                  </Form>
+                </div>
+                <div className='col-12 col-md-3'>
+
+                </div>
+              </div>
+          </div>
+      </section>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br> 
+      <br></br>
+      <br></br>  
+      <br></br>
+      <br></br>
+      <br></br>      
+      <br></br>   
+      <br></br>
+      <br></br>
+      <br></br>      
+      <br></br> 
+      <br></br>
+      <br></br>      
     </Layout>
   )
 }

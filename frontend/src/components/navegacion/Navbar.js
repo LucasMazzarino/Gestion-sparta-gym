@@ -2,14 +2,15 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
-import Alert from '../alert'
+import Alert from '../alert';
 import { Link } from 'react-router-dom';
-import { Navigate } from 'react-router'
+import { Navigate } from 'react-router';
 
-import { logout } from '../../redux/actions/auth'
+import { logout } from '../../redux/actions/auth';
 
-import { connect } from 'react-redux'
-import { Fragment, useState } from 'react'
+import { connect } from 'react-redux';
+import { Fragment, useState } from 'react';
+import Logo from '../../imagenes/Sparta Logo.jfif';
 
 
 function Navegacion({
@@ -33,30 +34,24 @@ function Navegacion({
 
   const isStafflinks = (
     <Fragment>
-        <button> eres administrador!!</button> 
+        <span className='pBienvenidoAdministrador'>Bienvenido administrador!</span>
     </Fragment>
   )
   
   const isNoStafflinks = (
     <Fragment>
-        <button> no eres administrador</button> 
-        <span>
-          Bienvenido
-        </span>
+        <span className='pNoeresadmins'>Bienvenido usuario!</span>     
     </Fragment>
     
   )
   
   const authenticatedLinks = (
     <Fragment>
-      <Link to="/reservas" className="btn btn-primary text-center">
+      <Link to="/reservas" className="btn btn-success text-center">
         Reserva tu horario
       </Link>
-    <button
-    onClick={logoutHandler}
-    > Cerrar seccion</button>
-      <Fragment>
-        {
+    <button onClick={logoutHandler} className="btn btn-link"> Cerrar sesión</button>
+      <Fragment>{
           staff ? isStafflinks: isNoStafflinks
         }
       </Fragment>
@@ -67,7 +62,7 @@ function Navegacion({
     <Fragment>
       <div className="flex item-center" variant="outline-success">
           <Link to="/login" className="btn btn-primary text-center">
-            Iniciar Sesion
+            Iniciar sesión
           </Link>
         </div>
     </Fragment>
@@ -77,7 +72,9 @@ function Navegacion({
     <>
     <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
       <Container>
-        <Navbar.Brand href="#home">SPARTA GYM</Navbar.Brand>
+        <Link to='/'>
+           <img src={Logo} width='70' height='50'></img>         
+        </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mx-auto">

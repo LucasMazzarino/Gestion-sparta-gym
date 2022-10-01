@@ -29,10 +29,7 @@ const CursoDetail = ({
         curso.horarios.map((horario) => {
           return (         
             <ListGroup key={horario.id} horizontal={'md'} className="my-2">
-              <ListGroup.Item>{horario.dia}</ListGroup.Item>
-              <ListGroup.Item>{horario.horario.horaInicio}</ListGroup.Item>
-              <ListGroup.Item>{horario.horario.horaFin}</ListGroup.Item>
-              <ListGroup.Item>and above!</ListGroup.Item> 
+              <ListGroup.Item>Día: {horario.dia} - Comienza a las {horario.horario.horaInicio} y finaliza a las {horario.horario.horaFin}</ListGroup.Item>                                     
             </ListGroup>
           )         
         })
@@ -40,21 +37,20 @@ const CursoDetail = ({
     }
     return <div> No se encontraron horarios {curso.horarios.dia}</div>  
   }
+ 
 
   const mostrarDetail = () =>{
     if( curso && curso !== null && curso !== undefined && curso.length !==0 )	
       return(	      
-        <Card  key={curso.id} className="bg-dark text-white">
-          <Card.Img variant="top" src={curso.imagen} />
+        <Card key={curso.id} className="bg-dark text-white">
+          <div className="Carta">
+            <Card.Img variant="top" src={curso.imagen} className='ImagenCarta' />
+          </div>         
           <Card.Body>
-            <Card.Title>{curso.nombre}</Card.Title>
-            <Card.Text>
-            {curso.descripcion}
-            </Card.Text>
+            <Card.Title className='CardTitle'>{curso.nombre}</Card.Title>
+            <Card.Text className='CardText'>{curso.descripcion}</Card.Text>
           </Card.Body>
-          <Card.Footer>
-          {mostrarHorario()}   	
-          </Card.Footer>
+          <Card.Footer> {mostrarHorario()}</Card.Footer>         
         </Card>        	  
       )
       return( 
