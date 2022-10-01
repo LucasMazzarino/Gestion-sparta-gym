@@ -50,7 +50,7 @@ const CursoDetail = ({
             <Card.Title className='CardTitle'>{curso.nombre}</Card.Title>
             <Card.Text className='CardText'>{curso.descripcion}</Card.Text>
           </Card.Body>
-          <Card.Footer> {mostrarHorario()}</Card.Footer>         
+          <Card.Footer> {mostrarHorario()}</Card.Footer>             
         </Card>        	  
       )
       return( 

@@ -6,15 +6,15 @@ import Galeria5 from '../../imagenes/Galeria5.jpg';
 import Galeria6 from '../../imagenes/Galeria6.jpg';
 import Image from 'react-bootstrap/Image';
 import Layout from "../../hocs/Layout";
+import Container from "react-bootstrap/esm/Container";
 
 
 
 function Galeria(){
     return(
         <Layout>
-        <section className="Galeria">
-            <h1>Galeria</h1>
-            <div className="container">
+        <Container className="Galeria">
+            <h1>Galeria</h1>            
                 <div className="row">
                     <div className='col-12 col-md-2'>
                                             
@@ -35,9 +35,8 @@ function Galeria(){
                     <div className='col-12 col-md-2'>
                                           
                     </div>
-                </div>
-            </div>     
-        </section>
+                </div>             
+        </Container>
         </Layout>
     );
 
