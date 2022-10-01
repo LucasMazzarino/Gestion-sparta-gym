@@ -2,9 +2,8 @@ import React from 'react';
 import Layout from '../../hocs/Layout';
 
 import Container from 'react-bootstrap/Container'
-import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup';
 import Row from 'react-bootstrap/Row';
+import Image from 'react-bootstrap/Image';
 
 import { get_noticias } from '../../redux/actions/noticias';
 
@@ -30,15 +29,13 @@ const Noticias = ({
 				noticias.length !==0 &&
 				noticias.map((noticia) => {   
 					return(
-						<CardGroup key={noticia.id}>
-								<Card.Img variant="top" src={noticia.imagen} />
-								<Card.Body>
-									<Card.Title>{noticia.titulo}</Card.Title>
-									<Card.Text>
-									{noticia.descripcion}
-									</Card.Text>
-								</Card.Body>
-						</CardGroup>
+						<Container className='seccionNoticias' key={noticia.id}>
+							<Row className='col-12 col-md-6 justify-content-center' id='Noticia'>
+								<Image className='imagenNoticia' src={noticia.imagen}/>							
+								<h4>{noticia.titulo}</h4>								
+								<p>{noticia.descripcion}</p>													
+							</Row>											
+						</Container>
 					)               
 				}) 
 			}

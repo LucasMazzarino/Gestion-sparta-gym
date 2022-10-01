@@ -2,38 +2,26 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Layout from '../../hocs/Layout';
+import Container from 'react-bootstrap/Container'
 
 
 function Contacto(){
   return(
     <Layout>
-    <section className='Contacto'>       
-         <div className='container'>
+    <Container className='Contacto'>          
                 <div className='row'>
-                  <h1>Contacto</h1>
-                  <br></br>
-                  <br></br>
-                  <br></br>
-                  <br></br>
-                  <br></br>
-                  <br></br>
+                  <h1>Contacto</h1>                
                   <div className='col-12 col-md-1'>
                                           
                   </div>
                   <div className='col-12 col-md-5'>
-                      <p className='ParrafoContacto'>Te responderemos dentro de las 24 horas.</p>   
-                      <br></br>
-                      <br></br>
-                      <br></br>
-                      <br></br>
-                      <p className='ParrafoContacto'>Email: spartagyym@gmail.com<br></br>
+                      <p className='ParrafoContactoUno'>Te responderemos dentro de las 24 horas.</p>                         
+                      <p className='ParrafoContactoDos'>Email: spartagyym@gmail.com<br></br>
                         Whatsapp: +598 098 34 02 64<br></br>
                         Dirección: Agraciada 1664, Salto, Uruguay</p>          
                   </div>
                   <div className='col-12 col-md-5'>
-                      <p className='ParrafoContacto'>Deja tu información y te contactaremos muy pronto</p> 
-                      <br></br>
-                      <br></br>
+                      <p className='ParrafoContactoUno'>Deja tu información y te contactaremos muy pronto</p>                      
                       <Form>
                           <Form.Group className="mb-3" controlId="Nombre">                            
                             <Form.Label>Nombre</Form.Label>
@@ -53,19 +41,8 @@ function Contacto(){
                   <div className='col-12 col-md-1'>
                                 
                   </div>                
-                </div>
-                <div className='row'>
-                  
-                </div>
-              </div>               
-              <br></br>
-              <br></br>
-              <br></br>
-              <br></br> 
-              <br></br>
-              <br></br>  
-              <br></br>             
-    </section>
+                </div>            
+    </Container>
     </Layout>
   );
 }
