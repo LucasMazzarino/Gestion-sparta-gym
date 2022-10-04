@@ -4,12 +4,8 @@ from django.contrib.auth.models import Group
 
 from .models import Horario, Cursos, CursoHorario, PagoCuota, Asistencia
 from Users.models import Usuarios,ReservaUsuarios
+from datetime import datetime
 
-# class MinValidatedInlineMixIn:
-#     validate_min = True
-#     def get_formset(self, *args, **kwargs):
-
-#         return super().get_formset(validate_min=self.validate_min, *args, **kwargs)
 
 class PagoCuotaInline(admin.TabularInline):
     model = PagoCuota
@@ -79,7 +75,7 @@ class CursoHorarioInline(admin.TabularInline):
 class ReservasUsuariosInline(admin.TabularInline):
      model = ReservaUsuarios
      extra = 1
-     fields =('usuario',)
+     readonly_fields =('usuario',)
 
      def formfield_for_foreignkey(self, db_field, request, **kwargs):
             if db_field.name == 'usuario':
@@ -136,6 +132,7 @@ class PagoCuotaAdmin(admin.ModelAdmin):
         form.base_fields['curso'].widget.can_add_related = False
         form.base_fields['curso'].widget.can_change_related = False
         return form
+    
 
 
 @admin.register(Asistencia)

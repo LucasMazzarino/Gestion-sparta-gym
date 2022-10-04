@@ -32,7 +32,7 @@ const Noticias = ({
 				noticias.map((noticia) => {   
 					return(
 						<Container className='seccionNoticias' key={noticia.id}>
-							<Row className='col-12 col-md-6 justify-content-center' id='Noticia'>
+							<Row  key={noticia.id} className='col-12 col-md-6 justify-content-center' id='Noticia'>
 								<Image className='imagenNoticia' src={noticia.imagen}/>							
 								<h4>{noticia.titulo}</h4>								
 								<p>{noticia.descripcion}</p>

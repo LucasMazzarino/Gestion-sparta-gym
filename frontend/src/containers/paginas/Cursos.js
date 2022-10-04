@@ -33,7 +33,7 @@ const Cursos = ({
 			cursos.length !==0 &&
 			cursos.map((curso) => {        
 				return(
-					<section className='CartasCursos'>
+					<section key={curso.id} className='CartasCursos'>
 						<CardGroup key={curso.id}>
 							<Card className="bg-dark text-white">
 								<div className='Carta'>

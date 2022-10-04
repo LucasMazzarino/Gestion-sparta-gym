@@ -5,7 +5,7 @@ import Accordion from 'react-bootstrap/Accordion';
 import Container from 'react-bootstrap/Container';
 
 import { connect } from "react-redux";
-import { reservar_horario, get_reservas_horarios} from '../../redux/actions/reserva'
+import { reservar_horario, get_reservas_horarios, eliminar_reserva} from '../../redux/actions/reserva'
 
 
 import { useEffect, useState } from 'react';
@@ -16,6 +16,7 @@ const ReservaHorarios = ({
   reservas,
   reservar_horario,
   get_reservas_horarios,
+  eliminar_reserva
 }) => {
 
   const [listar, setListar] = useState(false) 
@@ -26,7 +27,6 @@ const ReservaHorarios = ({
 
   const reservar = () => {
     get_reservas_horarios(usu_id)
-    console.log('renderizando')
   }
 
   const onClick = (id) => {  
@@ -37,6 +37,11 @@ const ReservaHorarios = ({
   if (listar){
     reservar()
     setListar(false)
+  };
+
+  const borrarReserva = (id) => {
+    eliminar_reserva(id)
+    window.scrollTo(0,0)
   }
   
   const listarMiscursos = () => {
@@ -81,16 +86,15 @@ const ReservaHorarios = ({
       reservas !== undefined && 
       reservas.length !==0)
       {
-        return (reservas.map((reserva) => { 
-          console.log(reserva)     
+        return (reservas.map((reserva) => {  
           return(
-          <div key={reserva.id}>
+          <div key={reserva.curso_horario.id}>
             <Accordion defaultActiveKey="1">
                 <Accordion.Item eventKey="0">
-                  <Accordion.Header>{reserva.curso.nombre}</Accordion.Header>
+                  <Accordion.Header>{reserva.curso_horario.curso.nombre}</Accordion.Header>
                   <Accordion.Body>
-                      {reserva.dia} de {reserva.horario.horaInicio} a {reserva.horario.horaFin}
-                      <Button variant="danger">Eliminar reserva</Button>
+                       {reserva.dia} de {reserva.curso_horario.horario.horaInicio} a {reserva.curso_horario.horario.horaFin}
+                      <Button variant="danger" onClick={()=>borrarReserva(reserva.id)}>Eliminar reserva</Button>
                   </Accordion.Body>                
                 </Accordion.Item>             
           </Accordion>
@@ -141,5 +145,6 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
   reservar_horario,
-  get_reservas_horarios
+  get_reservas_horarios,
+  eliminar_reserva
 }) (ReservaHorarios)
