@@ -1,3 +1,4 @@
+from xml.dom import ValidationErr
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
@@ -5,6 +6,8 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 from django.conf import settings
+from django.core.exceptions import ValidationError
+
 
 
 class UsuarioManager(BaseUserManager):
@@ -62,6 +65,15 @@ class Usuarios(AbstractBaseUser, PermissionsMixin):
 class ReservaUsuarios(models.Model):
   usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
   curso_horario = models.ForeignKey(to='Cursos.CursoHorario', on_delete=models.CASCADE)
+
+  # def clean(self):
+  #   from Cursos.models import CursoHorario
+
+  #   usu = self.usuario
+  #   cu_ho = CursoHorario.objects.filter(reserva=usu, dia=self.curso_horario.dia, curso__nombre=self.curso_horario.curso.nombre, id=self.curso_horario.id)
+  #   if cu_ho.exists():  
+  #     raise ValidationError("no se puede agrear")
+    
 
 
 @receiver(post_save, sender=ReservaUsuarios, dispatch_uid="create_restar_cupo")
