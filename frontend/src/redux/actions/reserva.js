@@ -24,7 +24,7 @@ export const reservar_horario = (usuario, curso_horario) => async dispatch => {
 
 	try {
 		const res = await axios.post(`${process.env.REACT_APP_API_URL}/usuarios/reservas/`, body, config);
-		console.log(res)
+		
 		if (res.status === 201) {
 			dispatch({
 				type: RESERVA_HORARIO_SUCCESS,
@@ -41,7 +41,7 @@ export const reservar_horario = (usuario, curso_horario) => async dispatch => {
 		dispatch({
 			type: RESERVA_HORARIO_FAIL
 		});
-		dispatch(setAlert(res.data.usuario[0], 'danger'));
+		dispatch(setAlert('Error', 'danger'));
 	}
 
 }
