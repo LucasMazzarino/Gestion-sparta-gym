@@ -1,5 +1,5 @@
 import React from 'react';
-import EntrenadorUno from '../imagenes/EntrenadorUno.png'
+import EntrenadorUno from '../imagenes/EntrenadorUno.jpg'
 import EntrenadorDos from '../imagenes/EntrenadorDos.jpg'
 import Image from 'react-bootstrap/Image'
 
@@ -18,14 +18,12 @@ function SeccionTres(){
                   </div>
                   <div className='col-12 col-md-3'>
                         <div className='EntrenadorUno d-flex aling-items-center justify-content-center'>                        
-                          <Image src={EntrenadorUno} rounded width='300' height='500'/>  
-                          <p className='TextoUno'>Carlitos Tevez</p>                                                               
+                          <Image src={EntrenadorUno} rounded width='300' height='500'/>                                                                                   
                         </div>                        
                   </div>
                   <div className='col-12 col-md-3'>
                         <div className='EntrenadorUno d-flex aling-items-center justify-content-center'>                        
-                          <Image src={EntrenadorDos} rounded width='300' height='500'/>  
-                          <p className='TextoDos'>Profe Bengoechea</p>                                                               
+                          <Image src={EntrenadorDos} rounded width='300' height='500'/>                                                                                      
                         </div>                        
                   </div>
                   <div className='col-12 col-md-3'>
