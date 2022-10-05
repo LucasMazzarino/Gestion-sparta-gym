@@ -9,8 +9,8 @@ function SeccionTres(){
   return(
     <section className='SeccionTres'> 
               <h1>Nuestros entrenadores</h1>
-              <p className='d-flex aling-items-center justify-content-center'>¡Te esperamos en el gimnasio que lo tiene todo! Aparatos nuevos de última generación, caminadores profesionales, bicis de spinning, escaladores, elípticas,  remos ergómetros</p> 
-              <p className='d-flex aling-items-center justify-content-center'>Entrenadores certificados siempre disponibles en sala, el mejor ambiente y un estricto protocolo sanitario para cuidarte. Vení a divertirte!</p>
+              <p className='d-flex aling-items-center justify-content-center'>En el gimnasio encontrarás entrenadores certificados siempre disponibles a ayudarte y a sacar lo mejor de ti!</p> 
+              <p className='d-flex aling-items-center justify-content-center'>Sumate a nuestros entrenmianetos! Te esperamos!</p>
               <div className='container'>
                 <div className='row'>
                   <div className='col-12 col-md-3'>
