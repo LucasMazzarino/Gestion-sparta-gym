@@ -32,6 +32,7 @@ const ReservaHorarios = ({
   const onClick = (id) => {  
     reservar_horario(usu_id, id)
     setListar(true)
+    window.scrollTo(0,0)
   }
 
   if (listar){
@@ -42,6 +43,7 @@ const ReservaHorarios = ({
   const borrarReserva = (id) => {
     eliminar_reserva(id)
     window.scrollTo(0,0)
+    setListar(true)
   }
   
   const listarMiscursos = () => {
@@ -86,14 +88,14 @@ const ReservaHorarios = ({
       reservas !== undefined && 
       reservas.length !==0)
       {
-        return (reservas.map((reserva) => {  
+        return (reservas.map((reserva) => { 
           return(
           <div key={reserva.curso_horario.id}>
             <Accordion defaultActiveKey="1">
                 <Accordion.Item eventKey="0">
                   <Accordion.Header>{reserva.curso_horario.curso.nombre}</Accordion.Header>
                   <Accordion.Body>
-                       {reserva.dia} de {reserva.curso_horario.horario.horaInicio} a {reserva.curso_horario.horario.horaFin}
+                       {reserva.curso_horario.dia} de {reserva.curso_horario.horario.horaInicio} a {reserva.curso_horario.horario.horaFin}
                       <Button variant="danger" onClick={()=>borrarReserva(reserva.id)}>Eliminar reserva</Button>
                   </Accordion.Body>                
                 </Accordion.Item>             

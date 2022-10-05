@@ -3,7 +3,7 @@ from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from Users.models import Usuarios, ReservaUsuarios
 from Cursos.models import Cursos,CursoHorario
-from Cursos.api.serializers import CursoSerializer,CursoHorarioserializer,PartialCursoHorarioserializer, PartialCursoSerializer
+from Cursos.api.serializers import CursoSerializer,CursoHorarioserializer,PartialCursoHorarioserializer
 
 class UsuariosSerializer(serializers.ModelSerializer):
   cursos = CursoSerializer(many=True,)
@@ -17,6 +17,10 @@ class UsuariosPartialSerializer(serializers.ModelSerializer):
     model=Usuarios
     fields = ('id',)
 
+class NombreUsuarioSerializer(serializers.ModelSerializer):
+  class Meta:
+    model=Usuarios
+    fields =('nombre',)
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
   pass

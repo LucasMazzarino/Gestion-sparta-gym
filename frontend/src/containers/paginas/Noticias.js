@@ -36,22 +36,16 @@ const Noticias = ({
 								<Image className='imagenNoticia' src={noticia.imagen}/>							
 								<h4>{noticia.titulo}</h4>								
 								<p>{noticia.descripcion}</p>
-								<span className='fechaPosteo'>Posted on: {noticia.publicado}</span><br></br><br></br>
+								<span className='fechaPosteo'>publicado en: {noticia.publicado} por: {noticia.autor.nombre}</span>
 								<Accordion defaultActiveKey="1">
 									<Accordion.Item eventKey="0">
 										<Accordion.Header>Seccion de comentarios</Accordion.Header>
 										<Accordion.Body>
-										Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-										eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-										minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-										aliquip ex ea commodo consequat. Duis aute irure dolor in
-										reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-										pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-										culpa qui officia deserunt mollit anim id est laborum.
+
 										</Accordion.Body>
 									</Accordion.Item>								
    								 </Accordion>	
-								 <hr></hr>						
+								 						
 								<textarea placeholder='Realice un comentario'></textarea>																								
 							</Row>		
 							<Button variant="dark">Comentar</Button>

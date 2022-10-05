@@ -41,7 +41,7 @@ export const reservar_horario = (usuario, curso_horario) => async dispatch => {
 		dispatch({
 			type: RESERVA_HORARIO_FAIL
 		});
-		dispatch(setAlert('Error al agregar su reserva', 'danger'));
+		dispatch(setAlert('No puedes reservar este horario', 'danger'));
 	}
 
 }
@@ -96,7 +96,7 @@ export const eliminar_reserva = (reserva_id) => async (dispatch) => {
 			dispatch({
 				type: ELIMINAR_RESERVA_FAIL
 			});
-			dispatch(setAlert('Error', 'danger'));
+			dispatch(setAlert(res.data.usuario[0], 'danger'));
 		}
 	}
 	catch (err) {

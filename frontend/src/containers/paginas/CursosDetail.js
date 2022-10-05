@@ -24,7 +24,6 @@ const CursoDetail = ({
 
   const mostrarHorario = () => {
     if(curso.horarios && curso.horarios !== null && curso.horarios !== undefined && curso.horarios.length !==0){
-      console.log(curso.horarios)
       return(
         curso.horarios.map((horario) => {
           return (         

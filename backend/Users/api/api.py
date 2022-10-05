@@ -37,8 +37,6 @@ class ReservaUsuariosViewset(viewsets.ModelViewSet):
 	def destroy(self, request, *args, **kwargs):
 			instance = self.get_object()
 			self.perform_destroy(instance)
-			print('\n')
-			print(instance.curso_horario.cupo)
 			instance.curso_horario.cupo += 1
 			instance.curso_horario.save()
 			return Response({'status' : 'Reserva Eliminada'})
