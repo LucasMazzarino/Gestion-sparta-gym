@@ -4,6 +4,9 @@ from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.core.exceptions import ValidationError
 
+from ckeditor.fields import RichTextField
+
+from django.db.models import Sum
 
 class Horario(models.Model):
   id = models.AutoField(primary_key=True)
@@ -19,12 +22,12 @@ class Horario(models.Model):
      return txt.format(self.horaInicio, self.horaFin)
 
 
-class Cursos(models.Model):
+class Curso(models.Model):
   id = models.AutoField(primary_key=True)
   usuarios = models.ManyToManyField(Usuarios, related_name='cursos')
   nombre = models.CharField(max_length=250)
   costo = models.PositiveSmallIntegerField(default=0)
-  descripcion = models.TextField(max_length=250)  
+  descripcion = RichTextField(blank=True, null=True)  
   imagen = models.ImageField('Imagen de portada',upload_to='cursos/imagenes/', null=True, default='cursos/imagenes/sparta_img.jpg')
   state = models.BooleanField('Estado',default = True)
   horarios = models.ManyToManyField(Horario, through='CursoHorario')
@@ -32,20 +35,24 @@ class Cursos(models.Model):
   asistencias = models.ManyToManyField(Usuarios, through='Asistencia', related_name='asistencias')
   
   @property
-  def ganancia(self):
-    ganancia = 0
+  def ingresos(self):
+    ingresos = 0
     for pago in self.pagos_cuotas.through.objects.filter(curso_id=self.id):
-      ganancia += pago.monto
-    return ganancia
+      ingresos += pago.monto
+    return ingresos
 
   def __str__(self):
-    
     return self.nombre
+  
+  # @property
+  # def ingresos_totales(self):
+  #   total = Curso.objects.aggregate(TOTAL = Sum('ingresos'))['TOTAL']
+  #   return total
 
   
 class PagoCuota(models.Model):
   usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
-  curso = models.ForeignKey(Cursos, on_delete=models.CASCADE)
+  curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
   dia_de_pago = models.DateField()
 
   
@@ -79,7 +86,7 @@ class CursoHorario(models.Model):
   ("Sabado","Sabado"),
  )
   horario = models.ForeignKey(Horario, on_delete=models.CASCADE)
-  curso =models.ForeignKey(Cursos, on_delete=models.CASCADE)
+  curso =models.ForeignKey(Curso, on_delete=models.CASCADE)
   cupo = models.PositiveSmallIntegerField(default=40)
   dia = models.CharField(max_length=200, choices=dias)
   
@@ -87,7 +94,7 @@ class CursoHorario(models.Model):
 
 class Asistencia(models.Model):
   usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
-  curso = models.ForeignKey(Cursos, on_delete=models.CASCADE)
+  curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
   asistio = models.BooleanField(default=False)
   fecha = models.DateField()
 

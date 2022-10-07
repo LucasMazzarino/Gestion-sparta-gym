@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from Cursos.models import Cursos,Horario, CursoHorario
+from Cursos.models import Curso,Horario, CursoHorario
 
 
 
@@ -19,12 +19,12 @@ class CursoHorarioserializer(serializers.ModelSerializer):
 class CursoSerializer(serializers.ModelSerializer):
   horarios = CursoHorarioserializer(source='cursohorario_set',many=True,)
   class Meta:
-   model = Cursos
+   model = Curso
    fields = ('id', 'nombre', 'costo','descripcion','imagen','horarios')
 
 class PartialCursoSerializer(serializers.ModelSerializer):
   class Meta:
-   model = Cursos
+   model = Curso
    fields = ('nombre',)
 
 class PartialCursoHorarioserializer(serializers.ModelSerializer):

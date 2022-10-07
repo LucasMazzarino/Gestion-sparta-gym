@@ -43,7 +43,7 @@ class UsuarioManager(BaseUserManager):
 class Usuarios(AbstractBaseUser, PermissionsMixin):   
   nombre = models.CharField(max_length=250)
   apellido = models.CharField(max_length=250)
-  cedula = models.IntegerField(unique=True, null=False, blank=False)
+  cedula = models.IntegerField(unique=True, null=False, blank=False, help_text="Ingrese su Cedula o su DNI",)
   email = models.EmailField(max_length=250)
   direccion = models.CharField(max_length=250)
   #curso = models.ForeignKey(Cursos,on_delete=models.CASCADE,null=True)
@@ -56,10 +56,17 @@ class Usuarios(AbstractBaseUser, PermissionsMixin):
   USERNAME_FIELD = 'cedula'
   REQUIRED_FIELDS = ['nombre', 'apellido', 'email', 'direccion']
   
+  def clean(self):
+    docu = self.cedula
+    if docu <= 10000000:
+      raise ValidationError("El documento debe tener 8 digitos")
+    if docu >= 99999999:
+      raise ValidationError("El documento debe tener 8 digitos")
   
   
   def __str__(self):
     return self.nombre +" "+self.apellido
+    
   
 
 class ReservaUsuarios(models.Model):
@@ -67,12 +74,30 @@ class ReservaUsuarios(models.Model):
   curso_horario = models.ForeignKey(to='Cursos.CursoHorario', on_delete=models.CASCADE)
 
   # def clean(self):
-  #   from Cursos.models import CursoHorario
+  #    from Cursos.models import CursoHorario
 
-  #   usu = self.usuario
-  #   cu_ho = CursoHorario.objects.filter(reserva=usu, dia=self.curso_horario.dia, curso__nombre=self.curso_horario.curso.nombre, id=self.curso_horario.id)
-  #   if cu_ho.exists():  
-  #     raise ValidationError("no se puede agrear")
+  #    usuario = self.usuario
+  #    cu_ho = CursoHorario.objects.filter(reserva=usuario, dia=self.curso_horario.dia, curso__nombre=self.curso_horario.curso.nombre, id=self.curso_horario.id)
+  #    if cu_ho.exists():  
+  #      raise ValidationError("no se puede agrear")
+
+  def validate_unique(self, *args, **kwargs):
+        qs = ReservaUsuarios.objects.exclude(id=self.id).filter(
+            usuario_id = self.usuario_id,
+            curso_horario__curso__nombre = self.curso_horario.curso.nombre,
+            curso_horario__dia = self.curso_horario.dia,
+        ).exists()
+        hf = ReservaUsuarios.objects.exclude(id=self.id).filter(
+            usuario_id = self.usuario_id,
+            curso_horario__curso__nombre = self.curso_horario.curso.nombre,
+            curso_horario__id = self.curso_horario.id
+          ).exists()
+        if hf:
+            raise ValidationError('Este usuario ya tiene una reserva en este horario')
+        if qs:
+            raise ValidationError('Este usuario ya tiene una reserva para este curso por el dia de hoy')
+        return super().validate_unique(*args, **kwargs)
+
     
 
 

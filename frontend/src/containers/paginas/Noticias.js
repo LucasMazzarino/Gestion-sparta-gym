@@ -7,6 +7,8 @@ import Row from 'react-bootstrap/Row';
 import Image from 'react-bootstrap/Image';
 import Accordion from 'react-bootstrap/Accordion';
 
+import Parse from 'html-react-parser'
+
 import { get_noticias } from '../../redux/actions/noticias';
 
 import { useEffect } from 'react';
@@ -35,7 +37,7 @@ const Noticias = ({
 							<Row  key={noticia.id} className='col-12 col-md-6 justify-content-center' id='Noticia'>
 								<Image className='imagenNoticia' src={noticia.imagen}/>							
 								<h4>{noticia.titulo}</h4>								
-								<p>{noticia.descripcion}</p>
+								<p>{Parse(noticia.descripcion)}</p>
 								<span className='fechaPosteo'>publicado en: {noticia.publicado} por: {noticia.autor.nombre}</span>
 								<Accordion defaultActiveKey="1">
 									<Accordion.Item eventKey="0">
@@ -44,8 +46,7 @@ const Noticias = ({
 
 										</Accordion.Body>
 									</Accordion.Item>								
-   								 </Accordion>	
-								 						
+   								 </Accordion>		 						
 								<textarea placeholder='Realice un comentario'></textarea>																								
 							</Row>		
 							<Button variant="dark">Comentar</Button>

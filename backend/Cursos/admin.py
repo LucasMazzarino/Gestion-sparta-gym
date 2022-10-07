@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.models import Group
 
 
-from .models import Horario, Cursos, CursoHorario, PagoCuota, Asistencia
+from .models import Horario, Curso, CursoHorario, PagoCuota, Asistencia
 from Users.models import Usuarios,ReservaUsuarios
 from datetime import datetime
 
@@ -75,7 +75,7 @@ class CursoHorarioInline(admin.TabularInline):
 class ReservasUsuariosInline(admin.TabularInline):
      model = ReservaUsuarios
      extra = 1
-     readonly_fields =('usuario',)
+     fields =('usuario',)
 
      def formfield_for_foreignkey(self, db_field, request, **kwargs):
             if db_field.name == 'usuario':
@@ -89,13 +89,13 @@ class ReservasUsuariosInline(admin.TabularInline):
 
 
     
-@admin.register(Cursos)
+@admin.register(Curso)
 class CursoAdmin(admin.ModelAdmin):
     list_display = ('nombre', 'costo',)
     filter_horizontal = ('usuarios',)
     ordering = ['nombre']
     inlines = (CursoHorarioInline,PagoCuotaInline,AsistenciaInline)
-    readonly_fields = ('ganancia',)
+    readonly_fields = ('ingresos',)
 
     
 

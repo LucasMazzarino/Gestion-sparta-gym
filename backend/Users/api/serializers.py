@@ -2,7 +2,7 @@ from attr import fields
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from Users.models import Usuarios, ReservaUsuarios
-from Cursos.models import Cursos,CursoHorario
+from Cursos.models import Curso,CursoHorario
 from Cursos.api.serializers import CursoSerializer,CursoHorarioserializer,PartialCursoHorarioserializer
 
 class UsuariosSerializer(serializers.ModelSerializer):
@@ -56,7 +56,7 @@ class CrearReservaUsuarioSerializer(serializers.ModelSerializer):
 
   def validate_usuario(self, value):
     cu_ho = self.context['request'].data['curso_horario']
-    curso = Cursos.objects.get(cursohorario=cu_ho)
+    curso = Curso.objects.get(cursohorario=cu_ho)
     reservass = CursoHorario.objects.get(id=cu_ho)
     por_dia = value.reservas.filter(dia=reservass.dia)
     por_nombre =value.reservas.filter(curso__nombre=curso.nombre)
