@@ -33,15 +33,13 @@ function Navegacion({
   const handleShow = () => setShow(true);
   const logoutHandler = () => {
     logout()
-    setRedirect(true);
-  }
-
-  if (redirect){
-    window.location.reload(false)
     return <Navigate to='/' />;
   }
-
- 
+  //decidir como hacer esto
+  // if (redirect){
+  //   window.location.reload(false)
+  //   return <Navigate to='/' />;
+  // }
 
 
   const isStafflinks = (

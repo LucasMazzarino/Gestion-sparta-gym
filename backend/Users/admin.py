@@ -17,6 +17,7 @@ admin.site.register(models.OutstandingToken, NewOutstandingTokenAdmin)
 class UserAdmin(BaseUserAdmin):
     ordering = ['apellido']
     list_display= ['cedula', 'nombre','apellido',]
+    search_fields = ['nombre']
     fieldsets = (
         (None,{'fields':('cedula',)}),
         (_('Informacion personal'),{'fields':('nombre','apellido', 'direccion','email',)}),

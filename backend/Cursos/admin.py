@@ -95,7 +95,7 @@ class CursoAdmin(admin.ModelAdmin):
     filter_horizontal = ('usuarios',)
     ordering = ['nombre']
     inlines = (CursoHorarioInline,PagoCuotaInline,AsistenciaInline)
-    readonly_fields = ('ingresos',)
+    readonly_fields = ('ingresos','ingresos_mensuales')
 
     
 
@@ -125,7 +125,7 @@ class PagoCuotaAdmin(admin.ModelAdmin):
     fields = ('curso','usuario','dia_de_pago')
     list_filter = ('dia_de_pago','usuario','curso')
 
-    def get_form(self, request, obj=None, **kwargs):    # Just added this override
+    def get_form(self, request, obj=None, **kwargs):  
         form = super(PagoCuotaAdmin, self).get_form(request, obj, **kwargs)
         form.base_fields['usuario'].widget.can_add_related = False
         form.base_fields['usuario'].widget.can_change_related = False
