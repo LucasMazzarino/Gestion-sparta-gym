@@ -4,7 +4,8 @@ from django.contrib.auth.models import Group
 
 from .models import Horario, Curso, CursoHorario, PagoCuota, Asistencia
 from Users.models import Usuarios,ReservaUsuarios
-from datetime import datetime
+from datetime import date
+from django.utils.html import mark_safe
 
 
 class PagoCuotaInline(admin.TabularInline):
@@ -91,11 +92,23 @@ class ReservasUsuariosInline(admin.TabularInline):
     
 @admin.register(Curso)
 class CursoAdmin(admin.ModelAdmin):
-    list_display = ('nombre', 'costo',)
+    list_display = ['nombre', 'costo','list_ingresos_mensuales']
     filter_horizontal = ('usuarios',)
     ordering = ['nombre']
     inlines = (CursoHorarioInline,PagoCuotaInline,AsistenciaInline)
-    readonly_fields = ('ingresos','ingresos_mensuales')
+    readonly_fields = ('ingresos','list_ingresos_mensuales')
+
+    def list_ingresos_mensuales(self, obj):
+        to_return = '<ul>'
+        for pago in obj.ingresos_mensuales:
+            to_return += '\n'.join('<li>{} {} </li>'.format( pago['month'], pago['c']))
+        # for pago in obj.ingresos_mensuales:
+        #     print(pago['month'])
+        # print(obj.ingresos_mensuales['month'])
+        # print(b.isoformat())   
+            to_return += '</ul>'
+            print(mark_safe(to_return))
+        return mark_safe(to_return)
 
     
 

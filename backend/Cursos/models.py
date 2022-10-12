@@ -1,6 +1,5 @@
-from tkinter import Pack
+
 from django.db import models
-from pyparsing import empty
 from Users.models import Usuarios
 from django.db.models.signals import post_delete, pre_save
 from django.dispatch import receiver
@@ -8,6 +7,7 @@ from django.core.exceptions import ValidationError
 
 from ckeditor.fields import RichTextField
 
+from datetime import date
 from django.db.models import Sum, Count, F
 from django.db.models.functions import TruncMonth,TruncYear
 
@@ -65,6 +65,7 @@ class Curso(models.Model):
       month=TruncMonth('dia_de_pago'), year=TruncYear('dia_de_pago'), monto=F('curso__costo')).values('month', 'year', 'monto').annotate(
       c=Sum('monto')).values('month', 'year', 'c')
     return ingresos_mensuales
+    
 
   def __str__(self):
     return self.nombre

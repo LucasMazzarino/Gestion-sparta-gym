@@ -94,13 +94,7 @@ const Login = ({
                     </div>
                   <div>
                     <br></br>
-                    <Link to="" onClick={handleShow}>Olvidaste la contraseña?</Link>
-                    <Modal show={show} onHide={handleClose}>
-                        <Modal.Header closeButton>
-                        <Modal.Title>Recupera tu contraseña</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body><ResetPassword/></Modal.Body>               
-                  </Modal>
+                    <Link to="/reset_password" onClick={handleShow}>Olvidaste la contraseña?</Link>          
                   </div>
                 </Form>
               </div>

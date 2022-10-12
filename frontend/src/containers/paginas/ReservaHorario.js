@@ -3,6 +3,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
 import Accordion from 'react-bootstrap/Accordion';
 import Container from 'react-bootstrap/Container';
+import Modal from 'react-bootstrap/Modal';
 
 import { connect } from "react-redux";
 import { reservar_horario, get_reservas_horarios, eliminar_reserva} from '../../redux/actions/reserva'
@@ -20,6 +21,10 @@ const ReservaHorarios = ({
 }) => {
 
   const [listar, setListar] = useState(false) 
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => { 
     get_reservas_horarios(usu_id)
@@ -44,6 +49,7 @@ const ReservaHorarios = ({
     eliminar_reserva(id)
     window.scrollTo(0,0)
     setListar(true)
+    handleClose()
   }
   
   const listarMiscursos = () => {
@@ -86,7 +92,7 @@ const ReservaHorarios = ({
     if(reservas &&
       reservas !== null && 
       reservas !== undefined && 
-      reservas.length !==0)
+      reservas.length !== 0)
       {
         return (reservas.map((reserva) => { 
           return(
@@ -96,7 +102,13 @@ const ReservaHorarios = ({
                   <Accordion.Header>{reserva.curso_horario.curso.nombre}</Accordion.Header>
                   <Accordion.Body>
                        {reserva.curso_horario.dia} de {reserva.curso_horario.horario.horaInicio} a {reserva.curso_horario.horario.horaFin}
-                      <Button variant="danger" onClick={()=>borrarReserva(reserva.id)}>Eliminar reserva</Button>
+                      <Button variant="danger" onClick={handleShow}>Eliminar reserva</Button>
+                      <Modal show={show} onHide={handleClose}>
+                          <Modal.Header closeButton>
+                          <Modal.Title>Seguro que quiere cancelar su reserva?</Modal.Title>
+                          </Modal.Header> 
+                          <Modal.Body><Button variant="danger" onClick={()=>borrarReserva(reserva.id)}>Eliminar reserva</Button></Modal.Body>               
+                      </Modal>
                   </Accordion.Body>                
                 </Accordion.Item>             
           </Accordion>

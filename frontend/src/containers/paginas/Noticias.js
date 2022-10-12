@@ -26,7 +26,6 @@ const Noticias = ({
 
 	const mostrarNoticias = () =>{
 		return(
-			<div>{
 				noticias &&
 				noticias !== null &&
 				noticias !== undefined &&
@@ -34,7 +33,7 @@ const Noticias = ({
 				noticias.map((noticia) => {   
 					return(
 						<Container className='seccionNoticias' key={noticia.id}>
-							<Row  key={noticia.id} className='col-12 col-md-6 justify-content-center' id='Noticia'>
+							<Row key={noticia.autor} className='col-12 col-md-6 justify-content-center' id='Noticia'>
 								<Image className='imagenNoticia' src={noticia.imagen}/>							
 								<h4>{noticia.titulo}</h4>								
 								<p>{Parse(noticia.descripcion)}</p>
@@ -43,7 +42,6 @@ const Noticias = ({
 									<Accordion.Item eventKey="0">
 										<Accordion.Header>Seccion de comentarios</Accordion.Header>
 										<Accordion.Body>
-
 										</Accordion.Body>
 									</Accordion.Item>								
    								 </Accordion>		 						
@@ -53,9 +51,7 @@ const Noticias = ({
 																	
 						</Container>
 					)               
-				}) 
-			}
-		</div> 
+				})  
 		)
 	}
 	
@@ -64,9 +60,9 @@ const Noticias = ({
 			<section className='Noticias'>
 				<h1>Blog de Noticias</h1>
 				<Container>
-				<Row md={1}>
-					{mostrarNoticias()}
-				</Row>
+					<Row md={1}>
+						{mostrarNoticias()}
+					</Row>
 				</Container>
 			</section>
 		</Layout>
