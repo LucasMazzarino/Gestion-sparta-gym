@@ -14,6 +14,8 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal';
 import ResetPassword from './ResetPassword';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 
 const Login = ({
@@ -49,11 +51,8 @@ const Login = ({
   
   return (    
         <Container className='seccionLogin'>        
-            <div className='row'>
-              <div className='col-12 col-md-3'>
-
-              </div>
-              <div className='col-12 col-md-6 d-flex aling-items-center justify-content-center'>
+            <Row>            
+              <Col md={12}>
                   <Form onSubmit={e=>onSubmit(e)}>
                       <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Ingrese su cédula</Form.Label>
@@ -97,11 +96,9 @@ const Login = ({
                     <Link to="/reset_password" onClick={handleShow}>Olvidaste la contraseña?</Link>          
                   </div>
                 </Form>
-              </div>
-              <div className='col-12 col-md-3'>
-                
-              </div>     
-          </div>       
+              </Col>
+              
+          </Row>       
      </Container>  
   
 )

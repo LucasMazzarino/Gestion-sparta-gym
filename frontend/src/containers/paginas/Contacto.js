@@ -3,24 +3,23 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Layout from '../../hocs/Layout';
 import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 
 function Contacto(){
   return(
     <Layout>
-    <Container className='Contacto'>          
-                <div className='row'>
-                  <h1>Contacto</h1>                
-                  <div className='col-12 col-md-1'>
-                                          
-                  </div>
-                  <div className='col-12 col-md-5'>
+    <Container className='Contacto'>      
+                <h1>Contacto</h1>
+                <Row>                                  
+                  <Col xs={12} md={6}>
                       <p className='ParrafoContactoUno'>Te responderemos dentro de las 24 horas.</p>                         
                       <p className='ParrafoContactoDos'>Email: spartagyym@gmail.com<br></br>
                         Whatsapp: +598 098 34 02 64<br></br>
                         Dirección: Agraciada 1664, Salto, Uruguay</p>          
-                  </div>
-                  <div className='col-12 col-md-5'>
+                  </Col>
+                  <Col  xs={12} md={6}>
                       <p className='ParrafoContactoUno'>Deja tu información y te contactaremos muy pronto</p>                      
                       <Form action="https://formsubmit.co/tiagosilva_93@hotmail.es" method="POST" >
                           <Form.Group className="mb-3" controlId="Nombre">                            
@@ -39,11 +38,8 @@ function Contacto(){
                           <Form.Control type="hidden" name='_next' value='http://localhost:3000/Contacto'/>
                           <Form.Control type="hidden" name='_captcha' value='false'/>
                        </Form>                                         
-                  </div>
-                  <div className='col-12 col-md-1'>
-                                
-                  </div>                
-                </div>            
+                  </Col>                               
+                </Row>           
     </Container>
     </Layout>
   );

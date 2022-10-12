@@ -3,6 +3,8 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
 import Accordion from 'react-bootstrap/Accordion';
 import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Modal from 'react-bootstrap/Modal';
 
 import { connect } from "react-redux";
@@ -101,13 +103,14 @@ const ReservaHorarios = ({
                 <Accordion.Item eventKey="0">
                   <Accordion.Header>{reserva.curso_horario.curso.nombre}</Accordion.Header>
                   <Accordion.Body>
-                       {reserva.curso_horario.dia} de {reserva.curso_horario.horario.horaInicio} a {reserva.curso_horario.horario.horaFin}
+                       {reserva.curso_horario.dia} de {reserva.curso_horario.horario.horaInicio} a {reserva.curso_horario.horario.horaFin}<br></br>
                       <Button variant="danger" onClick={handleShow}>Eliminar reserva</Button>
                       <Modal show={show} onHide={handleClose}>
                           <Modal.Header closeButton>
                           <Modal.Title>Seguro que quiere cancelar su reserva?</Modal.Title>
                           </Modal.Header> 
-                          <Modal.Body><Button variant="danger" onClick={()=>borrarReserva(reserva.id)}>Eliminar reserva</Button></Modal.Body>               
+                          <Modal.Footer><Button variant="danger" onClick={()=>borrarReserva(reserva.id)}>Eliminar reserva</Button>
+                          <Button variant="primary" onClick={handleClose}>No</Button></Modal.Footer>               
                       </Modal>
                   </Accordion.Body>                
                 </Accordion.Item>             
@@ -122,29 +125,24 @@ const ReservaHorarios = ({
     <Layout>
     <Container className='seccionReservas'>     
           <h1>Reserva de horarios</h1>
-          <div className='row'>
-                <div className='col-12 col-md-2'>
-
-                </div>
-                <div className='col-12 col-md-3 d-flex aling-items-center justify-content-center'>                    
+          <Row>              
+                <Col md={5} sm={12}>                    
                      <div className='cursosUsuario'>
                         <h3>Tus cursos:</h3>
                         <div> {listarMiscursos()}</div>                    
                     </div>
-                </div>
-                <div className='col-12 col-md-2'>
-
-                </div>
-                <div className='col-12 col-md-3 d-flex aling-items-center justify-content-center'> 
+                </Col>
+                <Col md={2} sm={12}>          
+                    
+                </Col>                 
+                <Col md={5} sm={12}> 
                       <div className='reservaUsuario'>
                         <h3>Tus reservas:</h3>
                         <div>{listarMisReservas()}</div> 
                       </div>                      
-                </div>
-                <div className='col-12 col-md-2'>
-
-                </div>
-          </div>              
+                </Col>
+                
+          </Row>              
     </Container>           
     </Layout>
 )

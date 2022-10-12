@@ -70,15 +70,6 @@ h2{
   font-family: 'Crete Round', serif;;
 }
 
-
-.EntrenadorUno{  
-  position: relative;
-}
-
-.EntrenadorDos{  
-  position: relative;
-}
-
 Footer{
   background-color: black !important;
   color: floralwhite;
@@ -206,6 +197,11 @@ Footer #Derechos{
   height: 400px;
   width: 400px;  
   transition: all 1.5s ease;
+}
+
+.TextoCarta{
+  height: 350px; 
+  overflow-x: scroll;  
 }
 
 .Carta{
