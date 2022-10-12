@@ -13,11 +13,11 @@ const ResetPassword = ({
   loading
 }) => {
 
+  const [requestSent, setRequestSent] = useState(false);
+
   useEffect(() => {
     window.scrollTo(0,0)
   }, [])
-
-  const [requestSent, setRequestSent] = useState(false);
 
   const [formData, setFormData] = useState({
     email: '',
@@ -39,6 +39,7 @@ const ResetPassword = ({
         return <Navigate to='/' />;
 
   return (    
+    <Layout>
       <Container className='seccionResetPassword'>          
               <div className='row'>
               <div className='col-12 col-md-3'>
@@ -80,6 +81,7 @@ const ResetPassword = ({
                 </div>
               </div>   
       </Container> 
+      </Layout>
   )
 }
 const mapStateToProps = state => ({

@@ -2,14 +2,11 @@ from django.contrib import admin
 from django.contrib.auth.models import Group
 
 
-from .models import Horario, Cursos, CursoHorario, PagoCuota, Asistencia
+from .models import Horario, Curso, CursoHorario, PagoCuota, Asistencia
 from Users.models import Usuarios,ReservaUsuarios
+from datetime import date
+from django.utils.html import mark_safe
 
-# class MinValidatedInlineMixIn:
-#     validate_min = True
-#     def get_formset(self, *args, **kwargs):
-
-#         return super().get_formset(validate_min=self.validate_min, *args, **kwargs)
 
 class PagoCuotaInline(admin.TabularInline):
     model = PagoCuota
@@ -93,13 +90,25 @@ class ReservasUsuariosInline(admin.TabularInline):
 
 
     
-@admin.register(Cursos)
+@admin.register(Curso)
 class CursoAdmin(admin.ModelAdmin):
-    list_display = ('nombre', 'costo',)
+    list_display = ['nombre', 'costo','list_ingresos_mensuales']
     filter_horizontal = ('usuarios',)
     ordering = ['nombre']
     inlines = (CursoHorarioInline,PagoCuotaInline,AsistenciaInline)
-    readonly_fields = ('ganancia',)
+    readonly_fields = ('ingresos','list_ingresos_mensuales')
+
+    def list_ingresos_mensuales(self, obj):
+        to_return = '<ul>'
+        for pago in obj.ingresos_mensuales:
+            to_return += '\n'.join('<li>{} {} </li>'.format( pago['month'], pago['c']))
+        # for pago in obj.ingresos_mensuales:
+        #     print(pago['month'])
+        # print(obj.ingresos_mensuales['month'])
+        # print(b.isoformat())   
+            to_return += '</ul>'
+            print(mark_safe(to_return))
+        return mark_safe(to_return)
 
     
 
@@ -129,13 +138,14 @@ class PagoCuotaAdmin(admin.ModelAdmin):
     fields = ('curso','usuario','dia_de_pago')
     list_filter = ('dia_de_pago','usuario','curso')
 
-    def get_form(self, request, obj=None, **kwargs):    # Just added this override
+    def get_form(self, request, obj=None, **kwargs):  
         form = super(PagoCuotaAdmin, self).get_form(request, obj, **kwargs)
         form.base_fields['usuario'].widget.can_add_related = False
         form.base_fields['usuario'].widget.can_change_related = False
         form.base_fields['curso'].widget.can_add_related = False
         form.base_fields['curso'].widget.can_change_related = False
         return form
+    
 
 
 @admin.register(Asistencia)

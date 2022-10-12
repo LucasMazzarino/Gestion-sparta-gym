@@ -6,7 +6,7 @@ import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import Row from 'react-bootstrap/Row';
-
+import Parse from 'html-react-parser'
 
 
 import { get_cursos } from '../../redux/actions/cursos';
@@ -31,9 +31,9 @@ const Cursos = ({
 			cursos !== null &&
 			cursos !== undefined &&
 			cursos.length !==0 &&
-			cursos.map((curso) => {        
+			cursos.map((curso) => {      
 				return(
-					<section className='CartasCursos'>
+					<section key={curso.id} className='CartasCursos'>
 						<CardGroup key={curso.id}>
 							<Card className="bg-dark text-white">
 								<div className='Carta'>
@@ -41,9 +41,9 @@ const Cursos = ({
 								</div>						
 								<Card.Body>
 									<Card.Title className='CardTitle'>{curso.nombre}</Card.Title>
-									<Card.Text className='CardText'>
-									{curso.descripcion}
-									</Card.Text>
+									<div>
+									{Parse(curso.descripcion)}
+									</div>
 								</Card.Body>
 								<Card.Footer>
 									<Link to={`${curso.id}`} variant="primary">Detalles del curso</Link>

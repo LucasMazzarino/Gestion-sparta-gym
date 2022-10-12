@@ -4,6 +4,8 @@ import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 
+import Parse from 'html-react-parser'
+
 
 import { useParams } from "react-router-dom";
 import { Fragment, useEffect,} from "react";
@@ -24,7 +26,6 @@ const CursoDetail = ({
 
   const mostrarHorario = () => {
     if(curso.horarios && curso.horarios !== null && curso.horarios !== undefined && curso.horarios.length !==0){
-      console.log(curso.horarios)
       return(
         curso.horarios.map((horario) => {
           return (         
@@ -48,7 +49,7 @@ const CursoDetail = ({
           </div>         
           <Card.Body>
             <Card.Title className='CardTitle'>{curso.nombre}</Card.Title>
-            <Card.Text className='CardText'>{curso.descripcion}</Card.Text>
+            <Card.Text className='CardText'>Parse{curso.descripcion}</Card.Text>
           </Card.Body>
           <Card.Footer> {mostrarHorario()}</Card.Footer>  
           <Card.Text className='spanCosto'>Costo del curso: $ {curso.costo} mensual</Card.Text>           

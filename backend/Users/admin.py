@@ -1,11 +1,23 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import gettext as _
-from Users import models
+from Users.models import Usuarios
+
+from rest_framework_simplejwt.token_blacklist import models
+from rest_framework_simplejwt.token_blacklist.admin import OutstandingTokenAdmin
+
+class NewOutstandingTokenAdmin(OutstandingTokenAdmin):
+
+    def has_delete_permission(self, *args, **kwargs):
+        return True
+
+admin.site.unregister(models.OutstandingToken)
+admin.site.register(models.OutstandingToken, NewOutstandingTokenAdmin)
 
 class UserAdmin(BaseUserAdmin):
     ordering = ['apellido']
     list_display= ['cedula', 'nombre','apellido',]
+    search_fields = ['nombre']
     fieldsets = (
         (None,{'fields':('cedula',)}),
         (_('Informacion personal'),{'fields':('nombre','apellido', 'direccion','email',)}),
@@ -21,5 +33,5 @@ class UserAdmin(BaseUserAdmin):
         }),
     )
 
-admin.site.register(models.Usuarios,UserAdmin)
+admin.site.register(Usuarios,UserAdmin)
 
