@@ -12,12 +12,14 @@ function SeccionTres(){
   return(
     <section className='SeccionTres'> 
               <h1>Nuestros entrenadores</h1>
-              <p className='d-flex aling-items-center justify-content-center'>En el gimnasio encontrarás entrenadores certificados siempre disponibles a ayudarte y a sacar lo mejor de ti!</p> 
-              <p className='d-flex aling-items-center justify-content-center'>Sumate a nuestros entrenmianetos! Te esperamos!</p>
+              <Col className='text-center'>
+              <p>En el gimnasio encontrarás entrenadores certificados siempre disponibles a ayudarte y a sacar lo mejor de ti!</p>
+              <p>Sumate a nuestros entrenmianetos! Te esperamos!</p>
+              </Col>
               <Container>
                   <Row className="justify-content-md-center">
-                    <Col md="auto"> <Image src={EntrenadorUno} rounded width='300' height='500'/></Col>                   
-                    <Col md="auto"> <Image src={EntrenadorDos} rounded width='300' height='500'/> </Col>          
+                    <Col md="auto" className='text-center'><Image src={EntrenadorUno} rounded width='300' height='500'/></Col>                   
+                    <Col md="auto" className='text-center'><Image src={EntrenadorDos} rounded width='300' height='500'/></Col>          
                   </Row>                 
                </Container>
     </section>

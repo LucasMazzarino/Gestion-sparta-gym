@@ -41,7 +41,7 @@ const Cursos = ({
 								</div>						
 								<Card.Body>
 									<Card.Title className='CardTitle'>{curso.nombre}</Card.Title>
-									<Card.Text className='TextoCarta'>{Parse(curso.descripcion)}</Card.Text>									
+									<Card.Text className='CardText'>{Parse(curso.descripcion)}</Card.Text>									
 								</Card.Body>
 								<Card.Footer>
 									<Link to={`${curso.id}`} variant="primary">Detalles del curso</Link>

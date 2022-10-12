@@ -27,9 +27,9 @@ function SeccionCuatro(){
                 <br></br>
                 <Container>
                 <Row>
-                    <Col md sm={12}><Image src={ImagenDos} rounded width='300' height='500' className='ImagenDos'/></Col>                 
-                    <Col md sm={12}><Image src={ImagenTres} rounded width='300' height='500' className='ImagenTres'/></Col>                 
-                    <Col md sm={12}><Image src={ImagenCuatro} rounded width='300' height='500' className='ImagenCuatro'/></Col>
+                    <Col md sm={12} className='text-center'><Image src={ImagenDos} rounded width='300' height='500' className='ImagenDos'/></Col>                 
+                    <Col md sm={12} className='text-center'><Image src={ImagenTres} rounded width='300' height='500' className='ImagenTres'/></Col>                 
+                    <Col md sm={12} className='text-center'><Image src={ImagenCuatro} rounded width='300' height='500' className='ImagenCuatro'/></Col>
 
                 </Row>
                 </Container>

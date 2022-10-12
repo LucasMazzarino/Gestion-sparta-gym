@@ -70,6 +70,8 @@ h2{
   font-family: 'Crete Round', serif;;
 }
 
+
+
 Footer{
   background-color: black !important;
   color: floralwhite;
@@ -199,11 +201,6 @@ Footer #Derechos{
   transition: all 1.5s ease;
 }
 
-.TextoCarta{
-  height: 350px; 
-  overflow-x: scroll;  
-}
-
 .Carta{
   overflow: hidden;
 }
@@ -221,6 +218,8 @@ Footer #Derechos{
   text-align: center;
   font-family: 'Ropa Sans', sans-serif;
   font-size: 20px;
+  height: 350px; 
+  overflow-x: scroll; 
 }
 
 .spanCosto{
