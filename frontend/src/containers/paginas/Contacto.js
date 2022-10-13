@@ -19,7 +19,7 @@ function Contacto(){
                         Whatsapp: +598 098 34 02 64<br></br>
                         Dirección: Agraciada 1664, Salto, Uruguay</p>          
                   </Col>
-                  <Col  xs={12} md={6}>
+                  <Col xs={12} md={6}>
                       <p className='ParrafoContactoUno'>Deja tu información y te contactaremos muy pronto</p>                      
                       <Form action="https://formsubmit.co/tiagosilva_93@hotmail.es" method="POST" >
                           <Form.Group className="mb-3" controlId="Nombre">                            
