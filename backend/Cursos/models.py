@@ -56,48 +56,55 @@ class Curso(models.Model):
   def ingresos(self):
     ingresos = 0
     for pago in self.pagos_cuotas.through.objects.filter(curso_id=self.id):
-      ingresos += pago.monto
+      ingresos += pago.monto_final
     return ingresos
 
   @property
   def ingresos_mensuales(self):
     ingresos_mensuales =  Curso.objects.get(id=self.id).pagos_cuotas.through.objects.filter(curso_id=self.id).annotate(
-      month=TruncMonth('dia_de_pago'), year=TruncYear('dia_de_pago'), monto=F('curso__costo')).values('month', 'year', 'monto').annotate(
-      c=Sum('monto')).values('month', 'year', 'c')
+      month=TruncMonth('dia_de_pago'), year=TruncYear('dia_de_pago'), monto=F('monto_final')).values('month', 'year').annotate(
+      c=Sum('monto')).values('month', 'year', 'c').order_by('year','month')
     return ingresos_mensuales
     
 
   def __str__(self):
     return self.nombre
-  
-  # @property
-  # def ingresos_totales(self):
-  #   total = Curso.objects.aggregate(TOTAL = Sum('ingresos'))['TOTAL']
-  #   return total
 
   
 class PagoCuota(models.Model):
   usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
   curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
   dia_de_pago = models.DateField()
+  recargo = models.BooleanField(default=False,help_text="Marque la casilla si desea aplicar el recargo al pago",)
+  monto_final = models.SmallIntegerField(default=0)
 
   def __str__(self):
     txt = "{0} (Pago: $ {1} del Curso {2})"
-    return txt.format(self.usuario, self.monto, self.curso)
+    return txt.format(self.usuario, self.monto_final, self.curso)
 
-  @property
-  def monto(self):
-    monto = self.curso.costo
-    if self.dia_de_pago.day > 10:
-      monto+= 500
-      return monto
-    return monto
+  # @property
+  # def monto(self):
+  #   monto = self.curso.costo
+  #   if self.dia_de_pago.day > 10:
+  #     monto+= 500
+  #     return monto
+  #   return monto
 
   def full_clean(self, exclude=None, validate_unique=True, validate_constraints=True):
       super().full_clean()
       curso = self.curso.usuarios.all()
       if self.usuario not in curso:
         raise ValidationError("Este usuario no se encuentra en este curso.")
+  
+  def save(self,*args,**kwargs):
+    self.monto_final = self.curso.costo
+    if self.recargo == True:
+      self.monto_final += 500 
+    print(self.monto_final)
+    super().save(*args,**kwargs)
+
+
+
 
 @receiver(pre_save, sender=PagoCuota ,dispatch_uid="Valida_campo")
 def validar_campos_nulos (sender, instance, **kwargs):
