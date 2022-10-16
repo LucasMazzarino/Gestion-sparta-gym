@@ -49,8 +49,12 @@ class Curso(models.Model):
   asistencias = models.ManyToManyField(Usuarios, through='Asistencia', related_name='asistencias')
   
   def clean(self):
-    if Curso.objects.filter(nombre=self.nombre.lower()):
+    costo = self.costo
+    if Curso.objects.filter(nombre=self.nombre):
       raise ValidationError("Ya existe un curso con este nombre")
+    if costo <= 0:
+      raise ValidationError("Verique el precio, no puede ser 0 o menor")
+
 
   @property
   def ingresos(self):
