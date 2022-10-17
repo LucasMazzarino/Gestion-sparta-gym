@@ -3,8 +3,6 @@ from django.db import models
 from django.utils import timezone
 from Users.models import Usuarios
 
-from ckeditor.fields import RichTextField
-
 
 class Noticia(models.Model):
 
@@ -20,9 +18,9 @@ class Noticia(models.Model):
   )
   
   #Esta es la noticia
-  titulo = models.CharField(max_length = 250, unique=True)
+  titulo = models.CharField(max_length = 250)
   imagen = models.ImageField('Imagen Noticia',upload_to='noticias/imagenes/', null=True)
-  descripcion = RichTextField(blank=True,null=True)
+  descripcion = models.TextField(null=True)
   publicado = models.DateTimeField(default=timezone.now) 
   autor = models.ForeignKey(Usuarios, on_delete=models.CASCADE, related_name='autor')
   status = models.CharField(max_length=10, choices=opciones, default='borrador')

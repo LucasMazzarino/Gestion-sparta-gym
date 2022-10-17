@@ -3,8 +3,6 @@ import{
   GET_RESERVA_HORARIO_FAIL,
   RESERVA_HORARIO_FAIL,
   RESERVA_HORARIO_SUCCESS,
-  ELIMINAR_RESERVA_FAIL,
-  ELIMINAR_RESERVA_SUCCESS
 }from '../actions/types'
 
 
@@ -20,7 +18,7 @@ export default function Reservas(state = initialState, action){
     case GET_RESERVA_HORARIO_SUCCESS:
       return {
         ...state,
-  
+        
         reservas: payload.reservas
       }
     case GET_RESERVA_HORARIO_FAIL:
@@ -30,8 +28,6 @@ export default function Reservas(state = initialState, action){
       }
     case RESERVA_HORARIO_FAIL:
     case RESERVA_HORARIO_SUCCESS:
-    case ELIMINAR_RESERVA_FAIL:
-    case ELIMINAR_RESERVA_SUCCESS:
       return {
         ...state,
       }

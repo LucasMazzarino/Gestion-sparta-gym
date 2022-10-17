@@ -3,7 +3,6 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.static import serve
-
     
 # from Users.views import Login,Logout
 
@@ -16,9 +15,6 @@ urlpatterns = [
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
     # path('auth/', include('djoser.social.urls')),
-
-    # url (r'^ckeditor/' ,  include ( 'ckeditor_uploader.urls' )),
-
 
     path('admin/', admin.site.urls),
     path('usuarios/',include('Users.api.routers',)),

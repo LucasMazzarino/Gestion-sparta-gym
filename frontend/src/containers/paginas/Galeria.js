@@ -6,34 +6,36 @@ import Galeria5 from '../../imagenes/Galeria5.jpg';
 import Galeria6 from '../../imagenes/Galeria6.jpg';
 import Image from 'react-bootstrap/Image';
 import Layout from "../../hocs/Layout";
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import Container from "react-bootstrap/esm/Container";
 
 
 
 function Galeria(){
     return(
         <Layout>
-        <Container className="Galeria" fluid='md'>
+        <Container className="Galeria">
             <h1>Galeria</h1>            
-                <Row> 
-                    <Col md={2} ></Col>                   
-                    <Col md={10} sm={12}>                      
-                        <Row>
+                <div className="row">
+                    <div className='col-12 col-md-2'>
+                                            
+                    </div>
+                    <div className='col-12 col-md-10'>                      
+                        <div className="row">
                              <div className='col-md-6'><Image src={Galeria1}/></div>                             
                              <div className='col-md-3'><Image src={Galeria2}/></div>
-                        </Row>
-                        <Row className="row">                            
+                        </div>
+                        <div className="row">                            
                              <div className='col-md-9'><Image src={Galeria3}/></div>                            
-                        </Row>
-                        <Row>
+                        </div>
+                        <div className="row">
                             <div className='col-md-5'><Image src={Galeria5}/></div>
                             <div className='col-md-4'><Image src={Galeria6}/></div>                        
-                        </Row>                                                           
-                    </Col>
-                    <Col md={2}></Col>                     
-                </Row>             
+                        </div>                                                           
+                    </div>
+                    <div className='col-12 col-md-2'>
+                                          
+                    </div>
+                </div>             
         </Container>
         </Layout>
     );

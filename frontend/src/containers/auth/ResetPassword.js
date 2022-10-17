@@ -6,20 +6,17 @@ import { Navigate } from 'react-router'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Spinner from 'react-bootstrap/Spinner';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 
 const ResetPassword = ({
   reset_password,
   loading
 }) => {
 
-  const [requestSent, setRequestSent] = useState(false);
-
   useEffect(() => {
     window.scrollTo(0,0)
   }, [])
+
+  const [requestSent, setRequestSent] = useState(false);
 
   const [formData, setFormData] = useState({
     email: '',
@@ -40,11 +37,15 @@ const ResetPassword = ({
   if (requestSent && !loading)
         return <Navigate to='/' />;
 
-  return (    
+  return (
     <Layout>
-      <Container className='seccionResetPassword'>          
-              <Row>             
-                <Col md={12}>
+      <section className='seccionResetPassword'>
+          <div className='container'>
+              <div className='row'>
+              <div className='col-12 col-md-3'>
+
+              </div>
+                <div className='col-12 col-md-6 d-flex aling-items-center justify-content-center'>
                    <Form onSubmit={e=>onSubmit(e)}>
                       <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Dirección de E-Mail</Form.Label>
@@ -74,10 +75,30 @@ const ResetPassword = ({
                           <Button type="submit" variant="primary">Enviar E-Mail</Button>}
                     </div>
                   </Form>
-                </Col>               
-              </Row>   
-      </Container> 
-      </Layout>
+                </div>
+                <div className='col-12 col-md-3'>
+
+                </div>
+              </div>
+          </div>
+      </section>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br> 
+      <br></br>
+      <br></br>  
+      <br></br>
+      <br></br>
+      <br></br>      
+      <br></br>   
+      <br></br>
+      <br></br>
+      <br></br>      
+      <br></br> 
+      <br></br>
+      <br></br>      
+    </Layout>
   )
 }
 const mapStateToProps = state => ({

@@ -1,14 +1,9 @@
 import Layout from '../../hocs/Layout';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
-import Accordion from 'react-bootstrap/Accordion';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Modal from 'react-bootstrap/Modal';
 
 import { connect } from "react-redux";
-import { reservar_horario, get_reservas_horarios, eliminar_reserva} from '../../redux/actions/reserva'
+import { reservar_horario, get_reservas_horarios} from '../../redux/actions/reserva'
 
 
 import { useEffect, useState } from 'react';
@@ -19,14 +14,9 @@ const ReservaHorarios = ({
   reservas,
   reservar_horario,
   get_reservas_horarios,
-  eliminar_reserva
 }) => {
 
   const [listar, setListar] = useState(false) 
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   useEffect(() => { 
     get_reservas_horarios(usu_id)
@@ -34,24 +24,17 @@ const ReservaHorarios = ({
 
   const reservar = () => {
     get_reservas_horarios(usu_id)
+    console.log('renderizando')
   }
 
   const onClick = (id) => {  
     reservar_horario(usu_id, id)
     setListar(true)
-    window.scrollTo(0,0)
   }
 
   if (listar){
     reservar()
     setListar(false)
-  };
-
-  const borrarReserva = (id) => {
-    eliminar_reserva(id)
-    window.scrollTo(0,0)
-    setListar(true)
-    handleClose()
   }
   
   const listarMiscursos = () => {
@@ -82,7 +65,7 @@ const ReservaHorarios = ({
                 <ListGroup.Item >Dia: {horarios.dia}</ListGroup.Item>
                 <ListGroup.Item >Comienza a las: {horarios.horario.horaInicio}</ListGroup.Item>
                 <ListGroup.Item>Finaliza a las: {horarios.horario.horaFin}</ListGroup.Item> 
-                <Button type="submit" variant="info" onClick={()=>onClick(horarios.id)}>Reserva un cupo!</Button>
+                <Button type="submit" variant="danger" onClick={()=>onClick(horarios.id)}>Reserva un cupo!</Button>
               </ListGroup>
           )  
         })
@@ -94,27 +77,15 @@ const ReservaHorarios = ({
     if(reservas &&
       reservas !== null && 
       reservas !== undefined && 
-      reservas.length !== 0)
+      reservas.length !==0)
       {
         return (reservas.map((reserva) => { 
+          console.log(reserva)     
           return(
-          <div key={reserva.curso_horario.id}>
-            <Accordion defaultActiveKey="1">
-                <Accordion.Item eventKey="0">
-                  <Accordion.Header>{reserva.curso_horario.curso.nombre}</Accordion.Header>
-                  <Accordion.Body>
-                       {reserva.curso_horario.dia} de {reserva.curso_horario.horario.horaInicio} a {reserva.curso_horario.horario.horaFin}<br></br>
-                      <Button variant="danger" onClick={handleShow}>Eliminar reserva</Button>
-                      <Modal show={show} onHide={handleClose}>
-                          <Modal.Header closeButton>
-                          <Modal.Title>Seguro que quiere cancelar su reserva?</Modal.Title>
-                          </Modal.Header> 
-                          <Modal.Footer><Button variant="danger" onClick={()=>borrarReserva(reserva.id)}>Eliminar reserva</Button>
-                          <Button variant="primary" onClick={handleClose}>No</Button></Modal.Footer>               
-                      </Modal>
-                  </Accordion.Body>                
-                </Accordion.Item>             
-          </Accordion>
+          <div key={reserva.id}>
+            <div>{reserva.curso.nombre} el {reserva.dia} de:</div>
+            <div>{reserva.horario.horaInicio} a {reserva.horario.horaFin}</div>
+              <Button>Eliminar mi reserva</Button> 
           </div>
           )
         }))
@@ -123,27 +94,40 @@ const ReservaHorarios = ({
 
   return(
     <Layout>
-    <Container className='seccionReservas'>     
+    <section className='seccionReservas'>
+      <div className='container'>
           <h1>Reserva de horarios</h1>
-          <Row>              
-                <Col md={5} sm={12}>                    
+          <div className='row'>
+                <div className='col-12 col-md-2'>
+
+                </div>
+                <div className='col-12 col-md-3 d-flex aling-items-center justify-content-center'>                    
                      <div className='cursosUsuario'>
                         <h3>Tus cursos:</h3>
                         <div> {listarMiscursos()}</div>                    
                     </div>
-                </Col>
-                <Col md={2} sm={12}>          
-                    
-                </Col>                 
-                <Col md={5} sm={12}> 
-                      <div className='reservaUsuario'>
+                </div>
+                <div className='col-12 col-md-2'>
+
+                </div>
+                <div className='col-12 col-md-3 d-flex aling-items-center justify-content-center'> 
                         <h3>Tus reservas:</h3>
-                        <div>{listarMisReservas()}</div> 
-                      </div>                      
-                </Col>
-                
-          </Row>              
-    </Container>           
+                        <div>{listarMisReservas()}</div>  
+                </div>
+                <div className='col-12 col-md-2'>
+
+                </div>
+          </div>
+      </div>             
+    </section> 
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br> 
+      <br></br>
+      <br></br>  
+      <br></br>
+      <br></br>           
     </Layout>
 )
 
@@ -157,6 +141,5 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
   reservar_horario,
-  get_reservas_horarios,
-  eliminar_reserva
+  get_reservas_horarios
 }) (ReservaHorarios)

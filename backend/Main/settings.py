@@ -10,7 +10,7 @@ environ.Env.read_env()
 
 DEBUG = env('DEBUG')
 SECRET_KEY = env('SECRET_KEY')
-    
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SITE_NAME = 'SpartaGym'
@@ -62,7 +62,7 @@ INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
 
 CKEDITOR_CONFIGS={
     "default":{
-        'toolbar':'Full',
+        'toolbar':'full',
         'autoParagraph': False
     }
 }
@@ -179,7 +179,6 @@ AUTH_USER_MODEL = 'Users.Usuarios'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = { 
-    # 'DATE_INPUT_FORMATS': ("%d-%m-%Y"),
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
@@ -193,7 +192,7 @@ REST_FRAMEWORK = {
 SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('JWT', ),
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=10080),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=10),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=30),
     'ROTATE_REFRESFH_TOKENS':True,
     'BLACKLIST_AFTER_ROTATION': True,
     'AUTH_TOKEN_CLASSES': (
@@ -202,11 +201,11 @@ SIMPLE_JWT = {
 }
 
 DJOSER = {
-    'LOGIN_FIELD': 'documento',
+    'LOGIN_FIELD': 'cedula',
     'USER_CREATE_PASSWORD_RETYPE': True,
     'PASSWORD_RESET_CONFIRM_RETYPE': True,
     'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
-    'USERNAME_RESET_CONFIRM_URL': 'documento/reset/confirm/{uid}/{token}',
+    'USERNAME_RESET_CONFIRM_URL': 'cedula/reset/confirm/{uid}/{token}',
     'ACTIVATION_URL': 'activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': False,
     'SERIALIZERS': {

@@ -5,10 +5,10 @@
   	REMOVE_AUTH_LOADING,
   	USER_LOADED_SUCCESS,
   	USER_LOADED_FAIL,
-    REFRESH_SUCCESS,
-    REFRESH_FAIL,
-    AUTHENTICATED_FAIL,
-    AUTHENTICATED_SUCCESS,
+		REFRESH_SUCCESS,
+		REFRESH_FAIL,
+		AUTHENTICATED_FAIL,
+		AUTHENTICATED_SUCCESS,
     LOGOUT,
     RESET_PASSWORD_SUCCESS,
     RESET_PASSWORD_FAIL,
@@ -54,7 +54,7 @@ export const load_user = () => async dispatch => {
   }
 }
 
-export const login = (documento, password) => async dispatch => {
+export const login = (cedula, password) => async dispatch => {
   dispatch({
       type: SET_AUTH_LOADING
   });
@@ -66,7 +66,7 @@ export const login = (documento, password) => async dispatch => {
   };
 
   const body = JSON.stringify({
-      documento,
+      cedula,
       password
   });
 

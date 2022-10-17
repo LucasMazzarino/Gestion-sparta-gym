@@ -2,14 +2,18 @@ from django.contrib import admin
 from django.contrib.auth.models import Group
 
 
-from .models import Horario, Curso, CursoHorario, PagoCuota, Asistencia
+from .models import Horario, Cursos, CursoHorario, PagoCuota, Asistencia
 from Users.models import Usuarios,ReservaUsuarios
-from django.utils.html import format_html_join
 
+# class MinValidatedInlineMixIn:
+#     validate_min = True
+#     def get_formset(self, *args, **kwargs):
+
+#         return super().get_formset(validate_min=self.validate_min, *args, **kwargs)
 
 class PagoCuotaInline(admin.TabularInline):
     model = PagoCuota
-    fields = ('usuario','dia_de_pago','recargo')
+    fields = ('usuario','dia_de_pago',)
     extra = 1
     list_filter = ('dia_de_pago',)
     
@@ -18,11 +22,7 @@ class PagoCuotaInline(admin.TabularInline):
         if db_field.name == 'usuario':
             cur_id = request.resolver_match.kwargs.get('object_id', None)
             if cur_id:
-                kwargs['queryset'] = Usuarios.objects.exclude(
-                    is_active=False).exclude(
-                    is_superuser=True).exclude(
-                    is_staff=True).filter(
-                    cursos=cur_id)
+                kwargs['queryset'] = Usuarios.objects.filter(cursos=cur_id)
             else:
                 kwargs['queryset'] = Usuarios.objects.none()
         return super(PagoCuotaInline, self).formfield_for_foreignkey(db_field, request, **kwargs)
@@ -45,10 +45,7 @@ class AsistenciaInline(admin.TabularInline):
             if db_field.name == 'usuario':
                 cur_id = request.resolver_match.kwargs.get('object_id', None)
                 if cur_id:
-                    kwargs['queryset'] = Usuarios.objects.exclude(
-                        is_active=False).exclude(
-                        is_superuser=True).exclude(
-                        is_staff=True).filter(cursos=cur_id)
+                    kwargs['queryset'] = Usuarios.objects.filter(cursos=cur_id)
                 else:
                     kwargs['queryset'] = Usuarios.objects.none()
             return super(AsistenciaInline, self).formfield_for_foreignkey(db_field, request, **kwargs)
@@ -88,7 +85,7 @@ class ReservasUsuariosInline(admin.TabularInline):
             if db_field.name == 'usuario':
                 cursohorario_id = request.resolver_match.kwargs.get('object_id', None)
                 if cursohorario_id:
-                    kwargs['queryset'] = Usuarios.objects.exclude(is_active=False,is_superuser=True).filter(cursos__cursohorario=cursohorario_id)
+                    kwargs['queryset'] = Usuarios.objects.filter(cursos__cursohorario=cursohorario_id)
                 else:
                     kwargs['queryset'] = Usuarios.objects.none()
             return super(ReservasUsuariosInline, self).formfield_for_foreignkey(db_field, request, **kwargs)
@@ -96,32 +93,16 @@ class ReservasUsuariosInline(admin.TabularInline):
 
 
     
-@admin.register(Curso)
+@admin.register(Cursos)
 class CursoAdmin(admin.ModelAdmin):
-    list_display = ['nombre', 'costo']
+    list_display = ('nombre', 'costo',)
     filter_horizontal = ('usuarios',)
     ordering = ['nombre']
     inlines = (CursoHorarioInline,PagoCuotaInline,AsistenciaInline)
-    readonly_fields = ('ingresos','lista_de_ingresos_mensuales')
-
-
-    def lista_de_ingresos_mensuales(self, obj):
-        ingresos = obj.ingresos_mensuales
-        if ingresos:
-            return format_html_join(
-            '\n', "<li>{}/{}: Ingresos: ${}</li>",
-            ((ingreso['year'], ingreso['month'], ingreso['cant']) for ingreso in ingresos))
-        return '-'
-    
-    def formfield_for_manytomany(self, db_field, request, **kwargs):
-        if db_field.name == "usuarios":
-            kwargs["queryset"] = Usuarios.objects.exclude(
-                is_superuser=True).exclude(
-                is_active=False).exclude(
-                is_staff=True)
-        return super().formfield_for_manytomany(db_field, request, **kwargs)
+    readonly_fields = ('ganancia',)
 
     
+
 @admin.register(CursoHorario)
 class CursoHorarioAdmin(admin.ModelAdmin):
     model = CursoHorario
@@ -134,7 +115,7 @@ class CursoHorarioAdmin(admin.ModelAdmin):
     search_fields = ('dia',)
     
     
-    def get_form(self, request, obj=None, **kwargs):  
+    def get_form(self, request, obj=None, **kwargs):    # Just added this override
         form = super(CursoHorarioAdmin, self).get_form(request, obj, **kwargs)
         form.base_fields['curso'].widget.can_add_related = False
         form.base_fields['curso'].widget.can_change_related = False
@@ -145,21 +126,16 @@ class CursoHorarioAdmin(admin.ModelAdmin):
 @admin.register(PagoCuota)
 class PagoCuotaAdmin(admin.ModelAdmin):
     model = PagoCuota
-    fields = ('curso','usuario','dia_de_pago','recargo')
+    fields = ('curso','usuario','dia_de_pago')
     list_filter = ('dia_de_pago','usuario','curso')
 
-    def get_form(self, request, obj=None, **kwargs):  
+    def get_form(self, request, obj=None, **kwargs):    # Just added this override
         form = super(PagoCuotaAdmin, self).get_form(request, obj, **kwargs)
         form.base_fields['usuario'].widget.can_add_related = False
         form.base_fields['usuario'].widget.can_change_related = False
-        form.base_fields['usuario'].queryset = Usuarios.objects.exclude(
-        is_superuser=True).exclude(
-        is_active=False).exclude(
-        is_staff=True)
         form.base_fields['curso'].widget.can_add_related = False
         form.base_fields['curso'].widget.can_change_related = False
         return form
-    
 
 
 @admin.register(Asistencia)
@@ -172,15 +148,9 @@ class AsistenciaAdmin(admin.ModelAdmin):
         form = super(AsistenciaAdmin, self).get_form(request, obj, **kwargs)
         form.base_fields['usuario'].widget.can_add_related = False
         form.base_fields['usuario'].widget.can_change_related = False
-        form.base_fields['usuario'].queryset = Usuarios.objects.exclude(
-        is_superuser=True).exclude(
-        is_active=False).exclude(
-        is_staff=True)
         form.base_fields['curso'].widget.can_add_related = False
         form.base_fields['curso'].widget.can_change_related = False
         return form
-    
-
 
 
 
