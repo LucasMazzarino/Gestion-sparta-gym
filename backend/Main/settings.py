@@ -179,6 +179,7 @@ AUTH_USER_MODEL = 'Users.Usuarios'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = { 
+    # 'DATE_INPUT_FORMATS': ("%d-%m-%Y"),
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],

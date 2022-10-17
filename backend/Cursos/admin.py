@@ -4,8 +4,7 @@ from django.contrib.auth.models import Group
 
 from .models import Horario, Curso, CursoHorario, PagoCuota, Asistencia
 from Users.models import Usuarios,ReservaUsuarios
-from datetime import date
-from django.utils.html import mark_safe, format_html_join
+from django.utils.html import format_html_join
 
 
 class PagoCuotaInline(admin.TabularInline):
@@ -104,7 +103,7 @@ class CursoAdmin(admin.ModelAdmin):
         if ingresos:
             return format_html_join(
             '\n', "<li>{}/{}: Ingresos: ${}</li>",
-            ((ingreso['year'].year, ingreso['month'].month, ingreso['c']) for ingreso in ingresos))
+            ((ingreso['year'], ingreso['month'], ingreso['cant']) for ingreso in ingresos))
         return '-'
 
     

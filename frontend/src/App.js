@@ -14,6 +14,7 @@ import Login from './containers/auth/Login';
 import ResetPassword from './containers/auth/ResetPassword';
 import ConfirmResetPassword from './containers/auth/ConfirmResetPassword';
 import Error404 from './containers/errors/Error404';  
+import Estadisticas from './containers/paginas/Estadisticas';
 
 import { connect } from 'react-redux';
 
@@ -42,6 +43,8 @@ const App = ({
 
           {/*reserva de horario */}
           <Route exact path='/reservas' element={<ReservaHorario/>}></Route>
+          {/*graficos*/}
+          <Route exact path='/estadisticas' element={<Estadisticas/>}></Route>
         </Routes>
       </Router>      
   );
