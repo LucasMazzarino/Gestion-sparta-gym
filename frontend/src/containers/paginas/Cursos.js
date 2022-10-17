@@ -1,4 +1,3 @@
-import React from 'react';
 import Layout from '../../hocs/Layout';
 
 import Container from 'react-bootstrap/Container'
@@ -6,7 +5,7 @@ import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import Row from 'react-bootstrap/Row';
-
+import Parse from 'html-react-parser'
 
 
 import { get_cursos } from '../../redux/actions/cursos';
@@ -31,9 +30,9 @@ const Cursos = ({
 			cursos !== null &&
 			cursos !== undefined &&
 			cursos.length !==0 &&
-			cursos.map((curso) => {        
+			cursos.map((curso) => {      
 				return(
-					<section className='CartasCursos'>
+					<section key={curso.id} className='CartasCursos'>
 						<CardGroup key={curso.id}>
 							<Card className="bg-dark text-white">
 								<div className='Carta'>
@@ -41,9 +40,7 @@ const Cursos = ({
 								</div>						
 								<Card.Body>
 									<Card.Title className='CardTitle'>{curso.nombre}</Card.Title>
-									<Card.Text className='CardText'>
-									{curso.descripcion}
-									</Card.Text>
+									<Card.Text className='CardText'>{Parse(curso.descripcion)}</Card.Text>									
 								</Card.Body>
 								<Card.Footer>
 									<Link to={`${curso.id}`} variant="primary">Detalles del curso</Link>
@@ -59,7 +56,7 @@ const Cursos = ({
 	return(
 			<Layout>
 			<section className='Cursos'>
-					<h1>Cursos</h1>
+					<h1>Nuestros Cursos</h1>
 					<Container>
 						<Row md={3}>
 							{mostrarCursos()}

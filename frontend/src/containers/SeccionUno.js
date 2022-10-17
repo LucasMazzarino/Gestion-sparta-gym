@@ -14,7 +14,7 @@ function SeccionUno() {
               height='600'
             />
             <Carousel.Caption>
-              <h1>First slide label</h1>          
+              <h1></h1>          
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
@@ -26,7 +26,7 @@ function SeccionUno() {
             />
 
             <Carousel.Caption>
-              <h1>Second slide label</h1>
+              <h1></h1>
               
             </Carousel.Caption>
           </Carousel.Item>
@@ -39,7 +39,7 @@ function SeccionUno() {
             />
 
             <Carousel.Caption>
-              <h1>Third slide label</h1>          
+              <h1></h1>          
             </Carousel.Caption>
           </Carousel.Item>
         </Carousel>

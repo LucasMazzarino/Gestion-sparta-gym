@@ -19,6 +19,13 @@ h2{
   font-family: 'Russo One', sans-serif;
 }
 
+h5{
+  text-align: center;
+  padding: 20px;
+  letter-spacing: 2px;
+  font-family: 'Russo one', sans-serif;
+}
+
 .SeccionDos{ 
   background-color: black;
 }
@@ -71,29 +78,6 @@ h2{
 }
 
 
-.EntrenadorUno{  
-  position: relative;
-}
-
-.EntrenadorDos{  
-  position: relative;
-}
-
-.TextoUno{  
-  position: absolute;
-  bottom: 10%; 
-  color: white;
-  font-size: 25px !important;
-  font-family: 'Passion One', cursive !important;
-}
-
-.TextoDos{
-  position: absolute;
-  bottom: 10%;   
-  color: white;
-  font-size: 25px !important;
-  font-family: 'Passion One', cursive !important; 
-}
 
 Footer{
   background-color: black !important;
@@ -195,15 +179,18 @@ Footer #Derechos{
 }
 
 .seccionLogin{
-  margin: 100px;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .seccionResetPassword{
-  margin: 100px;
+  margin-top: 50px;
+  margin-bottom: 170px;
 }
 
 .seccionConfirmarReseteo{
-  margin: 100px;
+  margin-top: 100px;
+  margin-bottom: 450px;
 }
 
 .pBienvenidoAdministrador{
@@ -237,6 +224,14 @@ Footer #Derechos{
 .CardText{
   text-align: center;
   font-family: 'Ropa Sans', sans-serif;
+  font-size: 20px;
+  height: 350px; 
+  overflow-x: scroll; 
+}
+
+.spanCosto{
+  color: lawngreen;
+  text-align: center;
   font-size: 20px;
 }
 
@@ -315,6 +310,34 @@ Footer #Derechos{
   width: 700px;
   height: 300px;
 }
+
+.Noticias{
+  align-items: center;
+  padding-left: 140px;
+}
+
+
+#Noticia{
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+.fechaPosteo{
+  font-size: 15px;
+  color: gray;
+}
+
+.seccionReservas{
+  margin-bottom: 230px;
+}
+
+
+canvas{
+  max-width: 1100px;
+  max-height: 700px;
+}
+
+
 
 
 
