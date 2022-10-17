@@ -19,6 +19,13 @@ h2{
   font-family: 'Russo One', sans-serif;
 }
 
+h5{
+  text-align: center;
+  padding: 20px;
+  letter-spacing: 2px;
+  font-family: 'Russo one', sans-serif;
+}
+
 .SeccionDos{ 
   background-color: black;
 }
@@ -305,11 +312,14 @@ Footer #Derechos{
 }
 
 .Noticias{
-  padding: 20px;
+  align-items: center;
+  padding-left: 140px;
 }
 
+
 #Noticia{
-  margin: 20px;
+  margin-left: 15%;
+  margin-right: 15%;
 }
 
 .fechaPosteo{
@@ -321,6 +331,11 @@ Footer #Derechos{
   margin-bottom: 230px;
 }
 
+
+canvas{
+  max-width: 1100px;
+  max-height: 700px;
+}
 
 
 

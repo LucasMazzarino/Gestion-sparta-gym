@@ -7,9 +7,8 @@ from django.core.exceptions import ValidationError
 
 from ckeditor.fields import RichTextField
 
-from datetime import date
-from django.db.models import Sum, Count, F
-from django.db.models.functions import TruncMonth,TruncYear
+from django.db.models import Sum, F
+from django.db.models.functions import Extract
 
 class Horario(models.Model):
   id = models.AutoField(primary_key=True)
@@ -43,17 +42,17 @@ class Curso(models.Model):
   costo = models.PositiveSmallIntegerField(default=0)
   descripcion = RichTextField(blank=True, null=True)  
   imagen = models.ImageField('Imagen de portada',upload_to='cursos/imagenes/', null=True, default='cursos/imagenes/sparta_img.jpg')
-  state = models.BooleanField('Estado',default = True)
+  state = models.BooleanField('Estivar/desactivar',default = True, help_text="Si desactiva el curso este no se mostrara en la pagina principal")
   horarios = models.ManyToManyField(Horario, through='CursoHorario')
   pagos_cuotas = models.ManyToManyField(Usuarios, through='PagoCuota', related_name='pagos')
   asistencias = models.ManyToManyField(Usuarios, through='Asistencia', related_name='asistencias')
   
   def clean(self):
-    costo = self.costo
-    if Curso.objects.filter(nombre=self.nombre):
+    if Curso.objects.exclude(id=self.id).filter(nombre=self.nombre.lower()):
       raise ValidationError("Ya existe un curso con este nombre")
-    if costo <= 0:
-      raise ValidationError("Verique el precio, no puede ser 0 o menor")
+    elif Curso.objects.exclude(id=self.id).filter(nombre=self.nombre):
+       raise ValidationError("Ya existe un curso con este nombre")
+
 
 
   @property
@@ -66,8 +65,8 @@ class Curso(models.Model):
   @property
   def ingresos_mensuales(self):
     ingresos_mensuales =  Curso.objects.get(id=self.id).pagos_cuotas.through.objects.filter(curso_id=self.id).annotate(
-      month=TruncMonth('dia_de_pago'), year=TruncYear('dia_de_pago'), monto=F('monto_final')).values('month', 'year').annotate(
-      c=Sum('monto')).values('month', 'year', 'c').order_by('year','month')
+      month=Extract('dia_de_pago','month'), year=Extract('dia_de_pago','year'), monto=F('monto_final')).values('month', 'year').annotate(
+      cant=Sum('monto')).values('month', 'year', 'cant').order_by('year','month')
     return ingresos_mensuales
     
 
@@ -96,14 +95,14 @@ class PagoCuota(models.Model):
 
   def full_clean(self, exclude=None, validate_unique=True, validate_constraints=True):
       super().full_clean()
-      curso = self.curso.usuarios.all()
+      curso = self.curso.usuarios.all() 
       if self.usuario not in curso:
         raise ValidationError("Este usuario no se encuentra en este curso.")
   
   def save(self,*args,**kwargs):
     self.monto_final = self.curso.costo
     if self.recargo == True:
-      self.monto_final += 500 
+      self.monto_final += 200 
     print(self.monto_final)
     super().save(*args,**kwargs)
 

@@ -10,7 +10,7 @@ from Cursos.api.serializers import CursoSerializer
 
 class CursoViewSet(viewsets.ReadOnlyModelViewSet):
   serializer_class = CursoSerializer
-  queryset = Curso.objects.all()
+  queryset = Curso.objects.exclude(state=False)
 
 
   

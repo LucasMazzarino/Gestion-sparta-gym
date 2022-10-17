@@ -45,26 +45,29 @@ function Navegacion({
   const isStafflinks = (
     <Fragment>
         <span className='pBienvenidoAdministrador'>Bienvenido administrador!</span>
+        <Link to="/estadisticas" className="btn btn-success text-center">
+        Ver estadisticas
+        </Link>
     </Fragment>
   )
   
   const isNoStafflinks = (
     <Fragment>
-        <span className='pNoeresadmins'>Bienvenido usuario!</span>     
+        <span className='pNoeresadmins'>Bienvenido usuario!</span>
+        <Link to="/reservas" className="btn btn-success text-center">
+        Reserva tu horario
+      </Link>  
     </Fragment>
     
   )
   
   const authenticatedLinks = (
     <Fragment>
-      <Link to="/reservas" className="btn btn-success text-center">
-        Reserva tu horario
-      </Link>
-    <button onClick={logoutHandler} className="btn btn-link"> Cerrar sesión</button>
       <Fragment>{
           staff ? isStafflinks: isNoStafflinks
         }
       </Fragment>
+    <button onClick={logoutHandler} className="btn btn-link"> Cerrar sesión</button>    
     </Fragment>
   )
 
