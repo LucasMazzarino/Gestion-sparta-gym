@@ -78,29 +78,6 @@ h5{
 }
 
 
-.EntrenadorUno{  
-  position: relative;
-}
-
-.EntrenadorDos{  
-  position: relative;
-}
-
-.TextoUno{  
-  position: absolute;
-  bottom: 10%; 
-  color: white;
-  font-size: 25px !important;
-  font-family: 'Passion One', cursive !important;
-}
-
-.TextoDos{
-  position: absolute;
-  bottom: 10%;   
-  color: white;
-  font-size: 25px !important;
-  font-family: 'Passion One', cursive !important; 
-}
 
 Footer{
   background-color: black !important;
@@ -248,6 +225,8 @@ Footer #Derechos{
   text-align: center;
   font-family: 'Ropa Sans', sans-serif;
   font-size: 20px;
+  height: 350px; 
+  overflow-x: scroll; 
 }
 
 .spanCosto{
