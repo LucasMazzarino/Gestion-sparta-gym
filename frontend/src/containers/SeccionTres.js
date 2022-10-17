@@ -3,6 +3,8 @@ import EntrenadorUno from '../imagenes/EntrenadorUno.png'
 import EntrenadorDos from '../imagenes/EntrenadorDos.jpg'
 import Image from 'react-bootstrap/Image'
 
+
+
 function SeccionTres(){
   return(
     <section className='SeccionTres'> 

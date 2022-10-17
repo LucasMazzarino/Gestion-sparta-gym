@@ -2,9 +2,12 @@ import React from 'react';
 import Layout from '../../hocs/Layout';
 
 import Container from 'react-bootstrap/Container'
-import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup';
+import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
+import Image from 'react-bootstrap/Image';
+import Accordion from 'react-bootstrap/Accordion';
+
+import Parse from 'html-react-parser'
 
 import { get_noticias } from '../../redux/actions/noticias';
 
@@ -23,37 +26,43 @@ const Noticias = ({
 
 	const mostrarNoticias = () =>{
 		return(
-			<div>{
 				noticias &&
 				noticias !== null &&
 				noticias !== undefined &&
 				noticias.length !==0 &&
 				noticias.map((noticia) => {   
 					return(
-						<CardGroup key={noticia.id}>
-								<Card.Img variant="top" src={noticia.imagen} />
-								<Card.Body>
-									<Card.Title>{noticia.titulo}</Card.Title>
-									<Card.Text>
-									{noticia.descripcion}
-									</Card.Text>
-								</Card.Body>
-						</CardGroup>
+						<Container className='seccionNoticias' key={noticia.id}>
+							<Row key={noticia.autor} className='col-12 col-md-6 justify-content-center' id='Noticia'>
+								<Image className='imagenNoticia' src={noticia.imagen}/>							
+								<h4>{noticia.titulo}</h4>								
+								<p>{Parse(noticia.descripcion)}</p>
+								<span className='fechaPosteo'>publicado en: {noticia.publicado} por: {noticia.autor.nombre}</span>
+								<Accordion defaultActiveKey="1">
+									<Accordion.Item eventKey="0">
+										<Accordion.Header>Seccion de comentarios</Accordion.Header>
+										<Accordion.Body>
+										</Accordion.Body>
+									</Accordion.Item>								
+   								 </Accordion>		 						
+								<textarea placeholder='Realice un comentario'></textarea>																								
+							</Row>		
+							<Button variant="dark">Comentar</Button>
+																	
+						</Container>
 					)               
-				}) 
-			}
-		</div> 
+				})  
 		)
 	}
 	
 	return (
 		<Layout>
 			<section className='Noticias'>
-				<h1>Noticias</h1>
+				<h1>Blog de Noticias</h1>
 				<Container>
-				<Row md={1}>
-					{mostrarNoticias()}
-				</Row>
+					<Row md={1}>
+						{mostrarNoticias()}
+					</Row>
 				</Container>
 			</section>
 		</Layout>

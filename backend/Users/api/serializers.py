@@ -1,14 +1,15 @@
+from attr import fields
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from Users.models import Usuarios, ReservaUsuarios
-from Cursos.models import Cursos,CursoHorario
-from Cursos.api.serializers import CursoSerializer,CursoHorarioserializer,PartialCursoHorarioserializer, PartialCursoSerializer
+from Cursos.models import Curso,CursoHorario
+from Cursos.api.serializers import CursoSerializer,CursoHorarioserializer,PartialCursoHorarioserializer
 
 class UsuariosSerializer(serializers.ModelSerializer):
   cursos = CursoSerializer(many=True,)
   class Meta:
     model=Usuarios
-    fields = ('id','nombre','apellido','cedula','email','direccion','is_staff','cursos',)
+    fields = ('id','nombre','apellido','documento','email','direccion','is_staff','cursos',)
     extra_kwargs = {'password':{'write_only': True, 'min_length': 5}}
 
 class UsuariosPartialSerializer(serializers.ModelSerializer):
@@ -16,13 +17,24 @@ class UsuariosPartialSerializer(serializers.ModelSerializer):
     model=Usuarios
     fields = ('id',)
 
+class NombreUsuarioSerializer(serializers.ModelSerializer):
+  class Meta:
+    model=Usuarios
+    fields =('nombre',)
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
   pass
 
+
+class PartialReservaUsuariosSerializer(serializers.ModelSerializer):
+  curso_horario = PartialCursoHorarioserializer()
+  class Meta:
+    model=ReservaUsuarios
+    fields = ('id','curso_horario',)
+
 # serializador para listar las reservas de un usuario
 class ListaReservasUsuariosSerializer(serializers.ModelSerializer):
-  reservas = PartialCursoHorarioserializer(many=True,)
+  reservas = PartialReservaUsuariosSerializer(source='reservausuarios_set',many=True,)
   class Meta:
     model=Usuarios
     fields = ('reservas',)
@@ -33,7 +45,7 @@ class ReservaUsuariosSerializer(serializers.ModelSerializer):
   curso_horario = CursoHorarioserializer()
   class Meta:
     model=ReservaUsuarios
-    fields = ('usuario','curso_horario')
+    fields = ( 'usuario','curso_horario')
 
 
 # serializadr para crear la reserva con post
@@ -44,15 +56,17 @@ class CrearReservaUsuarioSerializer(serializers.ModelSerializer):
 
   def validate_usuario(self, value):
     cu_ho = self.context['request'].data['curso_horario']
-    curso = Cursos.objects.get(cursohorario=cu_ho)
-    reservas = CursoHorario.objects.get(id=cu_ho)
-    # por_dia = value.reservas.filter(dia=cu)
-    print(cu_ho)
-    print('\n')
-    print(value.reservas.filter(dia='Lunes'))
-    if value in reservas.reserva.all():
+    curso = Curso.objects.get(cursohorario=cu_ho)
+    reservass = CursoHorario.objects.get(id=cu_ho)
+    por_dia = value.reservas.filter(dia=reservass.dia)
+    por_nombre =value.reservas.filter(curso__nombre=curso.nombre)
+ 
+    if value in reservass.reserva.all():
       raise serializers.ValidationError("Este usuario ya tiene una reserva en este horario")
-    # elif value in  
+    elif por_dia.exists() and por_nombre.exists():
+      raise serializers.ValidationError("Ya tienes una reserva para este curso en este dia")
     elif value not in curso.usuarios.all():
         raise serializers.ValidationError("Este usario no se encuentra en el curso")
     return value
+
+  

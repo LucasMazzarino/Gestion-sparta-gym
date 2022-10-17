@@ -6,17 +6,18 @@ import { Navigate } from 'react-router'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Spinner from 'react-bootstrap/Spinner';
+import Container from 'react-bootstrap/Container'
 
 const ResetPassword = ({
   reset_password,
   loading
 }) => {
 
+  const [requestSent, setRequestSent] = useState(false);
+
   useEffect(() => {
     window.scrollTo(0,0)
   }, [])
-
-  const [requestSent, setRequestSent] = useState(false);
 
   const [formData, setFormData] = useState({
     email: '',
@@ -37,10 +38,9 @@ const ResetPassword = ({
   if (requestSent && !loading)
         return <Navigate to='/' />;
 
-  return (
+  return (    
     <Layout>
-      <section className='seccionResetPassword'>
-          <div className='container'>
+      <Container className='seccionResetPassword'>          
               <div className='row'>
               <div className='col-12 col-md-3'>
 
@@ -79,26 +79,9 @@ const ResetPassword = ({
                 <div className='col-12 col-md-3'>
 
                 </div>
-              </div>
-          </div>
-      </section>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br> 
-      <br></br>
-      <br></br>  
-      <br></br>
-      <br></br>
-      <br></br>      
-      <br></br>   
-      <br></br>
-      <br></br>
-      <br></br>      
-      <br></br> 
-      <br></br>
-      <br></br>      
-    </Layout>
+              </div>   
+      </Container> 
+      </Layout>
   )
 }
 const mapStateToProps = state => ({
