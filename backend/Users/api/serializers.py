@@ -9,7 +9,7 @@ class UsuariosSerializer(serializers.ModelSerializer):
   cursos = CursoSerializer(many=True,)
   class Meta:
     model=Usuarios
-    fields = ('id','nombre','apellido','cedula','email','direccion','is_staff','cursos',)
+    fields = ('id','nombre','apellido','documento','email','direccion','is_staff','cursos',)
     extra_kwargs = {'password':{'write_only': True, 'min_length': 5}}
 
 class UsuariosPartialSerializer(serializers.ModelSerializer):

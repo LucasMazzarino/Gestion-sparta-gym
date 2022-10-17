@@ -12,15 +12,15 @@ from django.core.exceptions import ValidationError
 
 class UsuarioManager(BaseUserManager):
 
-  def create_user(self, nombre, apellido, cedula, email, direccion, password=None, **extra_filds):
+  def create_user(self, nombre, apellido, documento, email, direccion, password=None, **extra_filds):
     '''crea y guarda un nuevo usuario'''
-    if not cedula:
-      raise ValueError('El usuario debe tener una cedula')
+    if not documento:
+      raise ValueError('El usuario debe tener una documento')
 
     usuario = self.model(
       nombre=nombre,
       apellido=apellido,
-      cedula=cedula,
+      documento=documento,
       email=self.normalize_email(email), 
       direccion=direccion, 
       **extra_filds
@@ -30,9 +30,9 @@ class UsuarioManager(BaseUserManager):
 
     return usuario
   
-  def create_superuser(self, nombre, apellido, cedula, email, direccion, password=None):
-    '''creacion de super usuario con cedula'''
-    usuario = self.create_user(nombre, apellido, cedula, email, direccion, password)
+  def create_superuser(self, nombre, apellido, documento, email, direccion, password=None):
+    '''creacion de super usuario con documento'''
+    usuario = self.create_user(nombre, apellido, documento, email, direccion, password)
     usuario.is_staff = True
     usuario.is_superuser = True
     usuario.save(using=self._db)
@@ -43,23 +43,23 @@ class UsuarioManager(BaseUserManager):
 class Usuarios(AbstractBaseUser, PermissionsMixin):   
   nombre = models.CharField(max_length=250)
   apellido = models.CharField(max_length=250)
-  cedula = models.IntegerField(unique=True, null=False, blank=False, help_text="Ingrese su Cedula o su DNI",)
+  documento = models.IntegerField(unique=True, null=False, blank=False, help_text="Ingrese su Cedula o su DNI",)
   email = models.EmailField(max_length=250, unique=True)
   direccion = models.CharField(max_length=250)
-  is_active = models.BooleanField(default=True)
+  is_active = models.BooleanField(default=True, help_text="Si desactiva al usuario, no podra agregarle pagos, asistencias, ni asignarlo a un Curso o horario")
   is_staff = models.BooleanField(default=False)
   reservas = models.ManyToManyField(to='Cursos.CursoHorario', through='ReservaUsuarios', blank=True, related_name='reserva')
   
   objects = UsuarioManager()
 
-  USERNAME_FIELD = 'cedula'
+  USERNAME_FIELD = 'documento'
   REQUIRED_FIELDS = ['nombre', 'apellido', 'email', 'direccion']
   
   def clean(self):
-    docu = self.cedula
-    if docu <= 10000000:
+    docu = self.documento
+    if docu < 10000000:
       raise ValidationError("El documento debe tener 8 digitos")
-    if docu >= 99999999:
+    if docu > 99999999:
       raise ValidationError("El documento debe tener 8 digitos")
   
   

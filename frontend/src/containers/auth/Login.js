@@ -31,12 +31,12 @@ const Login = ({
   const handleShow = () => setShow(true);
 
   const [formData, setFormData] = useState({
-    cedula: '',
+    documento: '',
     password: '',
   })
 
   const { 
-    cedula,
+    documento,
     password,
   } = formData;
 
@@ -44,7 +44,7 @@ const Login = ({
 
   const onSubmit = e =>{
     e.preventDefault();
-    login(cedula, password);
+    login(documento, password);
   }
   
   return (    
@@ -57,8 +57,8 @@ const Login = ({
                   <Form onSubmit={e=>onSubmit(e)}>
                       <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Ingrese su cédula</Form.Label>
-                        <Form.Control name='cedula'
-                            value={cedula}
+                        <Form.Control name='documento'
+                            value={documento}
                             onChange={e=>onChange(e)}
                             type="number"
                             required 

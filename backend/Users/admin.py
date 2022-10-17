@@ -16,10 +16,10 @@ admin.site.register(models.OutstandingToken, NewOutstandingTokenAdmin)
 
 class UserAdmin(BaseUserAdmin):
     ordering = ['apellido']
-    list_display= ['cedula', 'nombre','apellido',]
+    list_display= ['documento', 'nombre','apellido',]
     search_fields = ['nombre']
     fieldsets = (
-        (None,{'fields':('cedula',)}),
+        (None,{'fields':('documento',)}),
         (_('Informacion personal'),{'fields':('nombre','apellido', 'direccion','email',)}),
         (
             _('Permissions'),
@@ -29,7 +29,7 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None,{
             'classes':('wide',),
-            'fields':('cedula','nombre','apellido','direccion','email','password1', 'password2',)
+            'fields':('documento','nombre','apellido','direccion','email','password1', 'password2',)
         }),
     )
 

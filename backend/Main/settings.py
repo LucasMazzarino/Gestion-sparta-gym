@@ -202,11 +202,11 @@ SIMPLE_JWT = {
 }
 
 DJOSER = {
-    'LOGIN_FIELD': 'cedula',
+    'LOGIN_FIELD': 'documento',
     'USER_CREATE_PASSWORD_RETYPE': True,
     'PASSWORD_RESET_CONFIRM_RETYPE': True,
     'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
-    'USERNAME_RESET_CONFIRM_URL': 'cedula/reset/confirm/{uid}/{token}',
+    'USERNAME_RESET_CONFIRM_URL': 'documento/reset/confirm/{uid}/{token}',
     'ACTIVATION_URL': 'activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': False,
     'SERIALIZERS': {

@@ -18,10 +18,10 @@
 #     serializer_class = CustomTokenObtainPairSerializer
 
 #     def post(self, request, *args, **kwargs):
-#         cedula = request.data.get('cedula', '')
+#         documento = request.data.get('documento', '')
 #         password = request.data.get('password', '')
 #         user = authenticate(
-#             cedula=cedula,
+#             documento=documento,
 #             password=password
 #         )
 

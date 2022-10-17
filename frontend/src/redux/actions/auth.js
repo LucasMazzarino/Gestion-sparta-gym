@@ -54,7 +54,7 @@ export const load_user = () => async dispatch => {
   }
 }
 
-export const login = (cedula, password) => async dispatch => {
+export const login = (documento, password) => async dispatch => {
   dispatch({
       type: SET_AUTH_LOADING
   });
@@ -66,7 +66,7 @@ export const login = (cedula, password) => async dispatch => {
   };
 
   const body = JSON.stringify({
-      cedula,
+      documento,
       password
   });
 
