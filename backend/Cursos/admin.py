@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.models import Group
-
+from django.utils.translation import gettext as _
 
 from .models import Horario, Curso, CursoHorario, PagoCuota, Asistencia
 from Users.models import Usuarios,ReservaUsuarios
@@ -103,7 +103,16 @@ class CursoAdmin(admin.ModelAdmin):
     ordering = ['nombre']
     inlines = (CursoHorarioInline,PagoCuotaInline,AsistenciaInline)
     readonly_fields = ('ingresos','lista_de_ingresos_mensuales')
-
+    # fieldsets = (
+    #     (None,{'fields':('usuarios',)}),
+    #     (_,{'fields':('nombre','costo', 'descripcion','imagen','state','ingresos','lista_de_ingresos_mensuales')}),
+    # )
+    # add_fieldsets =(
+    #     (None,{
+    #         'classes':('wide',),
+    #         'fields':('usuarios','nombre','costo','imagen','state'),
+    #     }),
+    # )
 
     def lista_de_ingresos_mensuales(self, obj):
         ingresos = obj.ingresos_mensuales
@@ -140,7 +149,7 @@ class CursoHorarioAdmin(admin.ModelAdmin):
         form.base_fields['curso'].widget.can_change_related = False
         form.base_fields['horario'].widget.can_change_related = False
         return form
-
+    
 
 @admin.register(PagoCuota)
 class PagoCuotaAdmin(admin.ModelAdmin):

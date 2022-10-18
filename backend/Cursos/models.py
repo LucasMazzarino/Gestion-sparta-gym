@@ -43,7 +43,7 @@ class Curso(models.Model):
   descripcion = RichTextField(blank=True, null=True)  
   imagen = models.ImageField('Imagen de portada',upload_to='cursos/imagenes/', null=True, default='cursos/imagenes/sparta_img.jpg')
   state = models.BooleanField('Estivar/desactivar',default = True, help_text="Si desactiva el curso este no se mostrara en la pagina principal")
-  horarios = models.ManyToManyField(Horario, through='CursoHorario')
+  horarios = models.ManyToManyField(Horario, through='CursoHorario',)
   pagos_cuotas = models.ManyToManyField(Usuarios, through='PagoCuota', related_name='pagos')
   asistencias = models.ManyToManyField(Usuarios, through='Asistencia', related_name='asistencias')
   
@@ -101,7 +101,6 @@ class PagoCuota(models.Model):
     self.monto_final = self.curso.costo
     if self.recargo == True:
       self.monto_final += 200 
-    print(self.monto_final)
     super().save(*args,**kwargs)
 
 
@@ -136,15 +135,25 @@ class CursoHorario(models.Model):
   dia = models.CharField(max_length=200, choices=dias)
   
   def full_clean(self, exclude=None, validate_unique=True, validate_constraints=True):
-    super().full_clean()
-    cupo = self.cupo
-    filtro = CursoHorario.objects.exclude(id=self.id).filter(curso=self.curso,
-    dia=self.dia,
-    horario = self.horario)
-    if filtro.exists():
-      raise ValidationError('Este Curso ya tiene registrado este horario')
-    if cupo <= 0:
-      raise ValidationError('No hay mas cupos libres para este horario')
+    errors = {}
+    if self.curso.id:
+      try:
+        super().full_clean()
+      except ValidationError as e:
+        errors = e.update_error_dict(errors)
+    if getattr(self,'horario',None):
+      filtro = CursoHorario.objects.exclude(id=self.id).filter(curso=self.curso,
+      dia=self.dia,
+      horario = self.horario)
+      if filtro.exists():
+        errors = {**errors,'curso': ValidationError('Este Curso ya tiene registrado este horario')}
+    else:
+      errors = {**errors,'horario': ValidationError('Asigne un horario')}
+    if self.cupo <= 0:
+      errors = {**errors,'cupo': ValidationError('No hay mas cupos libres para este horario')}   
+    if errors:
+      raise ValidationError(errors)
+      
 
 @receiver(post_delete, sender=CursoHorario, dispatch_uid="create_elimniar_reserva")
 def eliminar_reserva(sender, instance, **kwargs):
