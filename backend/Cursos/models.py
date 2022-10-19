@@ -149,19 +149,11 @@ class CursoHorario(models.Model):
         errors = {**errors,'curso': ValidationError('Este Curso ya tiene registrado este horario')}
     else:
       errors = {**errors,'horario': ValidationError('Asigne un horario')}
-    if self.cupo <= 0:
+    if self.cupo == 0:
       errors = {**errors,'cupo': ValidationError('No hay mas cupos libres para este horario')}   
     if errors:
       raise ValidationError(errors)
       
-
-@receiver(post_delete, sender=CursoHorario, dispatch_uid="create_elimniar_reserva")
-def eliminar_reserva(sender, instance, **kwargs):
-  cup = instance.cupo 
-  if cup == 0:
-    instance.cupo +1
-    instance.save()
-
 
 class Asistencia(models.Model):
   usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE, null=False, blank=False)

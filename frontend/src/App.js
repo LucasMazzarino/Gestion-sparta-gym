@@ -18,10 +18,12 @@ import Estadisticas from './containers/paginas/Estadisticas';
 
 import { connect } from 'react-redux';
 
+import RutaProtegida from './components/RutaProtegida';
+
 
 
 const App = ({
-  
+  staff
 }) =>{
   return ( 
       <Router>
@@ -42,16 +44,18 @@ const App = ({
           <Route exact path='/cursos/:cursoId' element={<CursoDetail/>} /> 
 
           {/*reserva de horario */}
-          <Route exact path='/reservas' element={<ReservaHorario/>}></Route>
+          <Route exact path='/reservas' element={<RutaProtegida/>}></Route>
           {/*graficos*/}
-          <Route exact path='/estadisticas' element={<Estadisticas/>}></Route>
+          <Route exact path='/estadisticas' element={<RutaProtegida/>}>
+            <Route path='/estadisticas' element={<Estadisticas/>}/>
+          </Route>
         </Routes>
       </Router>      
   );
 }
 
 const mapStateToProps = state => ({
-  
+  staff: state.Auth.staff
 })
 
 export default connect(mapStateToProps,{

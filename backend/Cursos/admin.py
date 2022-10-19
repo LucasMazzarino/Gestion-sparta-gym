@@ -88,7 +88,11 @@ class ReservasUsuariosInline(admin.TabularInline):
             if db_field.name == 'usuario':
                 cursohorario_id = request.resolver_match.kwargs.get('object_id', None)
                 if cursohorario_id:
-                    kwargs['queryset'] = Usuarios.objects.exclude(is_active=False,is_superuser=True).filter(cursos__cursohorario=cursohorario_id)
+                    kwargs['queryset'] = Usuarios.objects.exclude(
+                        is_active=False).exclude(
+                        is_superuser=True).exclude(
+                        is_staff=True).filter(
+                        cursos__cursohorario=cursohorario_id)
                 else:
                     kwargs['queryset'] = Usuarios.objects.none()
             return super(ReservasUsuariosInline, self).formfield_for_foreignkey(db_field, request, **kwargs)
@@ -103,16 +107,6 @@ class CursoAdmin(admin.ModelAdmin):
     ordering = ['nombre']
     inlines = (CursoHorarioInline,PagoCuotaInline,AsistenciaInline)
     readonly_fields = ('ingresos','lista_de_ingresos_mensuales')
-    # fieldsets = (
-    #     (None,{'fields':('usuarios',)}),
-    #     (_,{'fields':('nombre','costo', 'descripcion','imagen','state','ingresos','lista_de_ingresos_mensuales')}),
-    # )
-    # add_fieldsets =(
-    #     (None,{
-    #         'classes':('wide',),
-    #         'fields':('usuarios','nombre','costo','imagen','state'),
-    #     }),
-    # )
 
     def lista_de_ingresos_mensuales(self, obj):
         ingresos = obj.ingresos_mensuales

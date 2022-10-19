@@ -1,20 +1,19 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+
+import { Fragment, useState } from 'react';
 
 import Alert from '../alert';
-import { Link } from 'react-router-dom';
-import { Navigate } from 'react-router';
+import { Link, Navigate } from 'react-router-dom';
 
 import { logout } from '../../redux/actions/auth';
 
 import { connect } from 'react-redux';
-import { Fragment, useState } from 'react';
+
 import Logo from '../../imagenes/Sparta Logo.jfif';
-
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-
 import Login from '../../containers/auth/Login';
 
 
@@ -33,19 +32,18 @@ function Navegacion({
   const handleShow = () => setShow(true);
   const logoutHandler = () => {
     logout()
-    return <Navigate to='/' />;
+    setRedirect(true)
   }
-  //decidir como hacer esto
-  // if (redirect){
-  //   window.location.reload(false)
-  //   return <Navigate to='/' />;
-  // }
+
+   if (redirect){
+     return <Navigate to='/' />;
+   }
 
 
   const isStafflinks = (
     <Fragment>
         <span className='pBienvenidoAdministrador'>Bienvenido administrador!</span>
-        <Link to="/estadisticas" className="btn btn-success text-center">
+        <Link to="/estadisticas" id='estadis' className="btn btn-info text-center ">
         Ver estadisticas
         </Link>
     </Fragment>
@@ -67,7 +65,7 @@ function Navegacion({
           staff ? isStafflinks: isNoStafflinks
         }
       </Fragment>
-    <button onClick={logoutHandler} className="btn btn-link"> Cerrar sesión</button>    
+    <Button onClick={logoutHandler} className="btn-logout" variant='success'> Cerrar sesión</Button>    
     </Fragment>
   )
 

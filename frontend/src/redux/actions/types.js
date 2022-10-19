@@ -4,7 +4,7 @@ export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
 
 /*loadin*/ 
-export const SET_AUTH_LOADING = 'SET_AUTH_LOADING';
+export const SET_AUTENTICACION_CARGANDO = 'SET_AUTENTICACION_CARGANDO';
 export const REMOVE_AUTH_LOADING = 'REMOVE_AUTH_LOADING';
 
 

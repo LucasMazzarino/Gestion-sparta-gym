@@ -1,7 +1,7 @@
  import { 
   	LOGIN_SUCCESS,
   	LOGIN_FAIL,
-  	SET_AUTH_LOADING,
+  	SET_AUTENTICACION_CARGANDO,
   	REMOVE_AUTH_LOADING,
   	USER_LOADED_SUCCESS,
   	USER_LOADED_FAIL,
@@ -56,7 +56,7 @@ export const load_user = () => async dispatch => {
 
 export const login = (documento, password) => async dispatch => {
   dispatch({
-      type: SET_AUTH_LOADING
+      type: SET_AUTENTICACION_CARGANDO
   });
 
   const config = {
@@ -181,7 +181,7 @@ export const check_authenticated = () => async dispatch => {
 
 export const reset_password = (email) => async dispatch => {
     dispatch({
-        type: SET_AUTH_LOADING
+        type: SET_AUTENTICACION_CARGANDO
     });
 
     const config = {
@@ -233,7 +233,7 @@ export const logout = () => dispatch => {
 
 export const confirm_reset_password = (uid, token, new_password, re_new_password) => async dispatch => {
     dispatch({
-        type: SET_AUTH_LOADING
+        type: SET_AUTENTICACION_CARGANDO
     });
 
     const config = {

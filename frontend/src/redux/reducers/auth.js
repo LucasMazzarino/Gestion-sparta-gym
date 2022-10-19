@@ -1,7 +1,7 @@
 import {
   LOGIN_SUCCESS,
   LOGIN_FAIL, 
-  SET_AUTH_LOADING,
+  SET_AUTENTICACION_CARGANDO,
   REMOVE_AUTH_LOADING,
   USER_LOADED_SUCCESS,
   USER_LOADED_FAIL,
@@ -32,7 +32,7 @@ import {
     const {type, payload} = action;
 
     switch(type) {
-        case SET_AUTH_LOADING:
+        case SET_AUTENTICACION_CARGANDO:
             return {
                 ...state,
                 loading: true

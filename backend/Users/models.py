@@ -46,8 +46,8 @@ class Usuarios(AbstractBaseUser, PermissionsMixin):
   documento = models.IntegerField(unique=True, null=False, blank=False, help_text="Ingrese su Cedula o su DNI",)
   email = models.EmailField(max_length=250, unique=True)
   direccion = models.CharField(max_length=250)
-  is_active = models.BooleanField(default=True, help_text="Si desactiva al usuario, no podra agregarle pagos, asistencias, ni asignarlo a un Curso o horario")
-  is_staff = models.BooleanField(default=False)
+  is_active = models.BooleanField('Esta activo',default=True, help_text="Si desactiva al usuario, no podra agregarle pagos, asistencias, ni asignarlo a un Curso o horario")
+  is_staff = models.BooleanField('Es del Staff?',default=False)
   reservas = models.ManyToManyField(to='Cursos.CursoHorario', through='ReservaUsuarios', blank=True, related_name='reserva')
   
   objects = UsuarioManager()
