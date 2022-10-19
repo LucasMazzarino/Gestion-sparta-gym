@@ -38,7 +38,7 @@ class Horario(models.Model):
 class Curso(models.Model):
   id = models.AutoField(primary_key=True)
   usuarios = models.ManyToManyField(Usuarios, related_name='cursos')
-  nombre = models.CharField(max_length=250)
+  nombre = models.CharField(max_length=250, unique=True)
   costo = models.PositiveSmallIntegerField(default=0)
   descripcion = RichTextField(blank=True, null=True)  
   imagen = models.ImageField('Imagen de portada',upload_to='cursos/imagenes/', null=True, default='cursos/imagenes/sparta_img.jpg')
@@ -52,6 +52,8 @@ class Curso(models.Model):
       raise ValidationError("Ya existe un curso con este nombre")
     elif Curso.objects.exclude(id=self.id).filter(nombre=self.nombre):
        raise ValidationError("Ya existe un curso con este nombre")
+
+
 
   @property
   def ingresos(self):

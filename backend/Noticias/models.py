@@ -20,7 +20,7 @@ class Noticia(models.Model):
   )
   
   #Esta es la noticia
-  titulo = models.CharField(max_length = 250)
+  titulo = models.CharField(max_length = 250, unique=True)
   imagen = models.ImageField('Imagen Noticia',upload_to='noticias/imagenes/', null=True)
   descripcion = RichTextField(blank=True,null=True)
   publicado = models.DateTimeField(default=timezone.now) 
