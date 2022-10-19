@@ -85,14 +85,6 @@ class PagoCuota(models.Model):
     txt = "{0} (Pago: $ {1} del Curso {2})"
     return txt.format(self.usuario, self.monto_final, self.curso)
 
-  # @property
-  # def monto(self):
-  #   monto = self.curso.costo
-  #   if self.dia_de_pago.day > 10:
-  #     monto+= 500
-  #     return monto
-  #   return monto
-
   def full_clean(self, exclude=None, validate_unique=True, validate_constraints=True):
       super().full_clean()
       curso = self.curso.usuarios.all() 

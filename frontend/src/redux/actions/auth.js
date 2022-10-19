@@ -2,18 +2,18 @@
   	LOGIN_SUCCESS,
   	LOGIN_FAIL,
   	SET_AUTENTICACION_CARGANDO,
-  	REMOVE_AUTH_LOADING,
-  	USER_LOADED_SUCCESS,
-  	USER_LOADED_FAIL,
+  	REMOVE_AUTENTICACION_CARGANDO,
+  	USUARIO_CARGADO_SUCCES,
+  	USUARIO_CARGADO_FAIL,
     REFRESH_SUCCESS,
     REFRESH_FAIL,
-    AUTHENTICATED_FAIL,
-    AUTHENTICATED_SUCCESS,
+    AUTHENTICACION_FAIL,
+    AUTHENTICACION_SUCCESS,
     LOGOUT,
-    RESET_PASSWORD_SUCCESS,
-    RESET_PASSWORD_FAIL,
-    CONFIRM_RESET_PASSWORD__SUCCESS,
-    CONFIRM_RESET_PASSWORD__FAIL,
+    RESETEO_PASSWORD_SUCCESS,
+    RESETEO_PASSWORD_FAIL,
+    CONFIRMACION_RESETEO_PASSWORD_SUCCESS,
+    CONFIRMACION_RESETEO_PASSWORD_FAIL,
 } from './types'
 import { setAlert } from './alert';
 import axios from 'axios'
@@ -33,23 +33,23 @@ export const load_user = () => async dispatch => {
       
           	if (res.status === 200) {
               dispatch({
-                  type: USER_LOADED_SUCCESS,
+                  type: USUARIO_CARGADO_SUCCES,
                   payload: res.data
               });
           	} else {
 				dispatch({
-				type:USER_LOADED_FAIL
+				type:USUARIO_CARGADO_FAIL
           		});
       		}
 		}
       	catch(err){
           dispatch({
-              type: USER_LOADED_FAIL
+              type: USUARIO_CARGADO_FAIL
           	});
       	}
   	} else {
       dispatch({
-          type: USER_LOADED_FAIL
+          type: USUARIO_CARGADO_FAIL
       });
   }
 }
@@ -80,7 +80,7 @@ export const login = (documento, password) => async dispatch => {
           });
 		  dispatch(load_user());
           dispatch({
-              type: REMOVE_AUTH_LOADING
+              type: REMOVE_AUTENTICACION_CARGANDO
           });
           dispatch(setAlert('Inicio de sesión con éxito', 'success'));             
       } else {
@@ -88,7 +88,7 @@ export const login = (documento, password) => async dispatch => {
               type: LOGIN_FAIL
           });
           dispatch({
-              type: REMOVE_AUTH_LOADING
+              type: REMOVE_AUTENTICACION_CARGANDO
           });
           dispatch(setAlert('Error al iniciar sesion.', 'danger'));
       }
@@ -98,7 +98,7 @@ export const login = (documento, password) => async dispatch => {
           type: LOGIN_FAIL
       });
       dispatch({
-          type: REMOVE_AUTH_LOADING
+          type: REMOVE_AUTENTICACION_CARGANDO
       });
       dispatch(setAlert('Error al iniciar sesion. Datos incorrectos', 'danger'));
   }
@@ -160,21 +160,21 @@ export const check_authenticated = () => async dispatch => {
 
             if (res.status === 200) {
                 dispatch({
-                    type: AUTHENTICATED_SUCCESS
+                    type: AUTHENTICACION_SUCCESS
                 });
             } else {
                 dispatch({
-                    type: AUTHENTICATED_FAIL
+                    type: AUTHENTICACION_FAIL
                 });
             }
         } catch(err){
             dispatch({
-                type: AUTHENTICATED_FAIL
+                type: AUTHENTICACION_FAIL
             });
         }
     } else {
         dispatch({
-            type: AUTHENTICATED_FAIL
+            type: AUTHENTICACION_FAIL
         });
     }
 }
@@ -197,28 +197,28 @@ export const reset_password = (email) => async dispatch => {
         
         if (res.status === 204) {
             dispatch({
-                type: RESET_PASSWORD_SUCCESS
+                type: RESETEO_PASSWORD_SUCCESS
             });
             dispatch({
-                type: REMOVE_AUTH_LOADING
+                type: REMOVE_AUTENTICACION_CARGANDO
             });
             dispatch(setAlert('Email para resetar la contraseña fue enviado', 'success'));
         } else {
             dispatch({
-                type: RESET_PASSWORD_FAIL
+                type: RESETEO_PASSWORD_FAIL
             });
             dispatch({
-                type: REMOVE_AUTH_LOADING
+                type: REMOVE_AUTENTICACION_CARGANDO
             });
             dispatch(setAlert('Error al enviar el correo', 'danger'));
         }
     }
     catch(err){
         dispatch({
-            type: RESET_PASSWORD_FAIL
+            type: RESETEO_PASSWORD_FAIL
         });
         dispatch({
-            type: REMOVE_AUTH_LOADING
+            type: REMOVE_AUTENTICACION_CARGANDO
         });
         dispatch(setAlert('Error al enviar el correo', 'danger'));
     }
@@ -251,10 +251,10 @@ export const confirm_reset_password = (uid, token, new_password, re_new_password
 
     if (new_password !== re_new_password) {
         dispatch({
-            type: CONFIRM_RESET_PASSWORD__FAIL
+            type: CONFIRMACION_RESETEO_PASSWORD_FAIL
         });
         dispatch({
-            type: REMOVE_AUTH_LOADING
+            type: REMOVE_AUTENTICACION_CARGANDO
         });
         dispatch(setAlert('Las contraseñas no coinciden', 'danger'));
     } else {
@@ -263,27 +263,27 @@ export const confirm_reset_password = (uid, token, new_password, re_new_password
         
             if (res.status === 204) {
                 dispatch({
-                    type: CONFIRM_RESET_PASSWORD__SUCCESS
+                    type: CONFIRMACION_RESETEO_PASSWORD_SUCCESS
                 });
                 dispatch({
-                    type: REMOVE_AUTH_LOADING
+                    type: REMOVE_AUTENTICACION_CARGANDO
                 });
                 dispatch(setAlert('Tu contraseña se reseteo', 'success'));
             } else {
                 dispatch({
-                    type: CONFIRM_RESET_PASSWORD__FAIL
+                    type: CONFIRMACION_RESETEO_PASSWORD_FAIL
                 });
                 dispatch({
-                    type: REMOVE_AUTH_LOADING
+                    type: REMOVE_AUTENTICACION_CARGANDO
                 });
                 dispatch(setAlert('Error al cambiar la contraseña', 'danger'));
             }
         } catch(err){
             dispatch({
-                type: CONFIRM_RESET_PASSWORD__FAIL
+                type: CONFIRMACION_RESETEO_PASSWORD_FAIL
             });
             dispatch({
-                type: REMOVE_AUTH_LOADING
+                type: REMOVE_AUTENTICACION_CARGANDO
             });
             dispatch(setAlert('Error al cambiar la contraseña', 'danger'));
         }

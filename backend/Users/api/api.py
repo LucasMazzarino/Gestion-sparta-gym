@@ -35,11 +35,11 @@ class ReservaUsuariosViewset(viewsets.ModelViewSet):
 		return CrearReservaUsuarioSerializer
 	
 	def destroy(self, request, *args, **kwargs):
-			instance = self.get_object()
-			self.perform_destroy(instance)
-			instance.curso_horario.cupo += 1
-			instance.curso_horario.save()
-			return Response({'status' : 'Reserva Eliminada'})
+		instance = self.get_object()
+		self.perform_destroy(instance)
+		instance.curso_horario.cupo += 1
+		instance.curso_horario.save()
+		return Response({'status' : 'Reserva Eliminada'})
 	
 
 

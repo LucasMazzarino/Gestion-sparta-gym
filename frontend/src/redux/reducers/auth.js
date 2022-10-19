@@ -2,18 +2,18 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL, 
   SET_AUTENTICACION_CARGANDO,
-  REMOVE_AUTH_LOADING,
-  USER_LOADED_SUCCESS,
-  USER_LOADED_FAIL,
+  REMOVE_AUTENTICACION_CARGANDO,
+  USUARIO_CARGADO_SUCCES,
+  USUARIO_CARGADO_FAIL,
   REFRESH_SUCCESS,
 	REFRESH_FAIL,
-  AUTHENTICATED_SUCCESS,
-  AUTHENTICATED_FAIL,
+  AUTHENTICACION_SUCCESS,
+  AUTHENTICACION_FAIL,
   LOGOUT,
-  RESET_PASSWORD_SUCCESS,
-  RESET_PASSWORD_FAIL,
-  CONFIRM_RESET_PASSWORD__SUCCESS,
-  CONFIRM_RESET_PASSWORD__FAIL,
+  RESETEO_PASSWORD_SUCCESS,
+  RESETEO_PASSWORD_FAIL,
+  CONFIRMACION_RESETEO_PASSWORD_SUCCESS,
+  CONFIRMACION_RESETEO_PASSWORD_FAIL,
  } from '../actions/types'
 
   const initialState = {
@@ -37,12 +37,12 @@ import {
                 ...state,
                 loading: true
             }
-        case REMOVE_AUTH_LOADING:
+        case REMOVE_AUTENTICACION_CARGANDO:
             return {
                 ...state,
                 loading: false
             }
-        case USER_LOADED_SUCCESS:
+        case USUARIO_CARGADO_SUCCES:
           localStorage.setItem('id',payload.id)
             return {
                 ...state,
@@ -51,17 +51,17 @@ import {
                 cursos_usuario:payload.cursos,
                 id:payload.id
             }
-        case USER_LOADED_FAIL:
+        case USUARIO_CARGADO_FAIL:
             return {
                 ...state,
                 user: null
             }
-        case AUTHENTICATED_SUCCESS:
+        case AUTHENTICACION_SUCCESS:
           return {
               ...state,
               isAuthenticated: true
           }
-        case AUTHENTICATED_FAIL:
+        case AUTHENTICACION_FAIL:
             localStorage.removeItem('access');
             localStorage.removeItem('refresh');
           return {
@@ -80,10 +80,10 @@ import {
             refresh:localStorage.getItem('refresh'),
             id:localStorage.getItem('id'),
           }
-        case RESET_PASSWORD_SUCCESS:
-        case RESET_PASSWORD_FAIL:
-        case CONFIRM_RESET_PASSWORD__SUCCESS:
-        case CONFIRM_RESET_PASSWORD__FAIL:
+        case RESETEO_PASSWORD_SUCCESS:
+        case RESETEO_PASSWORD_FAIL:
+        case CONFIRMACION_RESETEO_PASSWORD_SUCCESS:
+        case CONFIRMACION_RESETEO_PASSWORD_FAIL:
           return {
             ...state
           }

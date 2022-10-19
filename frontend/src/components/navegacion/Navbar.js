@@ -38,9 +38,7 @@ function Navegacion({
     setRedirect(true)
   }
 
-  // console.log(ubicacion.pathname)
-  if (redirect && ubicacion.pathname != '/'){
-    console.log('hola desde if 1',ubicacion.pathname)
+  if (redirect && ubicacion.pathname !== '/'){
      return <Navigate to='/'/>;
   }
 
@@ -97,7 +95,7 @@ function Navegacion({
     <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
       <Container>
         <Link to='/'>
-           <img src={Logo} width='70' height='50'></img>         
+           <img src={Logo} width='70' height='50' alt="Logo"></img>         
         </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

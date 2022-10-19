@@ -1,8 +1,6 @@
 from rest_framework import serializers
 from Cursos.models import Curso,Horario, CursoHorario
 
-
-
 class HorarioSerializer(serializers.ModelSerializer):
   class Meta:
     model = Horario
