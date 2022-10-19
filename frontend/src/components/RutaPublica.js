@@ -3,12 +3,12 @@ import React from 'react';
 import {Navigate, Outlet} from 'react-router-dom'
 import { connect } from 'react-redux';
 
-const RutasProtegidas=({
+const RutasPublicas=({
   user
 }) => {
   const auth = user
   return(
-    auth? <Outlet/> : <Navigate to="/"/>
+    auth? <Navigate to="/"/> :  <Outlet/> 
   )
 }
 
@@ -19,4 +19,4 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps,{
   
-}) (RutasProtegidas)
+}) (RutasPublicas)

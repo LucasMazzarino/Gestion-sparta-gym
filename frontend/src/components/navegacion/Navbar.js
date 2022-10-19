@@ -7,7 +7,7 @@ import Modal from 'react-bootstrap/Modal';
 import { Fragment, useState } from 'react';
 
 import Alert from '../alert';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useLocation} from 'react-router-dom';
 
 import { logout } from '../../redux/actions/auth';
 
@@ -28,16 +28,21 @@ function Navegacion({
   const [redirect, setRedirect] = useState(false);
   const [show, setShow] = useState(false);
 
+  const ubicacion = useLocation()
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
   const logoutHandler = () => {
     logout()
     setRedirect(true)
   }
 
-   if (redirect){
-     return <Navigate to='/' />;
-   }
+  // console.log(ubicacion.pathname)
+  if (redirect && ubicacion.pathname != '/'){
+    console.log('hola desde if 1',ubicacion.pathname)
+     return <Navigate to='/'/>;
+  }
 
 
   const isStafflinks = (
