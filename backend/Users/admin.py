@@ -21,7 +21,7 @@ class UserAdmin(BaseUserAdmin):
 	list_per_page= 30
 	fieldsets = (
 		(None,{'fields':('documento',)}),
-		(_('Informacion personal'),{'fields':('nombre','apellido', 'direccion','email',)}),
+		(_('Informacion personal'),{'fields':('nombre','apellido', 'direccion','email','telefono')}),
 		(
 				_('Permissions'),
 				{'fields':('is_active', 'is_staff')}
@@ -30,7 +30,7 @@ class UserAdmin(BaseUserAdmin):
 	add_fieldsets = (
 		(None,{
 				'classes':('wide',),
-				'fields':('documento','nombre','apellido','direccion','email','password1', 'password2',)
+				'fields':('documento','nombre','apellido','direccion','email','telefono','password1', 'password2',)
 		}),
 	)
 	def render_change_form(self, request, context, add=False, change=False, form_url='', obj=None):

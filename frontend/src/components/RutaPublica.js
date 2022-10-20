@@ -4,9 +4,9 @@ import {Navigate, Outlet} from 'react-router-dom'
 import { connect } from 'react-redux';
 
 const RutasPublicas=({
-  user
+  token
 }) => {
-  const auth = user
+  const auth = token
   return(
     auth? <Navigate to="/"/> :  <Outlet/> 
   )
@@ -14,7 +14,7 @@ const RutasPublicas=({
 
 
 const mapStateToProps = state => ({
-  user: state.Auth.user
+  token: state.Auth.refresh
 })
 
 export default connect(mapStateToProps,{

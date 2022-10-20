@@ -202,8 +202,7 @@ class AsistenciaAdmin(admin.ModelAdmin):
 			context.update({
 				'show_save_and_continue': False,		
 		})
-			return super().render_change_form(request, context, add, change, form_url, obj)
-	
+			return super().render_change_form(request, context, add, change, form_url, obj)	
 
 admin.site.site_header = 'Administracion Sparta Gym'
 admin.site.index_title = 'Panel de control Sparta'

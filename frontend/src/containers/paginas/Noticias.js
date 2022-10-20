@@ -56,14 +56,12 @@ const Noticias = ({
 	
 	return (
 		<Layout>
-			<section className='Noticias'>
 				<h1>Blog de Noticias</h1>
-				<Container>
+				<Container className='allNoticias'>
 					<Row md={1}>
 						{mostrarNoticias()}
 					</Row>
 				</Container>
-			</section>
 		</Layout>
 	)
 }

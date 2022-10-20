@@ -10,6 +10,7 @@ from django.core.exceptions import ValidationError
 
 
 
+
 class UsuarioManager(BaseUserManager):
 
   def create_user(self, nombre, apellido, documento, email, direccion, password=None, **extra_filds):
@@ -46,6 +47,8 @@ class Usuarios(AbstractBaseUser, PermissionsMixin):
   documento = models.IntegerField(unique=True, null=False, blank=False, help_text="Ingrese su Cedula o su DNI",)
   email = models.EmailField(max_length=250, unique=True)
   direccion = models.CharField(max_length=250)
+  telefonoRegex = RegexValidator(regex = r"^\+?1?\d{9,15}$")
+  telefono =  models.CharField(validators = [telefonoRegex], max_length = 16, null= True, blank=True,)
   is_active = models.BooleanField('Esta activo',default=True, help_text="Si desactiva al usuario, no podra agregarle pagos, asistencias, ni asignarlo a un Curso o horario")
   is_staff = models.BooleanField('Es del Staff?',default=False)
   reservas = models.ManyToManyField(to='Cursos.CursoHorario', through='ReservaUsuario', blank=True, related_name='reserva')

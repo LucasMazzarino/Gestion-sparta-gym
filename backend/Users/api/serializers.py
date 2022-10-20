@@ -34,7 +34,7 @@ class PartialReservaUsuariosSerializer(serializers.ModelSerializer):
 
 # serializador para listar las reservas de un usuario
 class ListaReservasUsuariosSerializer(serializers.ModelSerializer):
-  reservas = PartialReservaUsuariosSerializer(source='reservausuarios_set',many=True,)
+  reservas = PartialReservaUsuariosSerializer(source='reservausuario_set',many=True,)
   class Meta:
     model=Usuarios
     fields = ('reservas',)

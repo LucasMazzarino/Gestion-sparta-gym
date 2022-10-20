@@ -12,8 +12,9 @@ import ResetPassword from './containers/auth/ResetPassword';
 import ConfirmResetPassword from './containers/auth/ConfirmResetPassword';
 import Error404 from './containers/errors/Error404';  
 import Estadisticas from './containers/paginas/Estadisticas';
-import RutasProtegidas from './components/RutaProtegida';
+import RutasAdmin from './components/RutaAdmin';
 import RutaPublica from './components/RutaPublica';
+import RutaCliente from './components/RutaCliente';
 
 
 
@@ -27,21 +28,24 @@ const App = () => {
           <Route path='/Cursos' element={<Cursos/>}/>
           <Route path='/Noticias' element={<Noticias/>}/>
           <Route path='/Contacto' element={<Contacto/>}/>
-          <Route path='/Galeria' element={<Galeria/>}/>
-          <Route exact path='/cursos/:cursoId' element={<CursoDetail/>}/> 
-          {/*detalle Curso */}
+          <Route path='/Galeria' element={<Galeria/>}/>   
+          <Route exact path='/cursos/:cursoId' element={<CursoDetail/>}/>
+          <Route exact path='/password/reset/confirm/:uid/:token' element={<ConfirmResetPassword/>} />
+          {/*Rutas publicas*/}
           <Route element={<RutaPublica/>}>
             <Route exact path='/reset_password' element={<ResetPassword/>} />
           </Route>     
-          {/*Rutas protegidas*/}
-          {/*reserva de horario */}
+          {/*Rutas administrador*/}
           {/*graficos*/}
           {/*autenticacion */}
-          <Route element={<RutasProtegidas/>}>
-            <Route exact path='/reservas' element={<ReservaHorario/>}/>
+          <Route element={<RutasAdmin/>}>
             <Route exact path='/estadisticas' element={<Estadisticas/>}/>          
           </Route>
-          <Route exact path='/password/reset/confirm/:uid/:token' element={<ConfirmResetPassword/>} />
+          {/*Rutas cliente*/}
+          {/*reserva de horario */}
+          <Route element={<RutaCliente/>}>
+            <Route exact path='/reservas' element={<ReservaHorario/>}/>          
+          </Route>
       </Routes>
       </Router>      
   );

@@ -12,7 +12,7 @@ from Users.api.serializers import UsuariosSerializer, UsuariosPartialSerializer,
 
 class UsuariosViewSet(viewsets.ViewSet):
   
-	permission_classes = (IsAuthenticated,)
+	
 	def list(self, request):
 		queryset = Usuarios.objects.all()
 		serializer = UsuariosSerializer(queryset, many=True)

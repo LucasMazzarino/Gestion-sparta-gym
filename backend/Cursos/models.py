@@ -20,11 +20,9 @@ class Horario(models.Model):
       raise ValidationError('Complete los campos')
     elif self.horaInicio >= self.horaFin:
       raise ValidationError("La hr de inicio debe ser menor a la hr de fin")
-    elif Horario.objects.filter(horaInicio=self.horaInicio,
+    elif Horario.objects.exclude(id=self.id).filter(horaInicio=self.horaInicio,
      horaFin=self.horaFin).exists():
      raise ValidationError("Este horario ya existe")
-
-
 
   class Meta:
    verbose_name = 'Horario'
@@ -32,7 +30,7 @@ class Horario(models.Model):
 
   def __str__(self):
      txt = "De {0} a {1} horas"
-     return txt.format(self.horaInicio, self.horaFin)
+     return txt.format(self.horaInicio.isoformat(timespec='minutes'), self.horaFin.isoformat(timespec='minutes'))
 
 
 class Curso(models.Model):
@@ -52,8 +50,6 @@ class Curso(models.Model):
       raise ValidationError("Ya existe un curso con este nombre")
     elif Curso.objects.exclude(id=self.id).filter(nombre=self.nombre):
        raise ValidationError("Ya existe un curso con este nombre")
-
-
 
   @property
   def ingresos(self):
@@ -151,6 +147,9 @@ class CursoHorario(models.Model):
   def __str__(self):
     txt = "{0} el dia {1} {2}"
     return txt.format(self.curso ,self.dia, self.horario)
+  
+  class Meta:
+    ordering = ['dia',]
       
 
 class Asistencia(models.Model):

@@ -311,15 +311,17 @@ Footer #Derechos{
   width: 700px;
   height: 300px;
 }
+.seccionNoticias{
+  margin-bottom:5% ;
+}
 
 .Noticias{
   align-items: center;
-  padding-left: 140px;
 }
 
 #Noticia{
-  margin-left: 15%;
-  margin-right: 15%;
+  justify-content: center;
+  align-items: center;
 }
 
 .fechaPosteo{
@@ -359,9 +361,17 @@ canvas{
   left: 16%;
   align-items: center;
   justify-content: center;
- 
 } 
 
+div.grupoHorario.list-group{
+  border: 5px;
+  border-color: #3c829e;
+  border-style: solid;
+  margin-bottom: 5%;
+}
+div.list-group-item{
+ text-decoration: underline black;
+}
 
 
 
