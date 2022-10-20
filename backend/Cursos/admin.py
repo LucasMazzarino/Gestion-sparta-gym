@@ -3,16 +3,15 @@ from django.contrib.auth.models import Group
 from django.utils.translation import gettext as _
 
 from .models import Horario, Curso, CursoHorario, PagoCuota, Asistencia
-from Users.models import Usuarios,ReservaUsuarios
+from Users.models import Usuarios,ReservaUsuario
 from django.utils.html import format_html_join
-
+			
 
 class PagoCuotaInline(admin.TabularInline):
 	model = PagoCuota
 	fields = ('usuario','dia_de_pago','recargo')
 	extra = 1
 	list_filter = ('dia_de_pago',)
-	
 
 	def formfield_for_foreignkey(self, db_field, request, **kwargs):
 		if db_field.name == 'usuario':
@@ -77,7 +76,7 @@ class CursoHorarioInline(admin.TabularInline):
 
 
 class ReservasUsuariosInline(admin.TabularInline):
-	model = ReservaUsuarios
+	model = ReservaUsuario
 	extra = 1
 	fields =('usuario',)
 
@@ -118,6 +117,13 @@ class CursoAdmin(admin.ModelAdmin):
 					is_active=False).exclude(
 					is_staff=True)
 		return super().formfield_for_manytomany(db_field, request, **kwargs)
+	
+	def render_change_form(self, request, context, add=False, change=False, form_url='', obj=None):
+			context.update({
+					'show_save_and_continue': False,
+					'show_save_and_add_another': False 
+			})
+			return super().render_change_form(request, context, add, change, form_url, obj)
 
     
 @admin.register(CursoHorario)
@@ -138,13 +144,20 @@ class CursoHorarioAdmin(admin.ModelAdmin):
 			form.base_fields['curso'].widget.can_change_related = False
 			form.base_fields['horario'].widget.can_change_related = False
 			return form
+	
+	def render_change_form(self, request, context, add=False, change=False, form_url='', obj=None):
+			context.update({
+				'show_save_and_add_another': False 
+		})
+			return super().render_change_form(request, context, add, change, form_url, obj)
+	
     
 
 @admin.register(PagoCuota)
 class PagoCuotaAdmin(admin.ModelAdmin):
 	model = PagoCuota
 	fields = ('curso','usuario','dia_de_pago','recargo')
-	list_filter = ('dia_de_pago','usuario','curso')
+	list_filter = ('curso','usuario','recargo')
 	list_per_page= 30
 
 	def get_form(self, request, obj=None, **kwargs):  
@@ -158,6 +171,12 @@ class PagoCuotaAdmin(admin.ModelAdmin):
 		form.base_fields['curso'].widget.can_add_related = False
 		form.base_fields['curso'].widget.can_change_related = False
 		return form
+	
+	def render_change_form(self, request, context, add=False, change=False, form_url='', obj=None):
+			context.update({
+				'show_save_and_add_another': False 
+		})
+			return super().render_change_form(request, context, add, change, form_url, obj)
 	
 
 @admin.register(Asistencia)
@@ -178,6 +197,12 @@ class AsistenciaAdmin(admin.ModelAdmin):
 		form.base_fields['curso'].widget.can_add_related = False
 		form.base_fields['curso'].widget.can_change_related = False
 		return form
+	
+	def render_change_form(self, request, context, add=False, change=False, form_url='', obj=None):
+			context.update({
+				'show_save_and_continue': False,		
+		})
+			return super().render_change_form(request, context, add, change, form_url, obj)
 	
 
 admin.site.site_header = 'Administracion Sparta Gym'

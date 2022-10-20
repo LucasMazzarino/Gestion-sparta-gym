@@ -48,7 +48,7 @@ class Usuarios(AbstractBaseUser, PermissionsMixin):
   direccion = models.CharField(max_length=250)
   is_active = models.BooleanField('Esta activo',default=True, help_text="Si desactiva al usuario, no podra agregarle pagos, asistencias, ni asignarlo a un Curso o horario")
   is_staff = models.BooleanField('Es del Staff?',default=False)
-  reservas = models.ManyToManyField(to='Cursos.CursoHorario', through='ReservaUsuarios', blank=True, related_name='reserva')
+  reservas = models.ManyToManyField(to='Cursos.CursoHorario', through='ReservaUsuario', blank=True, related_name='reserva')
   
   objects = UsuarioManager()
 
@@ -68,17 +68,17 @@ class Usuarios(AbstractBaseUser, PermissionsMixin):
     
   
 
-class ReservaUsuarios(models.Model):
+class ReservaUsuario(models.Model):
   usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
   curso_horario = models.ForeignKey(to='Cursos.CursoHorario', on_delete=models.CASCADE)
 
   def validate_unique(self, *args, **kwargs):
-    filtro_dia = ReservaUsuarios.objects.exclude(id=self.id).filter(
+    filtro_dia = ReservaUsuario.objects.exclude(id=self.id).filter(
         usuario_id = self.usuario_id,
         curso_horario__curso__nombre = self.curso_horario.curso.nombre,
         curso_horario__dia = self.curso_horario.dia,
     ).exists()
-    filto_curso = ReservaUsuarios.objects.exclude(id=self.id).filter(
+    filto_curso = ReservaUsuario.objects.exclude(id=self.id).filter(
         usuario_id = self.usuario_id,
         curso_horario__curso__nombre = self.curso_horario.curso.nombre,
         curso_horario__id = self.curso_horario.id
@@ -88,15 +88,20 @@ class ReservaUsuarios(models.Model):
     if filtro_dia:
         raise ValidationError('Este usuario ya tiene una reserva para este curso por el dia de hoy')
     return super().validate_unique(*args, **kwargs)
+
+  def __str__(self):
+    txt = "{0} Reservo {1}"
+    return txt.format(self.usuario ,self.curso_horario)
+  
   
 
 
-@receiver(post_save, sender=ReservaUsuarios, dispatch_uid="create_restar_cupo")
+@receiver(post_save, sender=ReservaUsuario, dispatch_uid="create_restar_cupo")
 def restar_cupo(sender, instance, **kwargs):
   instance.curso_horario.cupo -= 1
   instance.curso_horario.save()
 
-@receiver([post_delete],sender=ReservaUsuarios, dispatch_uid="create_sumar_cupo")
+@receiver([post_delete],sender=ReservaUsuario, dispatch_uid="create_sumar_cupo")
 def sumar_cupo(sender, instance, **kwargs):
   instance.curso_horario.cupo +=1
   instance.curso_horario.save()

@@ -46,9 +46,8 @@ const Noticias = ({
 									</Accordion.Item>								
    								 </Accordion>		 						
 								<textarea placeholder='Realice un comentario'></textarea>																								
-							</Row>		
-							<Button variant="dark">Comentar</Button>
-																	
+							</Row>																	
+							<Button variant="dark" className='btn-comentar'>Comentar</Button>	
 						</Container>
 					)               
 				})  

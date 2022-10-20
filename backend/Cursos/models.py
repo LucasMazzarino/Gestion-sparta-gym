@@ -147,6 +147,10 @@ class CursoHorario(models.Model):
       errors = {**errors,'cupo': ValidationError('No hay mas cupos libres para este horario')}   
     if errors:
       raise ValidationError(errors)
+    
+  def __str__(self):
+    txt = "{0} el dia {1} {2}"
+    return txt.format(self.curso ,self.dia, self.horario)
       
 
 class Asistencia(models.Model):
