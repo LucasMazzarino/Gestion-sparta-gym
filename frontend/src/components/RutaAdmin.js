@@ -4,10 +4,10 @@ import {Navigate, Outlet} from 'react-router-dom'
 import { connect } from 'react-redux';
 
 const RutasAdmin=({
-  token,
   staff
 }) => {
-  if(token !== null && staff){
+  if(staff == true){
+    console.log(staff,"hola desde rutasAdmin")
     return(
     <Outlet/>  
     )
@@ -20,7 +20,6 @@ const RutasAdmin=({
 
 
 const mapStateToProps = state => ({
-  token: state.Auth.refresh,
   staff: state.Auth.staff
 })
 

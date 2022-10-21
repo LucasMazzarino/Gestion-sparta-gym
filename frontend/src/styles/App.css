@@ -364,13 +364,16 @@ canvas{
 } 
 
 div.grupoHorario.list-group{
-  border: 5px;
   border-color: #3c829e;
   border-style: solid;
   margin-bottom: 5%;
 }
-div.list-group-item{
- text-decoration: underline black;
+
+button.boton-reservar{
+  position: relative;
+  width: 75%;
+  left:35px;
+  text-decoration: underline black;
 }
 
 

@@ -1,6 +1,6 @@
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { check_authenticated, load_user, refresh } from '../redux/actions/auth';
+import {load_user, refresh, check_authenticated } from '../redux/actions/auth';
 
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
@@ -26,7 +26,7 @@ const Layout = (props) => {
 }
 
 export default connect(null, {
-  check_authenticated,
   load_user,
+  check_authenticated,
   refresh,
 }) (Layout)

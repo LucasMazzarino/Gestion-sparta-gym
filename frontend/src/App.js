@@ -38,14 +38,15 @@ const App = () => {
           {/*Rutas administrador*/}
           {/*graficos*/}
           {/*autenticacion */}
+          <Route element={<RutaCliente/>}>
+            <Route exact path='/reservas' element={<ReservaHorario/>}/>          
+          </Route>
           <Route element={<RutasAdmin/>}>
             <Route exact path='/estadisticas' element={<Estadisticas/>}/>          
           </Route>
           {/*Rutas cliente*/}
           {/*reserva de horario */}
-          <Route element={<RutaCliente/>}>
-            <Route exact path='/reservas' element={<ReservaHorario/>}/>          
-          </Route>
+
       </Routes>
       </Router>      
   );

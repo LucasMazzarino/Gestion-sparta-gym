@@ -1,27 +1,30 @@
 import React from 'react';
 
+import { useState } from 'react';
 import {Navigate, Outlet} from 'react-router-dom'
 import { connect } from 'react-redux';
 
 const RutasClientes=({
-  token,
-  staff
+  staff,
+  id
 }) => {
-  if(token !== null && !staff){
+  
+  if(id && staff !== true ){
+    console.log(staff ,"hola desde Rutas ciente")
     return(
-    <Outlet/>  
+      <Outlet/>
     )
   }else{
     return(
       <Navigate to="/"/>
-    )
+    );
   }
 }
 
 
 const mapStateToProps = state => ({
-  token: state.Auth.refresh,
-  staff: state.Auth.staff
+  staff: state.Auth.staff,
+  id: state.Auth.id,
 })
 
 export default connect(mapStateToProps,{

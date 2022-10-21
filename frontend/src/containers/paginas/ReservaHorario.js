@@ -6,13 +6,13 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Modal from 'react-bootstrap/Modal';
+import ListGroupItem from 'react-bootstrap/esm/ListGroupItem';
+
 
 import { connect } from "react-redux";
 import { reservar_horario, get_reservas_horarios, eliminar_reserva} from '../../redux/actions/reserva'
 
-
 import { useEffect, useState } from 'react';
-import ListGroupItem from 'react-bootstrap/esm/ListGroupItem';
 
 const ReservaHorarios = ({
   cursos_usuarios,
@@ -83,7 +83,7 @@ const ReservaHorarios = ({
                 <ListGroup.Item variant='primary'>Dia: {horarios.dia}</ListGroup.Item>
                 <ListGroup.Item >Comienza a las: {horarios.horario.horaInicio}</ListGroup.Item>
                 <ListGroup.Item>Finaliza a las: {horarios.horario.horaFin}</ListGroup.Item> 
-                <Button type="submit" variant="info" onClick={()=>onClick(horarios.id)}>Reserva un cupo!</Button>
+                <Button type="submit" variant="info" className='boton-reservar' onClick={()=>onClick(horarios.id)}>Reserva un cupo!</Button>
               </ListGroup>
           )  
         })

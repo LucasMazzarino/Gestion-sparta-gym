@@ -19,12 +19,12 @@ import {
   const initialState = {
     access: localStorage.getItem('access'),
     refresh: localStorage.getItem('refresh'),
+    staff: localStorage.getItem('staff'),
     isAuthenticated: null,
     loading: false,
-    staff: false,
+    id:localStorage.getItem('id'),
     user: null,
     cursos_usuario: null,
-    id:localStorage.getItem('id'),
   }
 
 
@@ -44,6 +44,7 @@ import {
             }
         case USUARIO_CARGADO_SUCCES:
           localStorage.setItem('id',payload.id)
+          localStorage.setItem('staff',payload.is_staff)
             return {
                 ...state,
                 user: payload,
@@ -64,11 +65,15 @@ import {
         case AUTHENTICACION_FAIL:
             localStorage.removeItem('access');
             localStorage.removeItem('refresh');
+            localStorage.removeItem('id')
+            localStorage.removeItem('staff');
           return {
               ...state,
               isAuthenticated: false,
               access: null,
-              refresh: null
+              refresh: null,
+              id: null,
+              staff: null,
             }
         case LOGIN_SUCCESS:
             localStorage.setItem('access', payload.access);
@@ -99,6 +104,7 @@ import {
             localStorage.removeItem('access')
             localStorage.removeItem('refresh')
             localStorage.removeItem('id')
+            localStorage.removeItem('staff');
           return {
             ...state,
             access: null,
