@@ -1,6 +1,5 @@
 import './styles/App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import { Navigate } from 'react-router-dom';
 
 import Inicio from './containers/paginas/Inicio';
 import Cursos from './containers/paginas/Cursos';
@@ -9,20 +8,17 @@ import Contacto from './containers/paginas/Contacto';
 import Galeria from './containers/paginas/Galeria';
 import CursoDetail from './containers/paginas/CursosDetail';
 import ReservaHorario from './containers/paginas/ReservaHorario';
-
-import Login from './containers/auth/Login';
 import ResetPassword from './containers/auth/ResetPassword';
 import ConfirmResetPassword from './containers/auth/ConfirmResetPassword';
 import Error404 from './containers/errors/Error404';  
 import Estadisticas from './containers/paginas/Estadisticas';
+import RutasAdmin from './components/RutaAdmin';
+import RutaPublica from './components/RutaPublica';
+import RutaCliente from './components/RutaCliente';
 
-import { connect } from 'react-redux';
 
 
-
-const App = ({
-  
-}) =>{
+const App = () => {
   return ( 
       <Router>
         <Routes>
@@ -32,28 +28,28 @@ const App = ({
           <Route path='/Cursos' element={<Cursos/>}/>
           <Route path='/Noticias' element={<Noticias/>}/>
           <Route path='/Contacto' element={<Contacto/>}/>
-          <Route path='/Galeria' element={<Galeria/>}/>
-
-          {/*autenticacion */}
-          <Route exact path='/reset_password' element={<ResetPassword/>} />
+          <Route path='/Galeria' element={<Galeria/>}/>   
+          <Route exact path='/cursos/:cursoId' element={<CursoDetail/>}/>
           <Route exact path='/password/reset/confirm/:uid/:token' element={<ConfirmResetPassword/>} />
-
-          {/*detalle Curso */}
-          <Route exact path='/cursos/:cursoId' element={<CursoDetail/>} /> 
-
-          {/*reserva de horario */}
-          <Route exact path='/reservas' element={<ReservaHorario/>}></Route>
+          {/*Rutas publicas*/}
+          <Route element={<RutaPublica/>}>
+            <Route exact path='/reset_password' element={<ResetPassword/>} />
+          </Route>     
+          {/*Rutas administrador*/}
           {/*graficos*/}
-          <Route exact path='/estadisticas' element={<Estadisticas/>}></Route>
-        </Routes>
+          {/*autenticacion */}
+          <Route element={<RutaCliente/>}>
+            <Route exact path='/reservas' element={<ReservaHorario/>}/>          
+          </Route>
+          <Route element={<RutasAdmin/>}>
+            <Route exact path='/estadisticas' element={<Estadisticas/>}/>          
+          </Route>
+          {/*Rutas cliente*/}
+          {/*reserva de horario */}
+
+      </Routes>
       </Router>      
   );
 }
 
-const mapStateToProps = state => ({
-  
-})
-
-export default connect(mapStateToProps,{
-
-}) (App)
+export default App;

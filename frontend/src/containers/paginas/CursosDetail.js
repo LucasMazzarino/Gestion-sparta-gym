@@ -4,9 +4,6 @@ import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 
-import Parse from 'html-react-parser'
-
-
 import { useParams } from "react-router-dom";
 import { Fragment, useEffect,} from "react";
 import { connect } from "react-redux";

@@ -51,50 +51,50 @@ const ConfirmResetPassword = ({
   return (
     <Layout>
           <Container className='seccionConfirmarReseteo'>              
-                      <Row>                        
-                          <Col md={12}>
-                          <Form onSubmit={e=>onSubmit(e)}>
-                                  <Form.Group className="mb-3" >
-                                    <Form.Label>Ingrese su nueva contraseña</Form.Label>
-                                    <Form.Control
-                                                name="new_password"
-                                                value={new_password}
-                                                onChange={e=>onChange(e)}
-                                                type="password"
-                                                placeholder="Contraseña"
-                                                required />
-                                    <Form.Text className="text-muted">
-                                    </Form.Text>
-                                  </Form.Group>
-                                  <Form.Group className="mb-3" >
-                                    <Form.Label>Repita su contraseña</Form.Label>
-                                    <Form.Control
-                                                name="re_new_password"
-                                                value={re_new_password}
-                                                onChange={e=>onChange(e)}
-                                                type="password"
-                                                placeholder="Contraseña"
-                                                required />
-                                    <Form.Text className="text-muted">
-                                    </Form.Text>
-                                  </Form.Group>
-                                  <div>
-                                    {loading ? 
-                                      <Button  variant="primary" disabled>
-                                      <Spinner
-                                      as="span"
-                                      animation="grow"
-                                      size="sm"
-                                      role="status"
-                                      aria-hidden="true"
-                                    />
-                                    Enviando...
-                                    </Button>:
-                                    <Button type="submit" variant="primary">Confirmar</Button>}
-                                  </div>
-                              </Form>
-                          </Col>                         
-                      </Row>             
+            <Row>                        
+            <Col md={12}>
+              <Form onSubmit={e=>onSubmit(e)}>
+                  <Form.Group className="mb-3" >
+                    <Form.Label>Ingrese su nueva contraseña</Form.Label>
+                    <Form.Control
+                        name="new_password"
+                        value={new_password}
+                        onChange={e=>onChange(e)}
+                        type="password"
+                        placeholder="Contraseña"
+                        required />
+                    <Form.Text className="text-muted">
+                    </Form.Text>
+                  </Form.Group>
+                  <Form.Group className="mb-3" >
+                    <Form.Label>Repita su contraseña</Form.Label>
+                    <Form.Control
+                        name="re_new_password"
+                        value={re_new_password}
+                        onChange={e=>onChange(e)}
+                        type="password"
+                        placeholder="Contraseña"
+                        required />
+                    <Form.Text className="text-muted">
+                    </Form.Text>
+                  </Form.Group>
+                  <div>
+                    {loading ? 
+                      <Button  variant="primary" disabled>
+                      <Spinner
+                      as="span"
+                      animation="grow"
+                      size="sm"
+                      role="status"
+                      aria-hidden="true"
+                    />
+                    Enviando...
+                    </Button>:
+                    <Button type="submit" variant="primary">Confirmar</Button>}
+                  </div>
+                </Form>
+              </Col>                         
+            </Row>             
           </Container>               
     </Layout>
   )

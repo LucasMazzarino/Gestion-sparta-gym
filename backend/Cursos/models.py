@@ -20,11 +20,9 @@ class Horario(models.Model):
       raise ValidationError('Complete los campos')
     elif self.horaInicio >= self.horaFin:
       raise ValidationError("La hr de inicio debe ser menor a la hr de fin")
-    elif Horario.objects.filter(horaInicio=self.horaInicio,
+    elif Horario.objects.exclude(id=self.id).filter(horaInicio=self.horaInicio,
      horaFin=self.horaFin).exists():
      raise ValidationError("Este horario ya existe")
-
-
 
   class Meta:
    verbose_name = 'Horario'
@@ -32,7 +30,7 @@ class Horario(models.Model):
 
   def __str__(self):
      txt = "De {0} a {1} horas"
-     return txt.format(self.horaInicio, self.horaFin)
+     return txt.format(self.horaInicio.isoformat(timespec='minutes'), self.horaFin.isoformat(timespec='minutes'))
 
 
 class Curso(models.Model):
@@ -52,8 +50,6 @@ class Curso(models.Model):
       raise ValidationError("Ya existe un curso con este nombre")
     elif Curso.objects.exclude(id=self.id).filter(nombre=self.nombre):
        raise ValidationError("Ya existe un curso con este nombre")
-
-
 
   @property
   def ingresos(self):
@@ -85,14 +81,6 @@ class PagoCuota(models.Model):
     txt = "{0} (Pago: $ {1} del Curso {2})"
     return txt.format(self.usuario, self.monto_final, self.curso)
 
-  # @property
-  # def monto(self):
-  #   monto = self.curso.costo
-  #   if self.dia_de_pago.day > 10:
-  #     monto+= 500
-  #     return monto
-  #   return monto
-
   def full_clean(self, exclude=None, validate_unique=True, validate_constraints=True):
       super().full_clean()
       curso = self.curso.usuarios.all() 
@@ -103,7 +91,6 @@ class PagoCuota(models.Model):
     self.monto_final = self.curso.costo
     if self.recargo == True:
       self.monto_final += 200 
-    print(self.monto_final)
     super().save(*args,**kwargs)
 
 
@@ -138,23 +125,32 @@ class CursoHorario(models.Model):
   dia = models.CharField(max_length=200, choices=dias)
   
   def full_clean(self, exclude=None, validate_unique=True, validate_constraints=True):
-    super().full_clean()
-    cupo = self.cupo
-    filtro = CursoHorario.objects.exclude(id=self.id).filter(curso=self.curso,
-    dia=self.dia,
-    horario = self.horario)
-    if filtro.exists():
-      raise ValidationError('Este Curso ya tiene registrado este horario')
-    if cupo <= 0:
-      raise ValidationError('No hay mas cupos libres para este horario')
-
-@receiver(post_delete, sender=CursoHorario, dispatch_uid="create_elimniar_reserva")
-def eliminar_reserva(sender, instance, **kwargs):
-  cup = instance.cupo 
-  if cup == 0:
-    instance.cupo +1
-    instance.save()
-
+    errors = {}
+    if self.curso.id:
+      try:
+        super().full_clean()
+      except ValidationError as e:
+        errors = e.update_error_dict(errors)
+    if getattr(self,'horario',None):
+      filtro = CursoHorario.objects.exclude(id=self.id).filter(curso=self.curso,
+      dia=self.dia,
+      horario = self.horario)
+      if filtro.exists():
+        errors = {**errors,'curso': ValidationError('Este Curso ya tiene registrado este horario')}
+    else:
+      errors = {**errors,'horario': ValidationError('Asigne un horario')}
+    if self.cupo == 0:
+      errors = {**errors,'cupo': ValidationError('No hay mas cupos libres para este horario')}   
+    if errors:
+      raise ValidationError(errors)
+    
+  def __str__(self):
+    txt = "{0} el dia {1} {2}"
+    return txt.format(self.curso ,self.dia, self.horario)
+  
+  class Meta:
+    ordering = ['dia',]
+      
 
 class Asistencia(models.Model):
   usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE, null=False, blank=False)

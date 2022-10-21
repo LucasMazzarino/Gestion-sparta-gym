@@ -16,7 +16,7 @@ import {
     Filler,
     LinearScale
 } from 'chart.js'
-import { Bar , Doughnut} from 'react-chartjs-2'
+import { Bar } from 'react-chartjs-2'
 
 ChartJS.register(
     CategoryScale,

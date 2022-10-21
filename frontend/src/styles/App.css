@@ -195,6 +195,7 @@ Footer #Derechos{
 
 .pBienvenidoAdministrador{
   color: white;
+  padding-right: 10px;
 }
 
 .pNoeresadmins{
@@ -310,16 +311,17 @@ Footer #Derechos{
   width: 700px;
   height: 300px;
 }
+.seccionNoticias{
+  margin-bottom:5% ;
+}
 
 .Noticias{
   align-items: center;
-  padding-left: 140px;
 }
 
-
 #Noticia{
-  margin-left: 15%;
-  margin-right: 15%;
+  justify-content: center;
+  align-items: center;
 }
 
 .fechaPosteo{
@@ -337,6 +339,42 @@ canvas{
   max-height: 700px;
 }
 
+.b-estadisticas{
+  display: block;
+  background-color: #e5ae4b;
+  color: green;
+}
+
+.btn-success {
+  margin-left: 10px;
+}
+
+.graficas{
+  border: 15px ;
+  border-radius: 5px;
+  border-color: grey;
+  border-style: inset;
+}
+
+.btn-comentar{
+  position: relative;
+  left: 16%;
+  align-items: center;
+  justify-content: center;
+} 
+
+div.grupoHorario.list-group{
+  border-color: #3c829e;
+  border-style: solid;
+  margin-bottom: 5%;
+}
+
+button.boton-reservar{
+  position: relative;
+  width: 75%;
+  left:35px;
+  text-decoration: underline black;
+}
 
 
 

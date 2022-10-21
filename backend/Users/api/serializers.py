@@ -1,7 +1,7 @@
 from attr import fields
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from Users.models import Usuarios, ReservaUsuarios
+from Users.models import Usuarios, ReservaUsuario
 from Cursos.models import Curso,CursoHorario
 from Cursos.api.serializers import CursoSerializer,CursoHorarioserializer,PartialCursoHorarioserializer
 
@@ -29,12 +29,12 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 class PartialReservaUsuariosSerializer(serializers.ModelSerializer):
   curso_horario = PartialCursoHorarioserializer()
   class Meta:
-    model=ReservaUsuarios
+    model=ReservaUsuario
     fields = ('id','curso_horario',)
 
 # serializador para listar las reservas de un usuario
 class ListaReservasUsuariosSerializer(serializers.ModelSerializer):
-  reservas = PartialReservaUsuariosSerializer(source='reservausuarios_set',many=True,)
+  reservas = PartialReservaUsuariosSerializer(source='reservausuario_set',many=True,)
   class Meta:
     model=Usuarios
     fields = ('reservas',)
@@ -44,14 +44,14 @@ class ReservaUsuariosSerializer(serializers.ModelSerializer):
   usuario = UsuariosPartialSerializer()
   curso_horario = CursoHorarioserializer()
   class Meta:
-    model=ReservaUsuarios
+    model=ReservaUsuario
     fields = ( 'usuario','curso_horario')
 
 
 # serializadr para crear la reserva con post
 class CrearReservaUsuarioSerializer(serializers.ModelSerializer):
   class Meta:
-    model=ReservaUsuarios
+    model=ReservaUsuario
     fields = ('usuario','curso_horario')
 
   def validate_usuario(self, value):

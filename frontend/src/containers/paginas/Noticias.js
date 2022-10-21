@@ -46,9 +46,8 @@ const Noticias = ({
 									</Accordion.Item>								
    								 </Accordion>		 						
 								<textarea placeholder='Realice un comentario'></textarea>																								
-							</Row>		
-							<Button variant="dark">Comentar</Button>
-																	
+							</Row>																	
+							<Button variant="dark" className='btn-comentar'>Comentar</Button>	
 						</Container>
 					)               
 				})  
@@ -57,14 +56,12 @@ const Noticias = ({
 	
 	return (
 		<Layout>
-			<section className='Noticias'>
 				<h1>Blog de Noticias</h1>
-				<Container>
+				<Container className='allNoticias'>
 					<Row md={1}>
 						{mostrarNoticias()}
 					</Row>
 				</Container>
-			</section>
 		</Layout>
 	)
 }

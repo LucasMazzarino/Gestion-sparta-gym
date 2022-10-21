@@ -19,7 +19,6 @@ class Noticia(models.Model):
     ('publicado','Publicado')
   )
   
-  #Esta es la noticia
   titulo = models.CharField(max_length = 250, unique=True)
   imagen = models.ImageField('Imagen Noticia',upload_to='noticias/imagenes/', null=True)
   descripcion = RichTextField(blank=True,null=True)

@@ -6,10 +6,11 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Modal from 'react-bootstrap/Modal';
+import ListGroupItem from 'react-bootstrap/esm/ListGroupItem';
+
 
 import { connect } from "react-redux";
 import { reservar_horario, get_reservas_horarios, eliminar_reserva} from '../../redux/actions/reserva'
-
 
 import { useEffect, useState } from 'react';
 
@@ -62,10 +63,10 @@ const ReservaHorarios = ({
       {
         return (cursos_usuarios.map((cursos_horarios) => {      
           return(
-          <div key={cursos_horarios.id}>
-            <div className='NombreCursoReserva'>{cursos_horarios.nombre}</div>
-              <div>{listarHorarios(cursos_horarios)}</div> 
-          </div>
+          <ListGroup key={cursos_horarios.id} className="listadoCursosHorario">
+            <ListGroupItem className='NombreCursoReserva'>{cursos_horarios.nombre}</ListGroupItem>
+              <ListGroupItem>{listarHorarios(cursos_horarios)}</ListGroupItem> 
+          </ListGroup>
           )
         }))
       }
@@ -78,11 +79,11 @@ const ReservaHorarios = ({
       return(
         cursos_horarios.horarios.map((horarios) => {
           return (         
-              <ListGroup key={horarios.id} className="my-2">
-                <ListGroup.Item >Dia: {horarios.dia}</ListGroup.Item>
+              <ListGroup key={horarios.id} className="grupoHorario">
+                <ListGroup.Item variant='primary'>Dia: {horarios.dia}</ListGroup.Item>
                 <ListGroup.Item >Comienza a las: {horarios.horario.horaInicio}</ListGroup.Item>
                 <ListGroup.Item>Finaliza a las: {horarios.horario.horaFin}</ListGroup.Item> 
-                <Button type="submit" variant="info" onClick={()=>onClick(horarios.id)}>Reserva un cupo!</Button>
+                <Button type="submit" variant="info" className='boton-reservar' onClick={()=>onClick(horarios.id)}>Reserva un cupo!</Button>
               </ListGroup>
           )  
         })
@@ -132,8 +133,7 @@ const ReservaHorarios = ({
                         <div> {listarMiscursos()}</div>                    
                     </div>
                 </Col>
-                <Col md={2} sm={12}>          
-                    
+                <Col md={2} sm={12}>                            
                 </Col>                 
                 <Col md={5} sm={12}> 
                       <div className='reservaUsuario'>

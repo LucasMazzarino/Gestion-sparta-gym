@@ -1,30 +1,30 @@
 import {
   LOGIN_SUCCESS,
   LOGIN_FAIL, 
-  SET_AUTH_LOADING,
-  REMOVE_AUTH_LOADING,
-  USER_LOADED_SUCCESS,
-  USER_LOADED_FAIL,
+  SET_AUTENTICACION_CARGANDO,
+  REMOVE_AUTENTICACION_CARGANDO,
+  USUARIO_CARGADO_SUCCES,
+  USUARIO_CARGADO_FAIL,
   REFRESH_SUCCESS,
 	REFRESH_FAIL,
-  AUTHENTICATED_SUCCESS,
-  AUTHENTICATED_FAIL,
+  AUTHENTICACION_SUCCESS,
+  AUTHENTICACION_FAIL,
   LOGOUT,
-  RESET_PASSWORD_SUCCESS,
-  RESET_PASSWORD_FAIL,
-  CONFIRM_RESET_PASSWORD__SUCCESS,
-  CONFIRM_RESET_PASSWORD__FAIL,
+  RESETEO_PASSWORD_SUCCESS,
+  RESETEO_PASSWORD_FAIL,
+  CONFIRMACION_RESETEO_PASSWORD_SUCCESS,
+  CONFIRMACION_RESETEO_PASSWORD_FAIL,
  } from '../actions/types'
 
   const initialState = {
     access: localStorage.getItem('access'),
     refresh: localStorage.getItem('refresh'),
+    staff: localStorage.getItem('staff'),
     isAuthenticated: null,
     loading: false,
-    staff: false,
+    id:localStorage.getItem('id'),
     user: null,
     cursos_usuario: null,
-    id:localStorage.getItem('id'),
   }
 
 
@@ -32,18 +32,19 @@ import {
     const {type, payload} = action;
 
     switch(type) {
-        case SET_AUTH_LOADING:
+        case SET_AUTENTICACION_CARGANDO:
             return {
                 ...state,
                 loading: true
             }
-        case REMOVE_AUTH_LOADING:
+        case REMOVE_AUTENTICACION_CARGANDO:
             return {
                 ...state,
                 loading: false
             }
-        case USER_LOADED_SUCCESS:
+        case USUARIO_CARGADO_SUCCES:
           localStorage.setItem('id',payload.id)
+          localStorage.setItem('staff',payload.is_staff)
             return {
                 ...state,
                 user: payload,
@@ -51,24 +52,28 @@ import {
                 cursos_usuario:payload.cursos,
                 id:payload.id
             }
-        case USER_LOADED_FAIL:
+        case USUARIO_CARGADO_FAIL:
             return {
                 ...state,
                 user: null
             }
-        case AUTHENTICATED_SUCCESS:
+        case AUTHENTICACION_SUCCESS:
           return {
               ...state,
               isAuthenticated: true
           }
-        case AUTHENTICATED_FAIL:
+        case AUTHENTICACION_FAIL:
             localStorage.removeItem('access');
             localStorage.removeItem('refresh');
+            localStorage.removeItem('id')
+            localStorage.removeItem('staff');
           return {
               ...state,
               isAuthenticated: false,
               access: null,
-              refresh: null
+              refresh: null,
+              id: null,
+              staff: null,
             }
         case LOGIN_SUCCESS:
             localStorage.setItem('access', payload.access);
@@ -80,10 +85,10 @@ import {
             refresh:localStorage.getItem('refresh'),
             id:localStorage.getItem('id'),
           }
-        case RESET_PASSWORD_SUCCESS:
-        case RESET_PASSWORD_FAIL:
-        case CONFIRM_RESET_PASSWORD__SUCCESS:
-        case CONFIRM_RESET_PASSWORD__FAIL:
+        case RESETEO_PASSWORD_SUCCESS:
+        case RESETEO_PASSWORD_FAIL:
+        case CONFIRMACION_RESETEO_PASSWORD_SUCCESS:
+        case CONFIRMACION_RESETEO_PASSWORD_FAIL:
           return {
             ...state
           }
@@ -99,6 +104,7 @@ import {
             localStorage.removeItem('access')
             localStorage.removeItem('refresh')
             localStorage.removeItem('id')
+            localStorage.removeItem('staff');
           return {
             ...state,
             access: null,
