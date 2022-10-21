@@ -8,7 +8,7 @@ const RutasPublicas=({
 }) => {
   const auth = token
   return(
-    auth? <Navigate to="/"/> :  <Outlet/> 
+    auth? <Navigate to="/"/> : <Outlet/> 
   )
 }
 
