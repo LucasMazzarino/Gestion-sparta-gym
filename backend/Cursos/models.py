@@ -40,8 +40,8 @@ class Curso(models.Model):
   costo = models.PositiveSmallIntegerField(default=0)
   descripcion = RichTextField(blank=True, null=True)  
   imagen = models.ImageField('Imagen de portada',upload_to='cursos/imagenes/', null=True, default='cursos/imagenes/sparta_img.jpg')
-  state = models.BooleanField('Estivar/desactivar',default = True, help_text="Si desactiva el curso este no se mostrara en la pagina principal")
-  horarios = models.ManyToManyField(Horario, through='CursoHorario',)
+  state = models.BooleanField('Activar/Desactivar',default = True, help_text="Si desactiva el curso este no se mostrara en la pagina principal")
+  horarios = models.ManyToManyField(Horario, through='CursoHorario')
   pagos_cuotas = models.ManyToManyField(Usuarios, through='PagoCuota', related_name='pagos')
   asistencias = models.ManyToManyField(Usuarios, through='Asistencia', related_name='asistencias')
   
