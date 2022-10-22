@@ -31,6 +31,8 @@ class Horario(models.Model):
   def __str__(self):
      txt = "De {0} a {1} horas"
      return txt.format(self.horaInicio.isoformat(timespec='minutes'), self.horaFin.isoformat(timespec='minutes'))
+  
+
 
 
 class Curso(models.Model):
@@ -112,12 +114,12 @@ def validar_campos_nulos (sender, instance, **kwargs):
 class CursoHorario(models.Model):
   
   dias = (
-  ("Lunes","Lunes"),
-  ("Martes","Martes"),
-  ("Miercoles","Miercoles"),
-  ("Jueves","Jueves"),
-  ("Viernes","Viernes"),
-  ("Sabado","Sabado"),
+  ("1-Lunes","Lunes"),
+  ("2-Martes","Martes"),
+  ("3-Miercoles","Miercoles"),
+  ("4-Jueves","Jueves"),
+  ("5-Viernes","Viernes"),
+  ("6-Sabado","Sabado"),
  )
   horario = models.ForeignKey(Horario, on_delete=models.CASCADE)
   curso =models.ForeignKey(Curso, on_delete=models.CASCADE)
@@ -146,10 +148,10 @@ class CursoHorario(models.Model):
     
   def __str__(self):
     txt = "{0} el dia {1} {2}"
-    return txt.format(self.curso ,self.dia, self.horario)
+    return txt.format(self.curso ,self.dia.translate({ord(i): None for i in '123456-'}), self.horario)
   
   class Meta:
-    ordering = ['dia',]
+    ordering = ['dia','horario__horaInicio']
       
 
 class Asistencia(models.Model):

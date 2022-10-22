@@ -180,8 +180,8 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSIONS_CLASSES': [
         'rest_framework.permissions.IsAuthenticated'
     ],
-    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    # 'PAGE_SIZE':16,
+    'DATETIME_FORMAT':"%d-%m-%Y %H:%M",
+    'TIME_FORMAT': "%H:%M",
 }
 
 SIMPLE_JWT = {

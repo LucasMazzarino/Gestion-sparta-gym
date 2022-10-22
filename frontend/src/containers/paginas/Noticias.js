@@ -37,7 +37,7 @@ const Noticias = ({
 								<Image className='imagenNoticia' src={noticia.imagen}/>							
 								<h4>{noticia.titulo}</h4>								
 								<p>{Parse(noticia.descripcion)}</p>
-								<span className='fechaPosteo'>publicado en: {noticia.publicado} por: {noticia.autor.nombre}</span>
+								<span className='fechaPosteo'>publicado el: {noticia.publicado} por: {noticia.autor.nombre}</span>
 								<Accordion defaultActiveKey="1">
 									<Accordion.Item eventKey="0">
 										<Accordion.Header>Seccion de comentarios</Accordion.Header>

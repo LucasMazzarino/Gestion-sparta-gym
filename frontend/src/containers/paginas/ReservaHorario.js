@@ -23,6 +23,8 @@ const ReservaHorarios = ({
   eliminar_reserva
 }) => {
 
+  const remplazar = /(1-)|(2-)|(3-)|(4-)|(5-)|(6-)/g
+
   const [listar, setListar] = useState(false) 
   const [show, setShow] = useState(false);
 
@@ -80,7 +82,7 @@ const ReservaHorarios = ({
         cursos_horarios.horarios.map((horarios) => {
           return (         
               <ListGroup key={horarios.id} className="grupoHorario">
-                <ListGroup.Item variant='primary'>Dia: {horarios.dia}</ListGroup.Item>
+                <ListGroup.Item variant='primary'>Dia: {`${horarios.dia.replace(remplazar,'')}`}</ListGroup.Item>
                 <ListGroup.Item >Comienza a las: {horarios.horario.horaInicio}</ListGroup.Item>
                 <ListGroup.Item>Finaliza a las: {horarios.horario.horaFin}</ListGroup.Item> 
                 <Button type="submit" variant="info" className='boton-reservar' onClick={()=>onClick(horarios.id)}>Reserva un cupo!</Button>

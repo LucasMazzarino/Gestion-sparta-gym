@@ -8,5 +8,5 @@ from Noticias.api.serializers import NoticiaSerializer
 
 class NoticiaViewSet(viewsets.ReadOnlyModelViewSet):
   serializer_class = NoticiaSerializer
-  queryset = Noticia.objects.all()
+  queryset = Noticia.objects.filter(status='publicado')
   
