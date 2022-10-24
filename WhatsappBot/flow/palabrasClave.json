@@ -1,0 +1,185 @@
+[
+    {
+        "keywords":  [
+            "hola",
+            "holaa",
+            "holap",
+            "hola!",
+            "ola",            
+            "inicio",           
+            "buenos días",
+            "buenas tardes",
+            "buenas noches",
+            "me dieron este número",   
+            "necesito saber"
+        ],
+        "key": "STEP_Saludo"
+    },
+    {
+        "keywords":  [
+            "cursos",
+            "curso",     
+            "1"                      
+        ],
+        "key": "STEP_Cursos"
+    },
+    {
+        "keywords":  [              
+            "boxeo",
+            "box"        
+        ],
+        "key": "STEP_Boxeo"
+    },
+    {
+        "keywords":  [
+            "gimnasia artistica",
+            "gimnasia artística",
+            "artistica"
+        ],
+        "key": "STEP_GimnasiaArtistica"
+    },
+    {
+        "keywords":  [
+            "entrenamiento integral",
+            "integral"          
+        ],
+        "key": "STEP_EntrenamientoIntegral"
+    },
+
+    {
+        "keywords":  [
+            "entrenamiento personalizado",
+            "personalizado"
+        ],
+        "key": "STEP_EntrenamientoPersonalizado"
+    }, 
+
+    {
+
+        "keywords":  [
+            "gimnasia peques",
+            "peques"
+        ],
+        "key": "STEP_GimnasiaPeques"
+    }, 
+
+    {
+        "keywords":  [
+            "2",
+            "dias",
+            "días",
+            "horarios"
+        ],
+        "key": "STEP_DiasHorarios"
+    },
+
+    {
+        "keywords":  [
+            "horario boxeo"
+        ],
+        "key": "STEP_HorarioBoxeo"
+    },
+    
+    {
+        "keywords":  [
+            "horario artistica",
+            "horario artística"
+        ],
+        "key": "STEP_HorarioArtistica"
+    },
+
+    {
+        "keywords":  [
+            "horario integral"
+        ],
+        "key": "STEP_HorarioIntegral"
+    },
+
+    {
+        "keywords":  [
+            "horario personalizado"
+        ],
+        "key": "STEP_HorarioPersonalizado"
+    },
+
+    {
+        "keywords":  [
+            "horario peques"
+        ],
+        "key": "STEP_HorarioPeques"
+    },
+
+    {
+        "keywords":  [
+            "3",
+            "reserva",
+            "reservar",
+            "cupos",
+            "cupo",
+            "reserva de cupo",
+            "reservar cupo",
+            "reservar cupos",
+            "quiero reservar cupos",
+            "hola quiero reservar cupos"
+        ],
+        "key": "STEP_ReservaCupos"
+    },
+
+    {
+        "keywords":  [
+            "4",
+            "informacion",
+            "información",
+            "quiero información",
+            "quiero informacion",
+            "informe",
+            "inscripción",
+            "como me inscribo",
+            "cómo me inscribo",
+            "me quiero inscribir",
+            "registrarse",
+            "registro"
+        ],
+        "key": "STEP_Informacion"
+    },
+
+    {
+        "keywords":  [
+        "gracias",
+        "ok gracias"
+        ],
+        "key": "STEP_Gracias"
+    },
+
+    {
+        "keywords":  [
+        "chau",
+        "adios",
+        "me despido"
+        ],
+        "key": "STEP_Despedida"
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+   
+    {
+        "keywords":  [
+            "muchas gracias",
+            "ok",
+            "gracias",
+            "vale gracias"
+        ],
+        "key": "STEP_GRACIAS"
+    }
+  
+]
