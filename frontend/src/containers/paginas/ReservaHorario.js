@@ -80,6 +80,7 @@ const ReservaHorarios = ({
     {
       return(
         cursos_horarios.horarios.map((horarios) => {
+          // if(horarios.id == reserva){}
           return (         
               <ListGroup key={horarios.id} className="grupoHorario">
                 <ListGroup.Item variant='primary'>Dia: {`${horarios.dia.replace(remplazarRegx,'')}`}</ListGroup.Item>
@@ -102,6 +103,7 @@ const ReservaHorarios = ({
       reservas.length !== 0)
       {
         return (reservas.map((reserva) => { 
+          console.log(reserva)
           return(
           <div key={reserva.curso_horario.id}>
             <Accordion defaultActiveKey="1">
@@ -112,9 +114,10 @@ const ReservaHorarios = ({
                       <Button variant="danger" onClick={handleShow}>Eliminar reserva</Button>
                       <Modal show={show} onHide={handleClose}>
                           <Modal.Header closeButton>
-                          <Modal.Title>Seguro que quiere cancelar su reserva?</Modal.Title>
+                          <Modal.Title>¿Seguro que quiere cancelar su reserva?</Modal.Title>
                           </Modal.Header> 
-                          <Modal.Footer><Button variant="danger" onClick={()=>borrarReserva(reserva.id)}>Eliminar reserva</Button>
+                          <Modal.Body>Se eliminara su reserva de {reserva.curso_horario.curso.nombre} el dia {reserva.curso_horario.dia.replace(remplazarRegx,'')}</Modal.Body>
+                          <Modal.Footer><Button variant="danger" className='btn-borrarReserva' onClick={()=>borrarReserva(reserva.id)}>Eliminar reserva</Button>
                           <Button variant="primary" onClick={handleClose}>No</Button></Modal.Footer>               
                       </Modal>
                   </Accordion.Body>                
@@ -156,7 +159,7 @@ const ReservaHorarios = ({
 const mapStateToProps = state => ({
   cursos_usuarios: state.Auth.cursos_usuario,
   usu_id: state.Auth.id,
-  reservas: state.Reservas.reservas
+  reservas: state.Reservas.reservas,
 })
 
 export default connect(mapStateToProps, {

@@ -400,6 +400,11 @@ button.boton-reservar{
   width: 70%;
   text-decoration: underline black;
 }
+div.modal-footer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 
 
