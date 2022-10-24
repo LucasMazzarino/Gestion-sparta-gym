@@ -16,6 +16,7 @@ const CursoDetail = ({
 }) => {
   const params = useParams()
   const cursoId = params.cursoId
+  const remplazarRegx = /(1-)|(2-)|(3-)|(4-)|(5-)|(6-)/g
 
   useEffect(() =>{
     get_curso(cursoId)
@@ -27,7 +28,7 @@ const CursoDetail = ({
         curso.horarios.map((horario) => {
           return (         
             <ListGroup key={horario.id}  className="my-2">
-              <ListGroup.Item>Día: {horario.dia} - Comienza a las {horario.horario.horaInicio} y finaliza a las {horario.horario.horaFin}</ListGroup.Item>                                     
+              <ListGroup.Item>Día: {horario.dia.replace(remplazarRegx,'')} - Desde {horario.horario.horaInicio}  hasta {horario.horario.horaFin} </ListGroup.Item>                                     
             </ListGroup>
           )         
         })
@@ -40,7 +41,7 @@ const CursoDetail = ({
   const mostrarDetail = () =>{
     if( curso && curso !== null && curso !== undefined && curso.length !==0 )	
       return(	      
-        <Card key={curso.id} className="bg-dark text-white">
+        <Card key={curso.id} className="DetalleCarta">
           <div className="Carta">
             <Card.Img variant="top" src={curso.imagen} className='ImagenCarta' />
           </div>         
@@ -49,7 +50,7 @@ const CursoDetail = ({
             <Card.Text className='CardText'>Parse{curso.descripcion}</Card.Text>
           </Card.Body>
           <Card.Footer> {mostrarHorario()}</Card.Footer>  
-          <Card.Text className='spanCosto'>Costo del curso: $ {curso.costo} mensual</Card.Text>           
+          <Card.Text className='spanCosto'>Costo del curso: $ {curso.costo} mensuales</Card.Text>           
         </Card>        	  
       )
       return( 
@@ -61,10 +62,8 @@ const CursoDetail = ({
     <Layout>
 			<section className='Detalle'>
 					<h1>Detalle del Curso</h1>
-					<Container>
-					<Row md={2}>  
-					{mostrarDetail()}
-      		</Row>       
+					<Container className="DetalleCurso">
+					{mostrarDetail()}  
 					</Container>
 			</section>
 			</Layout>

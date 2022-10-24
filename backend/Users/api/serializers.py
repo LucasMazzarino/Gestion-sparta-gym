@@ -62,9 +62,9 @@ class CrearReservaUsuarioSerializer(serializers.ModelSerializer):
     por_nombre =value.reservas.filter(curso__nombre=curso.nombre)
  
     if value in reservass.reserva.all():
-      raise serializers.ValidationError("Este usuario ya tiene una reserva en este horario")
+      raise serializers.ValidationError("Ya tienes una reserva en este horario")
     elif por_dia.exists() and por_nombre.exists():
-      raise serializers.ValidationError("Ya tienes una reserva para este curso en este dia")
+      raise serializers.ValidationError("Ya tienes una reserva para este curso por el dia")
     elif value not in curso.usuarios.all():
         raise serializers.ValidationError("Este usario no se encuentra en el curso")
     return value

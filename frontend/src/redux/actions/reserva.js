@@ -41,7 +41,7 @@ export const reservar_horario = (usuario, curso_horario) => async dispatch => {
 		dispatch({
 			type: RESERVA_HORARIO_FAIL
 		});
-		dispatch(setAlert('No puedes reservar este horario', 'danger'));
+		dispatch(setAlert(err.response.data.usuario, 'danger'));
 	}
 
 }

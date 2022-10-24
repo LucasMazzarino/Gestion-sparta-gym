@@ -23,7 +23,7 @@ const ReservaHorarios = ({
   eliminar_reserva
 }) => {
 
-  const remplazar = /(1-)|(2-)|(3-)|(4-)|(5-)|(6-)/g
+  const remplazarRegx = /(1-)|(2-)|(3-)|(4-)|(5-)|(6-)/g
 
   const [listar, setListar] = useState(false) 
   const [show, setShow] = useState(false);
@@ -82,10 +82,12 @@ const ReservaHorarios = ({
         cursos_horarios.horarios.map((horarios) => {
           return (         
               <ListGroup key={horarios.id} className="grupoHorario">
-                <ListGroup.Item variant='primary'>Dia: {`${horarios.dia.replace(remplazar,'')}`}</ListGroup.Item>
-                <ListGroup.Item >Comienza a las: {horarios.horario.horaInicio}</ListGroup.Item>
-                <ListGroup.Item>Finaliza a las: {horarios.horario.horaFin}</ListGroup.Item> 
-                <Button type="submit" variant="info" className='boton-reservar' onClick={()=>onClick(horarios.id)}>Reserva un cupo!</Button>
+                <ListGroup.Item variant='primary'>Dia: {`${horarios.dia.replace(remplazarRegx,'')}`}</ListGroup.Item>
+                <ListGroup.Item >Comienza a las: {horarios.horario.horaInicio} Hrs</ListGroup.Item>
+                <ListGroup.Item>Finaliza a las: {horarios.horario.horaFin} Hrs</ListGroup.Item> 
+                <ListGroup className='botn'>
+                  <Button type="submit" variant="info" className='boton-reservar' onClick={()=>onClick(horarios.id)}>Reserva tu cupo!</Button>
+                </ListGroup>
               </ListGroup>
           )  
         })
@@ -106,7 +108,7 @@ const ReservaHorarios = ({
                 <Accordion.Item eventKey="0">
                   <Accordion.Header>{reserva.curso_horario.curso.nombre}</Accordion.Header>
                   <Accordion.Body>
-                       {reserva.curso_horario.dia} de {reserva.curso_horario.horario.horaInicio} a {reserva.curso_horario.horario.horaFin}<br></br>
+                       {reserva.curso_horario.dia.replace(remplazarRegx,'')} de {reserva.curso_horario.horario.horaInicio} a {reserva.curso_horario.horario.horaFin}<br></br>
                       <Button variant="danger" onClick={handleShow}>Eliminar reserva</Button>
                       <Modal show={show} onHide={handleClose}>
                           <Modal.Header closeButton>

@@ -138,7 +138,7 @@ class CursoHorario(models.Model):
       dia=self.dia,
       horario = self.horario)
       if filtro.exists():
-        errors = {**errors,'curso': ValidationError('Este Curso ya tiene registrado este horario')}
+        raise ValidationError('Este Curso ya tiene registrado este horario')
     else:
       errors = {**errors,'horario': ValidationError('Asigne un horario')}
     if self.cupo == 0:

@@ -67,7 +67,6 @@ const Login = ({
                             required />
                           </Form.Group>
                           <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                            <Form.Check type="checkbox" label="Recúerdame" />
                       </Form.Group>
                         <div>
                               {loading ? 
