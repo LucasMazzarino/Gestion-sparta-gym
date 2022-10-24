@@ -36,7 +36,7 @@ const Noticias = ({
 							<Row key={noticia.autor} className='col-12 col-md-6 justify-content-center' id='Noticia'>
 								<Image className='imagenNoticia' src={noticia.imagen}/>							
 								<h4>{noticia.titulo}</h4>								
-								<p>{Parse(noticia.descripcion)}</p>
+								<div>{Parse(noticia.descripcion)}</div>
 								<span className='fechaPosteo'>publicado el: {noticia.publicado} por: {noticia.autor.nombre}</span>
 								<Accordion defaultActiveKey="1">
 									<Accordion.Item eventKey="0">

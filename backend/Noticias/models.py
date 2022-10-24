@@ -24,7 +24,7 @@ class Noticia(models.Model):
   descripcion = RichTextField(blank=True,null=True)
   publicado = models.DateTimeField(default=timezone.now) 
   autor = models.ForeignKey(Usuarios, on_delete=models.CASCADE, related_name='autor')
-  status = models.CharField('Estado',max_length=10, choices=opciones, default='borrador')
+  status = models.CharField('Estado',max_length=10, choices=opciones, default='publicado')
   
     
   

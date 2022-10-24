@@ -7,7 +7,6 @@ const RutasAdmin=({
   staff
 }) => {
   if(staff == true){
-    console.log(staff,"hola desde rutasAdmin")
     return(
     <Outlet/>  
     )

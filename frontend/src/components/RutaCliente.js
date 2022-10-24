@@ -10,7 +10,6 @@ const RutasClientes=({
 }) => {
   
   if(id && staff !== true ){
-    console.log(staff ,"hola desde Rutas ciente")
     return(
       <Outlet/>
     )

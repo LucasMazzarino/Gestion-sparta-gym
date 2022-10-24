@@ -10,7 +10,7 @@ from django.utils.html import format_html_join
 class PagoCuotaInline(admin.TabularInline):
 	model = PagoCuota
 	fields = ('usuario','dia_de_pago','recargo')
-	extra = 1
+	extra = 0
 	list_filter = ('dia_de_pago',)
 
 	def formfield_for_foreignkey(self, db_field, request, **kwargs):
@@ -77,7 +77,7 @@ class CursoHorarioInline(admin.TabularInline):
 
 class ReservasUsuariosInline(admin.TabularInline):
 	model = ReservaUsuario
-	extra = 1
+	extra = 0
 	fields =('usuario',)
 
 	def formfield_for_foreignkey(self, db_field, request, **kwargs):
@@ -92,6 +92,14 @@ class ReservasUsuariosInline(admin.TabularInline):
 			else:
 					kwargs['queryset'] = Usuarios.objects.none()
 		return super(ReservasUsuariosInline, self).formfield_for_foreignkey(db_field, request, **kwargs)
+
+	def get_formset(self, request, obj=None, **kwargs):
+		formset = super(ReservasUsuariosInline, self).get_formset(request, obj, **kwargs)
+		form = formset.form
+		widget = form.base_fields['usuario'].widget
+		widget.can_add_related = False
+		widget.can_change_related = False
+		return formset
     
     
 @admin.register(Curso)
@@ -204,12 +212,25 @@ class AsistenciaAdmin(admin.ModelAdmin):
 		})
 			return super().render_change_form(request, context, add, change, form_url, obj)	
 
+@admin.register(Horario)
+class HorarioAdmin(admin.ModelAdmin):
+	model = Horario()
+	fields = ('horaInicio','horaFin')
+	list_per_page= 30
+	
+	def render_change_form(self, request, context, add=False, change=False, form_url='', obj=None):
+			context.update({
+				'show_save_and_continue': False,		
+		})
+			return super().render_change_form(request, context, add, change, form_url, obj)	
+
+
 admin.site.site_header = 'Administracion Sparta Gym'
 admin.site.index_title = 'Panel de control Sparta'
 
 
 admin.site.unregister(Group)
-admin.site.register(Horario)
+
 
 
 

@@ -16,7 +16,7 @@ admin.site.register(models.OutstandingToken, NewOutstandingTokenAdmin)
 
 class UserAdmin(BaseUserAdmin):
 	ordering = ['apellido']
-	list_display= ['documento', 'nombre','apellido',]
+	list_display= ['nombre','apellido','documento']
 	search_fields = ['nombre']
 	list_per_page= 30
 	fieldsets = (

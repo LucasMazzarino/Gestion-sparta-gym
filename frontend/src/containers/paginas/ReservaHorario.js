@@ -80,7 +80,6 @@ const ReservaHorarios = ({
     {
       return(
         cursos_horarios.horarios.map((horarios) => {
-          // if(horarios.id == reserva){}
           return (         
               <ListGroup key={horarios.id} className="grupoHorario">
                 <ListGroup.Item variant='primary'>Dia: {`${horarios.dia.replace(remplazarRegx,'')}`}</ListGroup.Item>
@@ -103,12 +102,11 @@ const ReservaHorarios = ({
       reservas.length !== 0)
       {
         return (reservas.map((reserva) => { 
-          console.log(reserva)
           return(
           <div key={reserva.curso_horario.id}>
             <Accordion defaultActiveKey="1">
                 <Accordion.Item eventKey="0">
-                  <Accordion.Header>{reserva.curso_horario.curso.nombre}</Accordion.Header>
+                  <Accordion.Header>{reserva.curso_horario.curso.nombre} el {reserva.curso_horario.dia.replace(remplazarRegx,'')}</Accordion.Header>
                   <Accordion.Body>
                        {reserva.curso_horario.dia.replace(remplazarRegx,'')} de {reserva.curso_horario.horario.horaInicio} a {reserva.curso_horario.horario.horaFin}<br></br>
                       <Button variant="danger" onClick={handleShow}>Eliminar reserva</Button>

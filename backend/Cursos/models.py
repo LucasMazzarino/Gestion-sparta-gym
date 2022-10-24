@@ -25,8 +25,8 @@ class Horario(models.Model):
      raise ValidationError("Este horario ya existe")
 
   class Meta:
-   verbose_name = 'Horario'
-   verbose_name_plural = 'Horarios'
+    verbose_name = 'Horario'
+    verbose_name_plural = 'Horarios'
 
   def __str__(self):
      txt = "De {0} a {1} horas"
@@ -37,7 +37,7 @@ class Horario(models.Model):
 
 class Curso(models.Model):
   id = models.AutoField(primary_key=True)
-  usuarios = models.ManyToManyField(Usuarios, related_name='cursos')
+  usuarios = models.ManyToManyField(Usuarios, related_name='cursos', blank=True)
   nombre = models.CharField(max_length=250, unique=True)
   costo = models.PositiveSmallIntegerField(default=0)
   descripcion = RichTextField(blank=True, null=True)  
@@ -101,7 +101,6 @@ class PagoCuota(models.Model):
 @receiver(pre_save, sender=PagoCuota ,dispatch_uid="Valida_campo")
 def validar_campos_nulos (sender, instance, **kwargs):
    c = instance.curso.usuarios.all()
-   print()
    if instance.usuario is None:
      raise ValidationError("Debe selecionar un usuario")
    elif instance.curso is None:
@@ -128,6 +127,7 @@ class CursoHorario(models.Model):
   
   def full_clean(self, exclude=None, validate_unique=True, validate_constraints=True):
     errors = {}
+    addUnico = {'horario':self.horario, 'dia':self.dia}
     if self.curso.id:
       try:
         super().full_clean()
@@ -143,8 +143,9 @@ class CursoHorario(models.Model):
       errors = {**errors,'horario': ValidationError('Asigne un horario')}
     if self.cupo == 0:
       errors = {**errors,'cupo': ValidationError('No hay mas cupos libres para este horario')}   
+    nuevo_dict = {} 
     if errors:
-      raise ValidationError(errors)
+      raise ValidationError(errors)  
     
   def __str__(self):
     txt = "{0} el dia {1} {2}"

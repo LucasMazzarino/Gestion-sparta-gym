@@ -47,7 +47,7 @@ class Usuarios(AbstractBaseUser, PermissionsMixin):
   nombre = models.CharField(max_length=250)
   apellido = models.CharField(max_length=250)
   documento = models.IntegerField(unique=True, null=False, blank=False, help_text="Ingrese su Cedula o su DNI",)
-  email = models.EmailField(max_length=250, unique=True)
+  email = models.EmailField(max_length=250, unique=True, null=False, blank=True)
   direccion = models.CharField(max_length=250)
   telefonoRegex = RegexValidator(regex = r"^\+?1?\d{9,15}$")
   telefono =  models.CharField(validators = [telefonoRegex], max_length = 16, null= True, blank=True,)
@@ -61,11 +61,13 @@ class Usuarios(AbstractBaseUser, PermissionsMixin):
   REQUIRED_FIELDS = ['nombre', 'apellido', 'email', 'direccion']
   
   def clean(self):
-    docu = self.documento
-    if docu < 10000000:
-      raise ValidationError("El documento debe tener 8 digitos")
-    if docu > 99999999:
-      raise ValidationError("El documento debe tener 8 digitos")
+    if getattr(self,'documento',None):
+      if self.documento < 10000000:
+        raise ValidationError("El documento debe tener 8 digitos")
+      if self.documento > 99999999:
+        raise ValidationError("El documento debe tener 8 digitos")
+    else:
+      raise ValidationError("Ingrese el documento")
   
   
   def __str__(self):
