@@ -33,8 +33,6 @@ class Horario(models.Model):
      return txt.format(self.horaInicio.isoformat(timespec='minutes'), self.horaFin.isoformat(timespec='minutes'))
   
 
-
-
 class Curso(models.Model):
   id = models.AutoField(primary_key=True)
   usuarios = models.ManyToManyField(Usuarios, related_name='cursos', blank=True)
