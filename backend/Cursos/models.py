@@ -77,6 +77,9 @@ class PagoCuota(models.Model):
   recargo = models.BooleanField(default=False,help_text="Marque la casilla si desea aplicar el recargo al pago",)
   monto_final = models.SmallIntegerField(default=0)
 
+  class Meta:
+    ordering = ['dia_de_pago',]
+
   def __str__(self):
     txt = "{0} (Pago: $ {1} del Curso {2})"
     return txt.format(self.usuario, self.monto_final, self.curso)
