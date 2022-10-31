@@ -406,6 +406,13 @@ div.modal-footer{
   justify-content: center;
 }
 
+.cont-inicio-sesión{
+  display: flex;
+  align-items: left;
+  justify-content: left;
+}
+
+
 
 
 

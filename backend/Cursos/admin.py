@@ -105,6 +105,7 @@ class ReservasUsuariosInline(admin.TabularInline):
 @admin.register(Curso)
 class CursoAdmin(admin.ModelAdmin):
 	list_display = ['nombre', 'costo']
+	exclude = ('is_deleted',)
 	filter_horizontal = ('usuarios',)
 	ordering = ['nombre']
 	inlines = (CursoHorarioInline,PagoCuotaInline,AsistenciaInline)

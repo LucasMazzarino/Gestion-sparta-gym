@@ -74,7 +74,7 @@ function Navegacion({
 
    const noAuthenticatedLinks = (
     <Fragment>
-      <div className="flex item-center" variant="outline-success">
+      <div className="cont-inicio-sesión" variant="outline-success">
           <Button variant="primary" onClick={handleShow}>
            Iniciar sesión
           </Button>
@@ -85,7 +85,7 @@ function Navegacion({
                 </Modal.Header>
                 <Modal.Body><Login/></Modal.Body>               
           </Modal>
-        </div>
+      </div>
     </Fragment>
   )
 

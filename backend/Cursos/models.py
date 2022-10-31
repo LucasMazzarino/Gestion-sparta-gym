@@ -1,7 +1,7 @@
-
 from django.db import models
 from Users.models import Usuarios
-from django.db.models.signals import post_delete, pre_save
+from Base.models import SoftDeleteModel
+from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.core.exceptions import ValidationError
 
@@ -33,7 +33,7 @@ class Horario(models.Model):
      return txt.format(self.horaInicio.isoformat(timespec='minutes'), self.horaFin.isoformat(timespec='minutes'))
   
 
-class Curso(models.Model):
+class Curso(SoftDeleteModel):
   id = models.AutoField(primary_key=True)
   usuarios = models.ManyToManyField(Usuarios, related_name='cursos', blank=True)
   nombre = models.CharField(max_length=250, unique=True)
@@ -70,7 +70,7 @@ class Curso(models.Model):
     return self.nombre
 
   
-class PagoCuota(models.Model):
+class PagoCuota(SoftDeleteModel):
   usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
   curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
   dia_de_pago = models.DateField()
