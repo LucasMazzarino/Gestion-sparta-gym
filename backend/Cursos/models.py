@@ -128,12 +128,20 @@ class CursoHorario(models.Model):
   
   def full_clean(self, exclude=None, validate_unique=True, validate_constraints=True):
     errors = {}
-    addUnico = {'horario':self.horario, 'dia':self.dia}
+    addUnico = {'horario':self.horario.id, 'dia':self.dia}
+    print(addUnico)
     if self.curso.id:
       try:
         super().full_clean()
       except ValidationError as e:
         errors = e.update_error_dict(errors)
+    # doble = {}
+    # for key, value in addUnico.items():
+    #   doble.setdefault(value, set()).add(key)
+
+    # res = filter(lambda x: len(x) >1, doble.values())
+
+    # print("New Dictionary:",list(res))
     if getattr(self,'horario',None):
       filtro = CursoHorario.objects.exclude(id=self.id).filter(curso=self.curso,
       dia=self.dia,
@@ -144,7 +152,6 @@ class CursoHorario(models.Model):
       errors = {**errors,'horario': ValidationError('Asigne un horario')}
     if self.cupo == 0:
       errors = {**errors,'cupo': ValidationError('No hay mas cupos libres para este horario')}   
-    nuevo_dict = {} 
     if errors:
       raise ValidationError(errors)  
     

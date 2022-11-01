@@ -23,7 +23,7 @@ const Noticias = ({
 		get_noticias()
 	}, [])
 
-
+	
 	const mostrarNoticias = () =>{
 		return(
 				noticias &&
