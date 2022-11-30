@@ -27,6 +27,7 @@ class Horario(models.Model):
   class Meta:
     verbose_name = 'Horario'
     verbose_name_plural = 'Horarios'
+    ordering = ['horaInicio',]
 
   def __str__(self):
      txt = "De {0} a {1} horas"
@@ -39,7 +40,7 @@ class Curso(SoftDeleteModel):
   nombre = models.CharField(max_length=250, unique=True)
   costo = models.PositiveSmallIntegerField(default=0)
   descripcion = RichTextField(blank=True, null=True)  
-  imagen = models.ImageField('Imagen de portada',upload_to='cursos/imagenes/', null=True, default='cursos/imagenes/sparta_img.jpg')
+  imagen = models.ImageField('Imagen de portada',upload_to='cursos/imagenes/', null=True, default='cursos/imagenes/logoo.jpg')
   state = models.BooleanField('Activar/Desactivar',default = True, help_text="Si desactiva el curso este no se mostrara en la pagina principal")
   horarios = models.ManyToManyField(Horario, through='CursoHorario')
   pagos_cuotas = models.ManyToManyField(Usuarios, through='PagoCuota', related_name='pagos')
