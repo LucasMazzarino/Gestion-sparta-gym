@@ -49,6 +49,9 @@ function Navegacion({
         <Link to="/estadisticas" id='estadis' className="btn btn-info text-center ">
         Ver estadisticas
         </Link>
+        <Link to="/Pagos" id='btn-pagos' className="btn btn-info text-center">
+        Estados de Cuenta
+        </Link>
     </Fragment>
   )
   
