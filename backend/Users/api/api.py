@@ -8,7 +8,7 @@ from rest_framework import viewsets
 from rest_framework.generics import DestroyAPIView
 
 from Users.models import Usuarios, ReservaUsuario
-from Users.api.serializers import UsuariosSerializer, UsuariosPartialSerializer,ReservaUsuariosSerializer,CrearReservaUsuarioSerializer,ListaReservasUsuariosSerializer
+from Users.api.serializers import UsuariosSerializer, UsuariosPartialSerializer,ReservaUsuariosSerializer,CrearReservaUsuarioSerializer,ListaReservasUsuariosSerializer,ListaPagosUsuariosSerializer
 
 class UsuariosViewSet(viewsets.ViewSet):
   
@@ -60,4 +60,9 @@ class ReservaUsuariosViewset(viewsets.ModelViewSet):
 class ListaReservasUsuariosViewSet(viewsets.ReadOnlyModelViewSet):
 	queryset = Usuarios.objects.all()
 	serializer_class = ListaReservasUsuariosSerializer
+
+class ListaPagosUsuariosViewSet(viewsets.ReadOnlyModelViewSet):
+	queryset = Usuarios.objects.all()
+	serializer_class = ListaPagosUsuariosSerializer
+
 

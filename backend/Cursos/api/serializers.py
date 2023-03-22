@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from Cursos.models import Curso,Horario, CursoHorario
+from Cursos.models import Curso,Horario, CursoHorario, PagoCuota
 
 class HorarioSerializer(serializers.ModelSerializer):
   class Meta:
@@ -35,5 +35,16 @@ class IngresosSerializer(serializers.ModelSerializer):
   class Meta: 
     model = Curso
     fields = ('id','nombre','ingresos','ingresos_mensuales')
+
+class PagosSerializer(serializers.ModelSerializer):
+  class Meta: 
+    model = PagoCuota
+    fields = ('id','dia_de_pago','monto_final')
+
+class TodosPagosSerializer(serializers.ModelSerializer):
+  # pagos_cuotas = PagosSerializer
+  class Meta: 
+    model = Curso
+    fields = ('id','nombre','pagos_cuotas')
 
 
