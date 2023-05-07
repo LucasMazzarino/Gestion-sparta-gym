@@ -37,14 +37,9 @@ class IngresosSerializer(serializers.ModelSerializer):
     fields = ('id','nombre','ingresos','ingresos_mensuales')
 
 class PagosSerializer(serializers.ModelSerializer):
+  curso = PartialCursoSerializer()
   class Meta: 
     model = PagoCuota
-    fields = ('id','dia_de_pago','monto_final')
-
-class TodosPagosSerializer(serializers.ModelSerializer):
-  # pagos_cuotas = PagosSerializer
-  class Meta: 
-    model = Curso
-    fields = ('id','nombre','pagos_cuotas')
+    fields = ('curso','id','dia_de_pago','monto_final',)
 
 

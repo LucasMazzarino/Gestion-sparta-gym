@@ -1,6 +1,5 @@
 import Layout from "../../hocs/Layout"
 import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 

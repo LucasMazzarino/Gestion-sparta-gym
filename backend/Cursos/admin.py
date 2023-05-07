@@ -165,7 +165,7 @@ class CursoHorarioAdmin(admin.ModelAdmin):
 class PagoCuotaAdmin(admin.ModelAdmin):
 	model = PagoCuota
 	list_display = ('__str__','dia_de_pago',)
-	fields = ('curso','usuario','dia_de_pago','recargo')
+	fields = ('curso','usuario','dia_de_pago','recargo',)
 	list_filter = ('curso','usuario','recargo')
 	list_per_page= 30
 

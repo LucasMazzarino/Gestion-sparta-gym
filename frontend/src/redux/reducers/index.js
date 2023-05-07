@@ -5,6 +5,7 @@ import Cursos from './cursos';
 import Noticias from './noticias';
 import Reservas from "./reserva";
 import Ingresos from "./ingresos";
+import Pagos from "./pagos";
 
 export default combineReducers({
   Auth,
@@ -13,4 +14,5 @@ export default combineReducers({
   Noticias,
   Reservas,
   Ingresos,
+  Pagos,
 })

@@ -4,11 +4,13 @@ from Base.models import SoftDeleteModel
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.core.exceptions import ValidationError
-
+from django.utils import timezone
 from ckeditor.fields import RichTextField
-
 from django.db.models import Sum, F
 from django.db.models.functions import Extract
+
+from datetime import date
+from dateutil.relativedelta import relativedelta
 
 class Horario(models.Model):
   id = models.AutoField(primary_key=True)
@@ -34,6 +36,13 @@ class Horario(models.Model):
      return txt.format(self.horaInicio.isoformat(timespec='minutes'), self.horaFin.isoformat(timespec='minutes'))
   
 
+def calcular_fecha_vencimiento():
+  hoy = date.today()
+  if hoy.day > 1:
+      mes_siguiente = hoy + relativedelta(months=1)
+      return date(mes_siguiente.year, mes_siguiente.month, 1)
+  else:
+      return date(hoy.year, hoy.month, 1)
 class Curso(SoftDeleteModel):
   id = models.AutoField(primary_key=True)
   usuarios = models.ManyToManyField(Usuarios, related_name='cursos', blank=True)
@@ -45,6 +54,8 @@ class Curso(SoftDeleteModel):
   horarios = models.ManyToManyField(Horario, through='CursoHorario')
   pagos_cuotas = models.ManyToManyField(Usuarios, through='PagoCuota', related_name='pagos')
   asistencias = models.ManyToManyField(Usuarios, through='Asistencia', related_name='asistencias')
+  vencimiento_cuota = models.DateField(default=calcular_fecha_vencimiento)
+
   
   def clean(self):
     if Curso.objects.exclude(id=self.id).filter(nombre=self.nombre.lower()):
@@ -70,7 +81,15 @@ class Curso(SoftDeleteModel):
   def __str__(self):
     return self.nombre
 
-  
+def pagos_pendientes(self):
+        hoy = timezone.now().date()
+        pagos = self.pagocuota_set.filter(dia_de_pago__lte=hoy, pago_pendiente=True)
+        usuarios_con_pagos_pendientes = []
+        for pago in pagos:
+            usuarios_con_pagos_pendientes.append(pago.usuario)
+        return usuarios_con_pagos_pendientes
+
+
 class PagoCuota(SoftDeleteModel):
   usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
   curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
@@ -82,23 +101,24 @@ class PagoCuota(SoftDeleteModel):
     ordering = ['dia_de_pago',]
 
   def __str__(self):
-    txt = "{0} (Pago: $ {1} del Curso {2})"
-    return txt.format(self.usuario, self.monto_final, self.curso)
+    txt = "{0} (Pago: $ {1} del Curso {2} el dia{3})"
+    return txt.format(self.usuario, self.monto_final, self.curso,self.dia_de_pago)
 
-  def full_clean(self, exclude=None, validate_unique=True, validate_constraints=True):
-      super().full_clean()
-      curso = self.curso.usuarios.all() 
-      if self.usuario not in curso:
-        raise ValidationError("Este usuario no se encuentra en este curso.")
-  
-  def save(self,*args,**kwargs):
-    self.monto_final = self.curso.costo
-    if self.recargo == True:
-      self.monto_final += 200 
-    super().save(*args,**kwargs)
+  def full_clean(self, exclude=None, validate_unique=True):
+    super().full_clean(exclude=exclude, validate_unique=validate_unique) 
+    curso = self.curso.usuarios.all()
+    if self.usuario not in curso:
+        raise ValidationError("Este usuario no se encuentra en este curso.")  
+    pagos = PagoCuota.objects.filter(usuario=self.usuario, curso=self.curso)
+    pagos_en_mes = pagos.filter(dia_de_pago__month=self.dia_de_pago.month)
+    if self.pk is None and pagos_en_mes.exists():
+        raise ValidationError("Este usuario ya ha realizado un pago en este curso este mes.")
 
-
-
+  def save(self, *args, **kwargs):
+      self.monto_final = self.curso.costo
+      if self.recargo:
+          self.monto_final += 200
+      super().save(*args, **kwargs)
 
 @receiver(pre_save, sender=PagoCuota ,dispatch_uid="Valida_campo")
 def validar_campos_nulos (sender, instance, **kwargs):
@@ -130,7 +150,6 @@ class CursoHorario(models.Model):
   def full_clean(self, exclude=None, validate_unique=True, validate_constraints=True):
     errors = {}
     addUnico = {'horario':self.horario.id, 'dia':self.dia}
-    print(addUnico)
     if self.curso.id:
       try:
         super().full_clean()

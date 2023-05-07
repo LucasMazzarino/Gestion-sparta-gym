@@ -10,7 +10,4 @@ router.register('reservas',ReservaUsuariosViewset, basename="reserva")
 router.register('listar_reservas',ListaReservasUsuariosViewSet, basename="listar")
 router.register('listar_pagos',ListaPagosUsuariosViewSet, basename="listarPagos")
 
-
-
-
 urlpatterns = router.urls
