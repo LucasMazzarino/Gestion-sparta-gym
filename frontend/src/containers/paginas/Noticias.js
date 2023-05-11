@@ -38,16 +38,16 @@ const Noticias = ({
 								<h4>{noticia.titulo}</h4>								
 								<div>{Parse(noticia.descripcion)}</div>
 								<span className='fechaPosteo'>publicado el: {noticia.publicado} por: {noticia.autor.nombre}</span>
-								<Accordion defaultActiveKey="1">
+								{/* <Accordion defaultActiveKey="1">
 									<Accordion.Item eventKey="0">
 										<Accordion.Header>Seccion de comentarios</Accordion.Header>
 										<Accordion.Body>
 										</Accordion.Body>
 									</Accordion.Item>								
-   								 </Accordion>		 						
-								<textarea placeholder='Realice un comentario'></textarea>																								
+   								 </Accordion>		 						 */}
+								{/* <textarea placeholder='Realice un comentario'></textarea>																								 */}
 							</Row>																	
-							<Button variant="dark" className='btn-comentar'>Comentar</Button>	
+							{/* <Button variant="dark" className='btn-comentar'>Comentar</Button>	 */}
 						</Container>
 					)               
 				})  

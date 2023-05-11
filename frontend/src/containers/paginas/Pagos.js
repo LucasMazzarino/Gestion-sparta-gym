@@ -61,7 +61,7 @@ const Pagos = ({
                         <Col className="data-label">Curso:</Col>
                         <Col className={getPagosClass(detalle)}>{detalle.curso.nombre}</Col>
                       </Row>
-                      <Row>
+                      <Row className="columna" >
                         <Col className="data-label">Pago el dia:</Col>
                         <Col>{detalle.dia_de_pago}</Col>
                       </Row>

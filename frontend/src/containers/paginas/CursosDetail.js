@@ -6,6 +6,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import { useParams } from "react-router-dom";
 import { Fragment, useEffect,} from "react";
 import { connect } from "react-redux";
+import Parse from 'html-react-parser'
 
 import { get_curso } from "../../redux/actions/cursos";
 
@@ -46,7 +47,7 @@ const CursoDetail = ({
           </div>         
           <Card.Body>
             <Card.Title className='CardTitle'>{curso.nombre}</Card.Title>
-            <Card.Text className='CardText'>Parse{curso.descripcion}</Card.Text>
+            <Card.Text className='CardText'>{Parse(curso.descripcion)}</Card.Text>
           </Card.Body>
           <Card.Footer> {mostrarHorario()}</Card.Footer>  
           <Card.Text className='spanCosto'>Costo del curso: $ {curso.costo} mensuales</Card.Text>           

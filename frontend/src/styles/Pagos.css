@@ -44,3 +44,7 @@
 .red {
   color: red;
 }
+
+.columna {
+  border-bottom: ridge 2px;
+}
