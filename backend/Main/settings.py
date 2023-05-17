@@ -220,6 +220,8 @@ FILE_UPLOAD_PERMISSIONS = 0o640
 
 EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
 
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 if not DEBUG:
     DEFAULT_FROM_EMAIL= env('EMAIL_DEF')
     EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
@@ -228,3 +230,4 @@ if not DEBUG:
     EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
     EMAIL_PORT = env('EMAIL_PORT')
     EMAIL_USE_TLS = env('EMAIL_USE_TLS')
+
