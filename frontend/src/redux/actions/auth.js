@@ -228,7 +228,7 @@ export const logout = () => dispatch => {
     dispatch({
         type: LOGOUT
     });
-    dispatch(setAlert('Cerraste secion con exito', 'success'));
+    dispatch(setAlert('Cerraste sesión con éxito', 'success'));
 }
 
 export const confirm_reset_password = (uid, token, new_password, re_new_password) => async dispatch => {

@@ -105,6 +105,7 @@ class ReservasUsuariosInline(admin.TabularInline):
 @admin.register(Curso)
 class CursoAdmin(admin.ModelAdmin):
 	list_display = ['nombre', 'costo']
+	exclude = ('is_deleted',)
 	filter_horizontal = ('usuarios',)
 	ordering = ['nombre']
 	inlines = (CursoHorarioInline,PagoCuotaInline,AsistenciaInline)
@@ -128,7 +129,6 @@ class CursoAdmin(admin.ModelAdmin):
 	
 	def render_change_form(self, request, context, add=False, change=False, form_url='', obj=None):
 			context.update({
-					'show_save_and_continue': False,
 					'show_save_and_add_another': False 
 			})
 			return super().render_change_form(request, context, add, change, form_url, obj)
@@ -164,7 +164,8 @@ class CursoHorarioAdmin(admin.ModelAdmin):
 @admin.register(PagoCuota)
 class PagoCuotaAdmin(admin.ModelAdmin):
 	model = PagoCuota
-	fields = ('curso','usuario','dia_de_pago','recargo')
+	list_display = ('__str__','dia_de_pago',)
+	fields = ('curso','usuario','dia_de_pago','recargo',)
 	list_filter = ('curso','usuario','recargo')
 	list_per_page= 30
 
