@@ -109,7 +109,15 @@ const ReservaHorarios = ({
                   <Accordion.Header>{reserva.curso_horario.curso.nombre} el {reserva.curso_horario.dia.replace(remplazarRegx,'')}</Accordion.Header>
                   <Accordion.Body>
                        {reserva.curso_horario.dia.replace(remplazarRegx,'')} de {reserva.curso_horario.horario.horaInicio} a {reserva.curso_horario.horario.horaFin}<br></br>
-                       <Button variant="danger" className='btn-borrarReserva' onClick={()=>borrarReserva(reserva.id)}>Eliminar reserva</Button>
+                      <Button variant="danger" onClick={handleShow}>Eliminar reserva</Button>
+                      <Modal show={show} onHide={handleClose}>
+                          <Modal.Header closeButton>
+                          <Modal.Title>¿Seguro que quiere cancelar su reserva?</Modal.Title>
+                          </Modal.Header> 
+                          <Modal.Body>Se eliminara su reserva de {reserva.curso_horario.curso.nombre} el dia {reserva.curso_horario.dia.replace(remplazarRegx,'')}</Modal.Body>
+                          <Modal.Footer><Button variant="danger" className='btn-borrarReserva' onClick={()=>borrarReserva(reserva.id)}>Eliminar reserva</Button>
+                          <Button variant="primary" onClick={handleClose}>No</Button></Modal.Footer>               
+                      </Modal>
                   </Accordion.Body>                
                 </Accordion.Item>             
           </Accordion>

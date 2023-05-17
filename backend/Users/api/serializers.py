@@ -3,7 +3,7 @@ from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from Users.models import Usuarios, ReservaUsuario
 from Cursos.models import Curso,CursoHorario
-from Cursos.api.serializers import CursoSerializer,CursoHorarioserializer,PartialCursoHorarioserializer,PagosSerializer
+from Cursos.api.serializers import CursoSerializer,CursoHorarioserializer,PartialCursoHorarioserializer
 
 class UsuariosSerializer(serializers.ModelSerializer):
   cursos = CursoSerializer(many=True,)
@@ -68,11 +68,5 @@ class CrearReservaUsuarioSerializer(serializers.ModelSerializer):
     elif value not in curso.usuarios.all():
         raise serializers.ValidationError("Este usario no se encuentra en el curso")
     return value
-
-class ListaPagosUsuariosSerializer(serializers.ModelSerializer):
-  pagos = PagosSerializer(source='pagocuota_set',many=True)
-  class Meta:
-    model=Usuarios
-    fields = ('id','nombre','apellido','pagos')
 
   

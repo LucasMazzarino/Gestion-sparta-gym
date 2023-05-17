@@ -9,7 +9,6 @@ import {
 import { setAlert } from './alert';
 import axios from 'axios'
 
-
 export const reservar_horario = (usuario, curso_horario) => async dispatch => {
 
 	const config = {

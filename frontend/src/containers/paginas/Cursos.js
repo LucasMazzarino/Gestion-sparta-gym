@@ -34,13 +34,13 @@ const Cursos = ({
 				return(
 					<section key={curso.id} className='CartasCursos'>
 						<CardGroup key={curso.id}>
-							<Card id="card" className="bg-dark text-white">
+							<Card className="bg-dark text-white">
 								<div className='Carta'>
 									<Card.Img variant="top" src={curso.imagen} className='ImagenCarta'/>
 								</div>						
 								<Card.Body>
 									<Card.Title className='CardTitle'>{curso.nombre}</Card.Title>
-									<Card.Text className='CardText'>{Parse(curso.descripcion)}</Card.Text>									
+									<div className='CardText'>{Parse(curso.descripcion)}</div>									
 								</Card.Body>
 								<Card.Footer>
 									<Link to={`${curso.id}`} variant="primary">Detalles del curso</Link>
