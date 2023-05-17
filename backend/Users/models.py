@@ -69,6 +69,8 @@ class Usuarios(AbstractBaseUser, PermissionsMixin):
     else:
       raise ValidationError("Ingrese el documento")
   
+  def tiene_pagos_pendientes(self):
+        return self.pagocuota_set.filter(dia_de_pago__lt=datetime.date.today()).exists()
   
   def __str__(self):
     return self.nombre +" "+self.apellido
