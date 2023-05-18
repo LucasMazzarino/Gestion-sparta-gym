@@ -73,8 +73,8 @@ CKEDITOR_UPLOAD_PATH = "/media/"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     #Corsheaders
     "corsheaders.middleware.CorsMiddleware",
 
