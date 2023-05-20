@@ -10,7 +10,7 @@ env = environ.Env()
 
 environ.Env.read_env()
 
-DEBUG = env('DEBUG')
+DEBUG = True
 SECRET_KEY = env('SECRET_KEY')
     
 BASE_DIR = Path(__file__).resolve().parent.parent
