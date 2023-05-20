@@ -4,6 +4,7 @@ from datetime import timedelta
 
 import os
 import environ
+import dj_database_url
 env = environ.Env()
 #leyendo env.File
 
@@ -128,7 +129,7 @@ WSGI_APPLICATION = 'Main.wsgi.application'
 
 
 DATABASES = {
-    "default":env.db("DATABASE_URL",default="postgres:///spartagym" ),
+    "default":dj_database_url.config(default=env.db("DATABASE_URL")),
 }
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
