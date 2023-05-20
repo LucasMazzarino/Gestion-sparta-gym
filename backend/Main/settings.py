@@ -8,9 +8,9 @@ import dj_database_url
 env = environ.Env()
 #leyendo env.File
 
-environ.Env.read_env()
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
-DEBUG = True
+DEBUG = env('DEBUG')
 SECRET_KEY = env('SECRET_KEY')
     
 BASE_DIR = Path(__file__).resolve().parent.parent
