@@ -19,6 +19,7 @@ class UserAdmin(BaseUserAdmin):
 	list_display= ['nombre','apellido','documento']
 	search_fields = ['nombre']
 	list_per_page= 30
+	list_filter = ('is_superuser','is_staff','is_active','cursos')
 	fieldsets = (
 		(None,{'fields':('documento',)}),
 		(_('Informacion personal'),{'fields':('nombre','apellido', 'direccion','email','telefono')}),

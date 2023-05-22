@@ -12,6 +12,7 @@ import ResetPassword from './containers/auth/ResetPassword';
 import ConfirmResetPassword from './containers/auth/ConfirmResetPassword';
 import Error404 from './containers/errors/Error404';  
 import Estadisticas from './containers/paginas/Estadisticas';
+import Pagos from './containers/paginas/Pagos';
 import RutasAdmin from './components/RutaAdmin';
 import RutaPublica from './components/RutaPublica';
 import RutaCliente from './components/RutaCliente';
@@ -42,7 +43,8 @@ const App = () => {
             <Route exact path='/reservas' element={<ReservaHorario/>}/>          
           </Route>
           <Route element={<RutasAdmin/>}>
-            <Route exact path='/estadisticas' element={<Estadisticas/>}/>          
+            <Route exact path='/estadisticas' element={<Estadisticas/>}/>
+            <Route exact path='/pagos' element={<Pagos/>}/>          
           </Route>
           {/*Rutas cliente*/}
           {/*reserva de horario */}

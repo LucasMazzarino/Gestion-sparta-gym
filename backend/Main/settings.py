@@ -4,6 +4,7 @@ from datetime import timedelta
 
 import os
 import environ
+import dj_database_url
 env = environ.Env()
 #leyendo env.File
 
@@ -46,7 +47,8 @@ DJANGO_APPS =[
 PROJECT_APPS =[
      'Users',
      'Noticias',
-     'Cursos'
+     'Cursos',
+     'Base'
 ]
 
 THIRD_PARTY_APPS =[
@@ -72,8 +74,8 @@ CKEDITOR_UPLOAD_PATH = "/media/"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     #Corsheaders
     "corsheaders.middleware.CorsMiddleware",
 
@@ -94,16 +96,16 @@ CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8000',
 ]
 
-if not DEBUG:
-    CORS_ORIGIN_WHITELIST = [
-        'https://spartagym.com',
-        'https://admin.spartagym.com',
-    ]
+# if not DEBUG:
+#     CORS_ORIGIN_WHITELIST = [
+#         'https://spartagym.com',
+#         'https://admin.spartagym.com',
+#     ]
 
-    CSRF_TRUSTED_ORIGINS[
-        'https://spartagym.com',
-        'https://admin.spartagym.com',
-    ]
+#     CSRF_TRUSTED_ORIGINS[
+#         'https://spartagym.com',
+#         'https://admin.spartagym.com',
+#     ]
 
 
 
@@ -127,7 +129,7 @@ WSGI_APPLICATION = 'Main.wsgi.application'
 
 
 DATABASES = {
-    "default":env.db("DATABASE_URL",default="postgres:///spartagym" ),
+    "default":dj_database_url.config(default=env.db("DATABASE_URL")),
 }
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
@@ -219,11 +221,14 @@ FILE_UPLOAD_PERMISSIONS = 0o640
 
 EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
 
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 if not DEBUG:
     DEFAULT_FROM_EMAIL= env('EMAIL_DEF')
     EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST = env('EMAIL_HOST')
-    EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-    EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
-    EMAIL_PORT = env('EMAIL_PORT')
-    EMAIL_USE_TLS = env('EMAIL_USE_TLS')
+    # EMAIL_HOST = env('EMAIL_HOST')
+    # EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+    # EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+    # EMAIL_PORT = env('EMAIL_PORT')
+    # EMAIL_USE_TLS = env('EMAIL_USE_TLS')
+
