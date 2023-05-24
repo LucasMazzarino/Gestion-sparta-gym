@@ -232,3 +232,8 @@ if not DEBUG:
     # EMAIL_PORT = env('EMAIL_PORT')
     # EMAIL_USE_TLS = env('EMAIL_USE_TLS')
 
+
+print(f"DEBUG: {DEBUG}")
+print(f"SECRET_KEY: {SECRET_KEY}")
+print(f"DATABASE_URL: {DATABASE_URL}")
+print(f"EMAIL_DEF: {EMAIL_DEF}")
