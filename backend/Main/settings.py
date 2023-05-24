@@ -21,8 +21,9 @@ SITE_NAME = 'SpartaGym'
 
 
 ALLOWED_HOSTS = [
-     "localhost",
-     "127.0.0.1"    
+    "gestion-sparta-gym-production.up.railway.app"
+    "localhost",
+    "127.0.0.1"    
 ]
 
 if not DEBUG:
