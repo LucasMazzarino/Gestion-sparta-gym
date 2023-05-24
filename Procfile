@@ -1,1 +1,1 @@
-web: python backend/manage.py migrate && python backend/manage.py collectstatic --noinput && gunicorn main.wsgi:application --chdir backend
+web: python backend/manage.py migrate && python backend/manage.py collectstatic --noinput && gunicorn Main.wsgi:application --chdir backend
