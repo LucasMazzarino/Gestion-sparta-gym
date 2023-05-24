@@ -27,6 +27,7 @@ ALLOWED_HOSTS = [
 
 if not DEBUG:
     ALLOWED_HOSTS = [
+        "gestion-sparta-gym-production.up.railway.app"
         "www.spartagym.com",
         ".spartagym.com",
         "spartagym.com",
