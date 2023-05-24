@@ -235,7 +235,7 @@ if not DEBUG:
     # EMAIL_USE_TLS = env('EMAIL_USE_TLS')
 
 
-print(f"DEBUG: {DEBUG}")
-print(f"SECRET_KEY: {SECRET_KEY}")
-# print(f"DATABASE_URL: {DATABASE_URL}")
-# print(f"EMAIL_DEF: {EMAIL_DEF}")
+# print(f"DEBUG: {DEBUG}")
+# print(f"SECRET_KEY: {SECRET_KEY}")
+# # print(f"DATABASE_URL: {DATABASE_URL}")
+# # print(f"EMAIL_DEF: {EMAIL_DEF}")
