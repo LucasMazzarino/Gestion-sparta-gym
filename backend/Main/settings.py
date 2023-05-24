@@ -5,15 +5,17 @@ from datetime import timedelta
 import os
 import environ
 import dj_database_url
+from pathlib import Path
+
 env = environ.Env()
 #leyendo env.File
-
-environ.Env.read_env()
+BASE_DIR = Path(__file__).resolve().parent.parent
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 DEBUG = env('DEBUG')
 SECRET_KEY = env('SECRET_KEY')
     
-BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 SITE_NAME = 'SpartaGym'
 
@@ -235,5 +237,5 @@ if not DEBUG:
 
 print(f"DEBUG: {DEBUG}")
 print(f"SECRET_KEY: {SECRET_KEY}")
-print(f"DATABASE_URL: {DATABASE_URL}")
-print(f"EMAIL_DEF: {EMAIL_DEF}")
+# print(f"DATABASE_URL: {DATABASE_URL}")
+# print(f"EMAIL_DEF: {EMAIL_DEF}")
