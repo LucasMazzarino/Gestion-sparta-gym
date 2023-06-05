@@ -15,10 +15,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 DEBUG = env('DEBUG')
 SECRET_KEY = env('SECRET_KEY')
     
-
-
 SITE_NAME = 'SpartaGym'
-
 
 ALLOWED_HOSTS = [
     "gestion-sparta-gym-production.up.railway.app"
@@ -32,11 +29,11 @@ if not DEBUG:
         "www.spartagym.com",
         ".spartagym.com",
         "spartagym.com",
-    ]
+    ]   
 
-RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+# RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+# if RENDER_EXTERNAL_HOSTNAME:
+#     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 DJANGO_APPS =[
     'django.contrib.admin',
