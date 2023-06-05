@@ -18,10 +18,11 @@ SECRET_KEY = env('SECRET_KEY')
 SITE_NAME = 'SpartaGym'
 
 ALLOWED_HOSTS = [
-    "gestion-sparta-gym-production.up.railway.app"
+    "gestion-sparta-gym-production.up.railway.app",
     "localhost",
     "127.0.0.1"    
 ]
+
 
 if not DEBUG:
     ALLOWED_HOSTS = [
