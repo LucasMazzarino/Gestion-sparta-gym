@@ -102,16 +102,18 @@ CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8000',
 ]
 
-# if not DEBUG:
-#     CORS_ORIGIN_WHITELIST = [
-#         'https://spartagym.com',
-#         'https://admin.spartagym.com',
-#     ]
+if not DEBUG:
+    CORS_ORIGIN_WHITELIST = [
+        'gestion-sparta-gym-production.up.railway.app'
+        'https://spartagym.com',
+        'https://admin.spartagym.com',
+     ]
 
-#     CSRF_TRUSTED_ORIGINS[
-#         'https://spartagym.com',
-#         'https://admin.spartagym.com',
-#     ]
+    CSRF_TRUSTED_ORIGINS[
+        'gestion-sparta-gym-production.up.railway.app'
+        'https://spartagym.com',
+        'https://admin.spartagym.com',
+     ]
 
 
 
