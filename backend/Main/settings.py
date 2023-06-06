@@ -91,7 +91,7 @@ MIDDLEWARE = [
 CORS_ORIGIN_WHITELIST = [
     "http://",
     "https://", 
-    "https://gestion-sparta-gym-production.up.railway.app"
+    "https://gestion-sparta-gym-production.up.railway.app",
     'http://localhost:3000',
     'http://localhost:8000',
 ]
@@ -99,7 +99,7 @@ CORS_ORIGIN_WHITELIST = [
 CSRF_TRUSTED_ORIGINS = [
     "http://",
     "https://", 
-    "https://gestion-sparta-gym-production.up.railway.app"
+    "https://gestion-sparta-gym-production.up.railway.app",
     'http://localhost:3000',
     'http://localhost:8000',
 ]
@@ -108,7 +108,7 @@ if not DEBUG:
     CORS_ORIGIN_WHITELIST = [
         "http://",
         "https://", 
-        "https://gestion-sparta-gym-production.up.railway.app"
+        "https://gestion-sparta-gym-production.up.railway.app",
         'https://spartagym.com',
         'https://admin.spartagym.com',
      ]
@@ -116,7 +116,7 @@ if not DEBUG:
     CSRF_TRUSTED_ORIGINS[
         "http://",
         "https://", 
-        "https://gestion-sparta-gym-production.up.railway.app"
+        "https://gestion-sparta-gym-production.up.railway.app",
         'https://spartagym.com',
         'https://admin.spartagym.com',
      ]
