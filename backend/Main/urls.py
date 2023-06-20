@@ -12,7 +12,7 @@ from rest_framework_simplejwt.views import (
  )
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name="indes.html"),name="index"),
+    path('', TemplateView.as_view(template_name="index.html"),name="index"),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
     path('admin/', admin.site.urls),
