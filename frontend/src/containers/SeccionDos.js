@@ -4,7 +4,7 @@ import React from 'react';
 function SeccionDos(){
   return(
     <section className='SeccionDos'>
-        <div className='container'>
+        {/* <div className='container'>
               <div className='row'>
                 <div className='col-12 col-md-6 d-flex aling-items-center justify-content-center'>
                       <div className='ParteUno'>  
@@ -19,7 +19,7 @@ function SeccionDos(){
                       </div>             
                 </div>                
               </div>
-        </div>
+        </div> */}
      </section>
   );
 }
