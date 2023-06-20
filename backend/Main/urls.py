@@ -4,6 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.views.static import serve
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.views.generic import TemplateView
 
 from rest_framework_simplejwt.views import (
      TokenObtainPairView,
@@ -11,6 +12,7 @@ from rest_framework_simplejwt.views import (
  )
 
 urlpatterns = [
+    path('', TemplateView.as_view(template_name="indes.html"),name="index"),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
     path('admin/', admin.site.urls),
