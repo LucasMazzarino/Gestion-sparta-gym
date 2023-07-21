@@ -5,34 +5,36 @@ from datetime import timedelta
 import os
 import environ
 import dj_database_url
+from pathlib import Path
+
 env = environ.Env()
 #leyendo env.File
-
-environ.Env.read_env()
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+environ.Env.read_env(os.path.join(BASE_DIR, 'backend', '.env'))
 
 DEBUG = env('DEBUG')
 SECRET_KEY = env('SECRET_KEY')
     
-BASE_DIR = Path(__file__).resolve().parent.parent
-
 SITE_NAME = 'SpartaGym'
 
-
 ALLOWED_HOSTS = [
-     "localhost",
-     "127.0.0.1"    
+    "gestion-sparta-gym-production.up.railway.app",
+    "localhost",
+    "127.0.0.1",   
 ]
+
 
 if not DEBUG:
     ALLOWED_HOSTS = [
+        "gestion-sparta-gym-production.up.railway.app",
         "www.spartagym.com",
         ".spartagym.com",
         "spartagym.com",
-    ]
+    ]   
 
-RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+# RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+# if RENDER_EXTERNAL_HOSTNAME:
+#     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 DJANGO_APPS =[
     'django.contrib.admin',
@@ -87,32 +89,31 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000',
-    'http://localhost:8000',
+    "http://localhost:3000",
+    "http://localhost:8000",
+    "https://gestion-sparta-gym-production.up.railway.app",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:3000',
-    'http://localhost:8000',
+    "http://localhost:3000",
+    "http://localhost:8000",
+    "https://gestion-sparta-gym-production.up.railway.app",
 ]
 
-# if not DEBUG:
-#     CORS_ORIGIN_WHITELIST = [
-#         'https://spartagym.com',
-#         'https://admin.spartagym.com',
-#     ]
+if not DEBUG:
+    CORS_ORIGIN_WHITELIST = [
+        "https://gestion-sparta-gym-production.up.railway.app",
+    ]
 
-#     CSRF_TRUSTED_ORIGINS[
-#         'https://spartagym.com',
-#         'https://admin.spartagym.com',
-#     ]
-
+    CSRF_TRUSTED_ORIGINS = [
+        "https://gestion-sparta-gym-production.up.railway.app",
+    ]
 
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'build')],
+        'DIRS': [os.path.join(BASE_DIR, 'frontend', 'build')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -162,14 +163,15 @@ USE_I18N = True
 USE_TZ = True
 
 
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'backend','staticfiles')
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'frontend', 'build/static')
+]
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-
+MEDIA_ROOT = os.path.join(BASE_DIR, 'backend', 'media')
 
 AUTH_USER_MODEL = 'Users.Usuarios'
 
@@ -232,3 +234,8 @@ if not DEBUG:
     # EMAIL_PORT = env('EMAIL_PORT')
     # EMAIL_USE_TLS = env('EMAIL_USE_TLS')
 
+
+# print(f"DEBUG: {DEBUG}")
+# print(f"SECRET_KEY: {SECRET_KEY}")
+# # print(f"DATABASE_URL: {DATABASE_URL}")
+# # print(f"EMAIL_DEF: {EMAIL_DEF}")
