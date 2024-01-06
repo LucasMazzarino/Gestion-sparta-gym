@@ -12,3 +12,4 @@ Execute the command `pip install -r requirements.txt` this will download the nec
 Once the backend dependencies are installed, navigate to the Frontend directory with `cd Frontend` and run `npm install` this will install React, Redux, and other libraries used in the project.
 
 
+![image](https://github.com/LucasMazzarino/Gestion-sparta-gym/assets/97771009/c8a0042d-8be3-488d-a600-42cb41f05ecc)
