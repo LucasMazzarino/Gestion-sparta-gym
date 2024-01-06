@@ -26,6 +26,7 @@ When a new client registers, an account will be created automatically so that th
 -If you are an administrator, 2 buttons will be enabled. One to see a graph with income and another to see the clients' account status.
 -If you are a client, a button will be displayed allowing them to reserve a time slot in the registered course. If the selected time slot is fully booked, it won't be shown as available."
 
+![image](https://github.com/LucasMazzarino/Gestion-sparta-gym/assets/97771009/6636aba0-82f3-463f-a048-392fbc47ac22)
 
 
 
